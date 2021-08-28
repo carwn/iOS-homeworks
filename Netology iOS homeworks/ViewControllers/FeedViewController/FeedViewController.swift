@@ -14,7 +14,9 @@ class FeedViewController: UIViewController {
     }
     
     @IBAction func pushPostViewControllerButtonPressed(_ sender: UIButton) {
+        let post = Post(title: "Hello")
         let postVC = PostViewController()
+        postVC.post = post
         navigationController?.pushViewController(postVC, animated: true)
     }
 }
