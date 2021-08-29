@@ -13,11 +13,9 @@
 		1F9F324D26D251DA00CB1285 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F324C26D251DA00CB1285 /* SceneDelegate.swift */; };
 		1F9F325426D251DB00CB1285 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F9F325326D251DB00CB1285 /* Assets.xcassets */; };
 		1F9F325726D251DB00CB1285 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */; };
-		1F9F325F26D254AD00CB1285 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F9F325E26D254AD00CB1285 /* ProfileView.xib */; };
 		1F9F326126D2581300CB1285 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F326026D2581300CB1285 /* ProfileView.swift */; };
 		1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F326426D2612400CB1285 /* ProfileViewController.swift */; };
 		6DF5CABC26D8AB3C000B030F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */; };
-		6DF5CAC226D8B21F000B030F /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF5CAC126D8B21F000B030F /* ProfileViewController.xib */; };
 		6DF5CAC526D8DC6E000B030F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CAC326D8DC6E000B030F /* PostViewController.swift */; };
 		6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */; };
 /* End PBXBuildFile section */
@@ -31,11 +29,9 @@
 		1F9F325326D251DB00CB1285 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F9F325626D251DB00CB1285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F9F325826D251DB00CB1285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F9F325E26D254AD00CB1285 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		1F9F326026D2581300CB1285 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1F9F326426D2612400CB1285 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		6DF5CAC126D8B21F000B030F /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		6DF5CAC326D8DC6E000B030F /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,7 +53,7 @@
 				6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */,
 				6DF5CAC326D8DC6E000B030F /* PostViewController.swift */,
 				1F2A9E3526DA1B6300542900 /* InfoViewController.swift */,
-				6DF5CABD26D8AB47000B030F /* ProfileViewController */,
+				1F9F326426D2612400CB1285 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -85,6 +81,7 @@
 				1F9F324C26D251DA00CB1285 /* SceneDelegate.swift */,
 				1F2A9E3226DA1AC800542900 /* Post.swift */,
 				1F2A9E3126DA1A8900542900 /* ViewControllers */,
+				6DF5CABD26D8AB47000B030F /* Views */,
 				1F9F325326D251DB00CB1285 /* Assets.xcassets */,
 				6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */,
 				1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */,
@@ -93,15 +90,12 @@
 			path = "Netology iOS homeworks";
 			sourceTree = "<group>";
 		};
-		6DF5CABD26D8AB47000B030F /* ProfileViewController */ = {
+		6DF5CABD26D8AB47000B030F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1F9F326426D2612400CB1285 /* ProfileViewController.swift */,
-				6DF5CAC126D8B21F000B030F /* ProfileViewController.xib */,
 				1F9F326026D2581300CB1285 /* ProfileView.swift */,
-				1F9F325E26D254AD00CB1285 /* ProfileView.xib */,
 			);
-			path = ProfileViewController;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,9 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F9F325F26D254AD00CB1285 /* ProfileView.xib in Resources */,
 				1F9F325726D251DB00CB1285 /* LaunchScreen.storyboard in Resources */,
-				6DF5CAC226D8B21F000B030F /* ProfileViewController.xib in Resources */,
 				1F9F325426D251DB00CB1285 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

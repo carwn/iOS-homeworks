@@ -13,4 +13,25 @@ extension UIView {
         self.centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
         self.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
     }
+    
+    func setPriorities(contentHugging: Float = 250, compressionResistance: Float = 750) {
+        setContentHuggingPriority(UILayoutPriority(contentHugging), for: .horizontal)
+        setContentHuggingPriority(UILayoutPriority(contentHugging), for: .vertical)
+        setContentCompressionResistancePriority(UILayoutPriority(compressionResistance), for: .horizontal)
+        setContentCompressionResistancePriority(UILayoutPriority(compressionResistance), for: .vertical)
+    }
+    
+    func setSquareAspectRatio(withHeight height: CGFloat) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.widthAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
+    }
+    
+    func constraintToSafeArea(_ safeArea: UILayoutGuide, spacing: CGFloat) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        topAnchor.constraint(equalTo: safeArea.topAnchor, constant: spacing).isActive = true
+        safeArea.bottomAnchor.constraint(equalTo: bottomAnchor, constant: spacing).isActive = true
+        leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: spacing).isActive = true
+        safeArea.trailingAnchor.constraint(equalTo: trailingAnchor, constant: spacing).isActive = true
+    }
 }
