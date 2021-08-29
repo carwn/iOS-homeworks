@@ -14,13 +14,6 @@ extension UIView {
         self.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
     }
     
-    func setPriorities(contentHugging: Float = 250, compressionResistance: Float = 750) {
-        setContentHuggingPriority(UILayoutPriority(contentHugging), for: .horizontal)
-        setContentHuggingPriority(UILayoutPriority(contentHugging), for: .vertical)
-        setContentCompressionResistancePriority(UILayoutPriority(compressionResistance), for: .horizontal)
-        setContentCompressionResistancePriority(UILayoutPriority(compressionResistance), for: .vertical)
-    }
-    
     func setSquareAspectRatio(withHeight height: CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.widthAnchor.constraint(equalTo: self.heightAnchor).isActive = true

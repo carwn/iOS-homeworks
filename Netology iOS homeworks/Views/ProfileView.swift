@@ -10,11 +10,29 @@ import UIKit
 class ProfileView: UIView {
     
     // MARK: - Private Properties
-    private var photoImageView: UIImageView!
-    private var nameLabel: UILabel!
-    private var birthdayLabel: UILabel!
-    private var placeLabel: UILabel!
-    private var captionTextView: UITextView!
+    private var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title1)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private var birthdayLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title2)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private var placeLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private var photoImageView: UIImageView = UIImageView()
+    private var captionTextView: UITextView = UITextView()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -38,35 +56,10 @@ class ProfileView: UIView {
     
     // MARK: - Private Methods
     private func commonInit() {
-        initSelfViews()
         let mainStack = self.mainStack()
         addSubview(mainStack)
         photoImageView.setSquareAspectRatio(withHeight: 100)
         mainStack.constraintToSafeArea(safeAreaLayoutGuide, spacing: 20)
-    }
-    
-    private func initSelfViews() {
-        nameLabel = UILabel()
-        nameLabel.font = .preferredFont(forTextStyle: .title1)
-        nameLabel.numberOfLines = 0
-        
-        birthdayLabel = UILabel()
-        birthdayLabel.font = .preferredFont(forTextStyle: .title2)
-        birthdayLabel.numberOfLines = 0
-        
-        placeLabel = UILabel()
-        placeLabel.font = .preferredFont(forTextStyle: .title3)
-        placeLabel.numberOfLines = 0
-        
-        [nameLabel, birthdayLabel, placeLabel].forEach { label in
-            label!.setPriorities(contentHugging: 252, compressionResistance: 751)
-        }
-        
-        photoImageView = UIImageView()
-        photoImageView.setPriorities(compressionResistance: 748)
-        
-        captionTextView = UITextView()
-        captionTextView.setPriorities(contentHugging: 249)
     }
     
     private func labelsStack() -> UIStackView {
