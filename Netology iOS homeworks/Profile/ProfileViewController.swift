@@ -9,14 +9,21 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    private lazy var headerView: ProfileHeaderView = ProfileHeaderView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "BackgroundColor")
-        addProfileView()
-        navigationItem.title = "ProfileViewController"
+        view.backgroundColor = .lightGray
+        navigationItem.title = "Profile"
+        view.addSubview(headerView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        headerView.frame = view.bounds
     }
 
-    func addProfileView() {
+    private func addProfileView() {
         let profileView = ProfileView(frame: view.bounds)
         view.addSubview(profileView)
         profileView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
