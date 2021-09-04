@@ -60,8 +60,11 @@ class ProfileHeaderView: UIView {
         textField.layer.borderColor = UIColor.black.cgColor
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
+        textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         return textField
     }()
+    
+    private var statusText: String?
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -82,7 +85,8 @@ class ProfileHeaderView: UIView {
     func configure(image: UIImage, title: String, currentStatus: String?) {
         avatarView.image = image
         titleLabel.text = title
-        statusLabel.text = currentStatus ?? "Waiting for something..."
+        statusText = currentStatus
+        updateStatusLabel()
     }
     
     override func layoutSubviews() {
@@ -127,7 +131,25 @@ class ProfileHeaderView: UIView {
                                         height: 50)
     }
     
+    // MARK: - Private Methods
+    
     @objc private func setStatusButtonPressed() {
-        print(statusLabel.text ?? "nil")
+        updateStatusLabel()
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        statusText = textField.text
+    }
+    
+    private func updateStatusLabel() {
+        let statusTextForLabel: String = {
+            let placeholder = "Waiting for something..."
+            if let statusText = statusText {
+                return statusText.isEmpty ? placeholder : statusText
+            } else {
+                return placeholder
+            }
+        }()
+        statusLabel.text = statusTextForLabel
     }
 }
