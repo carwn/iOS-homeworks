@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .lightGray
         navigationItem.title = "Profile"
         view.addSubview(headerView)
+        headerView.configure(image: #imageLiteral(resourceName: "Cat"), title: "Hipster Cat", currentStatus: nil)
     }
     
     override func viewWillLayoutSubviews() {
