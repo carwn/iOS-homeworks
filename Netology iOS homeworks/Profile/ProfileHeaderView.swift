@@ -143,11 +143,10 @@ class ProfileHeaderView: UIView {
     
     private func updateStatusLabel() {
         let statusTextForLabel: String = {
-            let placeholder = "Waiting for something..."
-            if let statusText = statusText {
-                return statusText.isEmpty ? placeholder : statusText
+            if let statusText = statusText, !statusText.isEmpty {
+                return statusText
             } else {
-                return placeholder
+                return "Waiting for something..."
             }
         }()
         statusLabel.text = statusTextForLabel
