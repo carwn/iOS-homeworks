@@ -39,17 +39,28 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    private lazy var showStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .normal)
         button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(showStatusButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(setStatusButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: 15, weight: .regular)
+        textField.textColor = .black
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 12
+        return textField
     }()
     
     // MARK: - Initializers
@@ -64,7 +75,7 @@ class ProfileHeaderView: UIView {
     }
     
     private func commonInit() {
-        [avatarView, titleLabel, statusLabel, showStatusButton].forEach { addSubview($0) }
+        [avatarView, titleLabel, statusLabel, setStatusButton, statusTextField].forEach { addSubview($0) }
     }
     
     // MARK: - Public Methods
@@ -78,34 +89,45 @@ class ProfileHeaderView: UIView {
         superview?.layoutSubviews()
         
         let defaulOffset: CGFloat = 16
-        let buttonVerticalOffset = defaulOffset * 2 + imageViewHeight + safeAreaInsets.top
+        let statusViewsOffset: CGFloat = 10
+        let statusTextFieldHeight: CGFloat = 40
+        
+        let oldButtonVerticalOffset = defaulOffset * 2 + imageViewHeight + safeAreaInsets.top
+        let statusLabelHeight = statusLabel.intrinsicContentSize.height
+        let statusLabelVerticalOffset = oldButtonVerticalOffset - 34 - statusLabelHeight
+        let statusTextFieldVerticalOffset = statusLabelVerticalOffset + statusLabelHeight + statusViewsOffset
+        
         let labelsHorizontalOffset = defaulOffset * 2 + imageViewHeight + safeAreaInsets.left
         let labelsWidth = bounds.width - labelsHorizontalOffset - defaulOffset - safeAreaInsets.right
-        let statusLabelHeight = statusLabel.intrinsicContentSize.height
+        
         
         avatarView.frame = CGRect(x: defaulOffset + safeAreaInsets.left,
                                   y: defaulOffset + safeAreaInsets.top,
                                   width: imageViewHeight,
                                   height: imageViewHeight)
         
-        showStatusButton.frame = CGRect(x: defaulOffset + safeAreaInsets.left,
-                                        y: buttonVerticalOffset,
-                                        width: bounds.width - defaulOffset * 2 - safeAreaInsets.left - safeAreaInsets.right,
-                                        height: 50)
-        
         titleLabel.frame = CGRect(x: labelsHorizontalOffset,
                                   y: 27 + safeAreaInsets.top,
                                   width: labelsWidth,
                                   height: titleLabel.intrinsicContentSize.height)
         
-        
         statusLabel.frame = CGRect(x: labelsHorizontalOffset,
-                                   y: buttonVerticalOffset - 34 - statusLabelHeight,
+                                   y: statusLabelVerticalOffset,
                                    width: labelsWidth,
                                    height: statusLabelHeight)
+        
+        statusTextField.frame = CGRect(x: labelsHorizontalOffset,
+                                       y: statusTextFieldVerticalOffset,
+                                       width: labelsWidth,
+                                       height: statusTextFieldHeight)
+        
+        setStatusButton.frame = CGRect(x: defaulOffset + safeAreaInsets.left,
+                                        y: statusTextFieldVerticalOffset + statusTextFieldHeight + defaulOffset,
+                                        width: bounds.width - defaulOffset * 2 - safeAreaInsets.left - safeAreaInsets.right,
+                                        height: 50)
     }
     
-    @objc private func showStatusButtonPressed() {
+    @objc private func setStatusButtonPressed() {
         print(statusLabel.text ?? "nil")
     }
 }
