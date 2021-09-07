@@ -12,15 +12,23 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "FeedViewController"
         view.backgroundColor = UIColor(named: "BackgroundColor")
-        addPushPostViewControllerButton()
+        addStackView()
     }
     
-    private func addPushPostViewControllerButton() {
+    private func pushPostViewControllerButton(number: Int) -> UIButton {
         let button = UIButton(type: .system)
-        button.setTitle("PushPostViewController", for: .normal)
+        button.setTitle("PushPostViewController #\(number)", for: .normal)
         button.addTarget(self, action: #selector(pushPostViewControllerButtonPressed), for: .touchUpInside)
-        view.addSubview(button)
-        button.center(in: view)
+        return button
+    }
+    
+    private func addStackView() {
+        let stack = UIStackView(arrangedSubviews: [pushPostViewControllerButton(number: 1),
+                                                   pushPostViewControllerButton(number: 2)])
+        stack.axis = .vertical
+        stack.spacing = 10
+        view.addSubview(stack)
+        stack.center(in: view)
     }
     
     @objc func pushPostViewControllerButtonPressed() {
