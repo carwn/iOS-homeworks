@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .lightGray
         navigationItem.title = "Profile"
         addHeaderView()
+        addButton(withTitle: "Best button ever")
     }
     
     private func addHeaderView() {
@@ -31,5 +32,15 @@ class ProfileViewController: UIViewController {
         let profileView = ProfileView(frame: view.bounds)
         view.addSubview(profileView)
         profileView.configure(name: "John Smith", birthday: "01.01.1990", place: "Cupertino", photo: #imageLiteral(resourceName: "AvatarTemplate"), caption: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.")
+    }
+    
+    private func addButton(withTitle title: String) {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
     }
 }
