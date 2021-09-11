@@ -9,9 +9,9 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private let imageViewHeight: CGFloat = 110
+    private let avatarImageViewHeight: CGFloat = 110
     
-    private lazy var avatarView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
@@ -19,13 +19,13 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderColor = UIColor.white.cgColor
         
         imageView.layer.masksToBounds = false
-        imageView.layer.cornerRadius = imageViewHeight / 2
+        imageView.layer.cornerRadius = avatarImageViewHeight / 2
         imageView.clipsToBounds = true
         
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .black
@@ -78,57 +78,45 @@ class ProfileHeaderView: UIView {
     }
     
     private func commonInit() {
-        [avatarView, titleLabel, statusLabel, setStatusButton, statusTextField].forEach { addSubview($0) }
+        [avatarImageView, fullNameLabel, statusLabel, setStatusButton, statusTextField].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(view)
+        }
+        let defaulOffset: CGFloat = 16
+        let constraints = [avatarImageView.heightAnchor.constraint(equalToConstant: avatarImageViewHeight),
+                           avatarImageView.widthAnchor.constraint(equalToConstant: avatarImageViewHeight),
+                           
+                           avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: defaulOffset),
+                           avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: defaulOffset),
+                           
+                           fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+                           fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: defaulOffset),
+                           fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -defaulOffset),
+                           
+                           statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+                           statusLabel.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+                           statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -18),
+                           
+                           statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+                           statusTextField.trailingAnchor.constraint(equalTo: fullNameLabel.trailingAnchor),
+                           statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+                           
+                           statusTextField.heightAnchor.constraint(equalToConstant: 40),
+                           
+                           setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+                           
+                           setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: defaulOffset),
+                           setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -defaulOffset),
+                           setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: defaulOffset)]
+        NSLayoutConstraint.activate(constraints)
     }
     
     // MARK: - Public Methods
     func configure(image: UIImage, title: String, currentStatus: String?) {
-        avatarView.image = image
-        titleLabel.text = title
+        avatarImageView.image = image
+        fullNameLabel.text = title
         statusText = currentStatus
         updateStatusLabel()
-    }
-    
-    override func layoutSubviews() {
-        superview?.layoutSubviews()
-        
-        let defaulOffset: CGFloat = 16
-        let statusViewsOffset: CGFloat = 10
-        let statusTextFieldHeight: CGFloat = 40
-        
-        let oldButtonVerticalOffset = defaulOffset * 2 + imageViewHeight + safeAreaInsets.top
-        let statusLabelHeight = statusLabel.intrinsicContentSize.height
-        let statusLabelVerticalOffset = oldButtonVerticalOffset - 34 - statusLabelHeight
-        let statusTextFieldVerticalOffset = statusLabelVerticalOffset + statusLabelHeight + statusViewsOffset
-        
-        let labelsHorizontalOffset = defaulOffset * 2 + imageViewHeight + safeAreaInsets.left
-        let labelsWidth = bounds.width - labelsHorizontalOffset - defaulOffset - safeAreaInsets.right
-        
-        
-        avatarView.frame = CGRect(x: defaulOffset + safeAreaInsets.left,
-                                  y: defaulOffset + safeAreaInsets.top,
-                                  width: imageViewHeight,
-                                  height: imageViewHeight)
-        
-        titleLabel.frame = CGRect(x: labelsHorizontalOffset,
-                                  y: 27 + safeAreaInsets.top,
-                                  width: labelsWidth,
-                                  height: titleLabel.intrinsicContentSize.height)
-        
-        statusLabel.frame = CGRect(x: labelsHorizontalOffset,
-                                   y: statusLabelVerticalOffset,
-                                   width: labelsWidth,
-                                   height: statusLabelHeight)
-        
-        statusTextField.frame = CGRect(x: labelsHorizontalOffset,
-                                       y: statusTextFieldVerticalOffset,
-                                       width: labelsWidth,
-                                       height: statusTextFieldHeight)
-        
-        setStatusButton.frame = CGRect(x: defaulOffset + safeAreaInsets.left,
-                                        y: statusTextFieldVerticalOffset + statusTextFieldHeight + defaulOffset,
-                                        width: bounds.width - defaulOffset * 2 - safeAreaInsets.left - safeAreaInsets.right,
-                                        height: 50)
     }
     
     // MARK: - Private Methods

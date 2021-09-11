@@ -8,10 +8,10 @@
 import UIKit
 
 extension UIView {
-    func center(in superview: UIView) {
+    func center(in otherView: UIView) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
-        self.centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true
+        self.centerXAnchor.constraint(equalTo: otherView.centerXAnchor).isActive = true
+        self.centerYAnchor.constraint(equalTo: otherView.centerYAnchor).isActive = true
     }
     
     func setSquareAspectRatio(withHeight height: CGFloat) {
