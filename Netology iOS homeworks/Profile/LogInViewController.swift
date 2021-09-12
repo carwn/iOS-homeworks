@@ -12,7 +12,12 @@ class LogInViewController: UIViewController {
     private let textFieldsViewBorderWidth: CGFloat = 0.5
     private let textFieldsViewBorderColor: UIColor = .lightGray
     
-    private let mainScrollView = UIScrollView()
+    private let mainScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.keyboardDismissMode = .interactive
+        return scrollView
+    }()
+    
     private let scrollViewContentView = UIView()
     
     private let logoImageView: UIImageView = {
@@ -81,6 +86,32 @@ class LogInViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         setupViews()
         setupConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIControl.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIControl.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        [UIControl.keyboardWillShowNotification, UIControl.keyboardWillHideNotification].forEach { name in
+            NotificationCenter.default.removeObserver(self, name: name, object: nil)
+        }
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        mainScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        mainScrollView.scrollIndicatorInsets = mainScrollView.contentInset
+    }
+    
+    @objc func keyboardWillHide() {
+        mainScrollView.contentInset.bottom = 0
+        mainScrollView.verticalScrollIndicatorInsets.bottom = 0
     }
     
     private func setupViews() {
