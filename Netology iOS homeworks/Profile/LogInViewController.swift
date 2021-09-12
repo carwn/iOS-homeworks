@@ -103,10 +103,10 @@ class LogInViewController: UIViewController {
         let logoOffset: CGFloat = 120
         let logoSize: CGFloat = 100
         let defaultOffset: CGFloat = 16
-        let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: defaultOffset),
-                           mainScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: defaultOffset),
-                           mainScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -defaultOffset),
-                           mainScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -defaultOffset),
+        let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),
+                           mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                           mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                           mainScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                            
                            scrollViewContentView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
                            scrollViewContentView.leadingAnchor.constraint(equalTo: mainScrollView.leadingAnchor),
@@ -115,14 +115,14 @@ class LogInViewController: UIViewController {
                            
                            scrollViewContentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor),
                            
-                           logoImageView.topAnchor.constraint(equalTo: scrollViewContentView.topAnchor, constant: logoOffset),
+                           logoImageView.topAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.topAnchor, constant: logoOffset),
                            logoImageView.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
                            logoImageView.heightAnchor.constraint(equalToConstant: logoSize),
                            logoImageView.widthAnchor.constraint(equalToConstant: logoSize),
                            
                            textFieldsView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: logoOffset),
-                           textFieldsView.leadingAnchor.constraint(equalTo: scrollViewContentView.leadingAnchor),
-                           textFieldsView.trailingAnchor.constraint(equalTo: scrollViewContentView.trailingAnchor),
+                           textFieldsView.leadingAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.leadingAnchor, constant: defaultOffset),
+                           textFieldsView.trailingAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.trailingAnchor, constant: -defaultOffset),
                            textFieldsView.heightAnchor.constraint(equalToConstant: 100),
                            
                            loginTextField.topAnchor.constraint(equalTo: textFieldsView.topAnchor),
@@ -144,7 +144,7 @@ class LogInViewController: UIViewController {
                            logInButton.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
                            logInButton.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
                            logInButton.heightAnchor.constraint(equalToConstant: 50),
-                           logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.bottomAnchor, constant: -defaultOffset)]
+                           logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
 }
