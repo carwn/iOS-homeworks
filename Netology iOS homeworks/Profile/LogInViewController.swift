@@ -78,6 +78,7 @@ class LogInViewController: UIViewController {
         button.layer.masksToBounds = false
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(logInButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -177,5 +178,10 @@ class LogInViewController: UIViewController {
                            logInButton.heightAnchor.constraint(equalToConstant: 50),
                            logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -defaultOffset)]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    @objc func logInButtonPressed() {
+        let profileViewController = ProfileViewController()
+        navigationController?.pushViewController(profileViewController, animated: true)
     }
 }
