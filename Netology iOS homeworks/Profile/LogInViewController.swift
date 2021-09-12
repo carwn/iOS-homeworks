@@ -197,6 +197,7 @@ class LogInViewController: UIViewController {
     
     @objc func logInButtonPressed() {
         let profileViewController = ProfileViewController()
+        profileViewController.posts = Post.postsExample
         navigationController?.pushViewController(profileViewController, animated: true)
     }
 }

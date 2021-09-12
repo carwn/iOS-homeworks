@@ -107,7 +107,8 @@ class ProfileHeaderView: UIView {
                            
                            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: defaulOffset),
                            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -defaulOffset),
-                           setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: defaulOffset)]
+                           setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: defaulOffset),
+                           setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -defaulOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     

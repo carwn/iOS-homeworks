@@ -11,6 +11,7 @@
 		1F2A9E3726DA1B6300542900 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A9E3526DA1B6300542900 /* InfoViewController.swift */; };
 		1F5B736D26EDD6440075597B /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B736C26EDD6440075597B /* UIImage+extensions.swift */; };
 		1F5B736F26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B736E26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift */; };
+		1F5B737126EE11F90075597B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B737026EE11F90075597B /* PostTableViewCell.swift */; };
 		1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E705B26E10F180019098B /* ProfileHeaderView.swift */; };
 		1F9F324B26D251DA00CB1285 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F324A26D251DA00CB1285 /* AppDelegate.swift */; };
 		1F9F324D26D251DA00CB1285 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F324C26D251DA00CB1285 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 		1F2A9E3526DA1B6300542900 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		1F5B736C26EDD6440075597B /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		1F5B736E26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+scrollToVerticalEnd.swift"; sourceTree = "<group>"; };
+		1F5B737026EE11F90075597B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		1F9E705B26E10F180019098B /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		1F9F324726D251DA00CB1285 /* Netology iOS homeworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Netology iOS homeworks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F9F324A26D251DA00CB1285 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				1F9F326026D2581300CB1285 /* ProfileView.swift */,
+				1F5B737026EE11F90075597B /* PostTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */,
 				6DF5CABC26D8AB3C000B030F /* FeedViewController.swift in Sources */,
 				1F9F324B26D251DA00CB1285 /* AppDelegate.swift in Sources */,
+				1F5B737126EE11F90075597B /* PostTableViewCell.swift in Sources */,
 				6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */,
 				1F2A9E3326DA1AC800542900 /* Post.swift in Sources */,
 				1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */,
