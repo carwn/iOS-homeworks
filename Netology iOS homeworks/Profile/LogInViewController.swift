@@ -9,8 +9,7 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-    private let textFieldsViewBorderWidth: CGFloat = 0.5
-    private let textFieldsViewBorderColor: UIColor = .lightGray
+    // MARK: - Subviews
     
     private let mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -25,6 +24,9 @@ class LogInViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
+    private let textFieldsViewBorderWidth: CGFloat = 0.5
+    private let textFieldsViewBorderColor: UIColor = .lightGray
     
     private lazy var textFieldsView: UIView = {
         let view = UIView()
@@ -65,7 +67,7 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
     }
     
-    private var logInButton: UIButton = {
+    private let logInButton: UIButton = {
         let button = UIButton()
         let bluePixelImage = UIImage(named: "blue_pixel")
         button.setBackgroundImage(bluePixelImage, for: .normal)
@@ -81,6 +83,8 @@ class LogInViewController: UIViewController {
         button.addTarget(self, action: #selector(logInButtonPressed), for: .touchUpInside)
         return button
     }()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,22 +107,7 @@ class LogInViewController: UIViewController {
         }
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        let keyboardScreenEndFrame = keyboardValue.cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-        mainScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
-        mainScrollView.scrollIndicatorInsets = mainScrollView.contentInset
-    }
-    
-    @objc func keyboardDidShow() {
-        mainScrollView.scrollToBottom()
-    }
-    
-    @objc func keyboardWillHide() {
-        mainScrollView.contentInset = .zero
-        mainScrollView.verticalScrollIndicatorInsets = .zero
-    }
+    // MARK: - Setup view and constraints
     
     private func setupViews() {
         view.backgroundColor = .white
@@ -184,6 +173,27 @@ class LogInViewController: UIViewController {
                            logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
+    
+    // MARK: - Keyboard
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        mainScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        mainScrollView.scrollIndicatorInsets = mainScrollView.contentInset
+    }
+    
+    @objc func keyboardDidShow() {
+        mainScrollView.scrollToBottom()
+    }
+    
+    @objc func keyboardWillHide() {
+        mainScrollView.contentInset = .zero
+        mainScrollView.verticalScrollIndicatorInsets = .zero
+    }
+    
+    // MARK: - Actions
     
     @objc func logInButtonPressed() {
         let profileViewController = ProfileViewController()
