@@ -92,12 +92,13 @@ class LogInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIControl.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIControl.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIControl.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        [UIControl.keyboardWillShowNotification, UIControl.keyboardWillHideNotification].forEach { name in
+        [UIControl.keyboardWillShowNotification, UIControl.keyboardDidShowNotification, UIControl.keyboardWillHideNotification].forEach { name in
             NotificationCenter.default.removeObserver(self, name: name, object: nil)
         }
     }
@@ -110,9 +111,13 @@ class LogInViewController: UIViewController {
         mainScrollView.scrollIndicatorInsets = mainScrollView.contentInset
     }
     
+    @objc func keyboardDidShow() {
+        mainScrollView.scrollToBottom()
+    }
+    
     @objc func keyboardWillHide() {
-        mainScrollView.contentInset.bottom = 0
-        mainScrollView.verticalScrollIndicatorInsets.bottom = 0
+        mainScrollView.contentInset = .zero
+        mainScrollView.verticalScrollIndicatorInsets = .zero
     }
     
     private func setupViews() {
