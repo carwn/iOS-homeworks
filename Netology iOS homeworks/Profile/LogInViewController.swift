@@ -20,7 +20,8 @@ class LogInViewController: UIViewController {
     private let scrollViewContentView = UIView()
     
     private let logoImageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "logo"), highlightedImage: nil)
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -111,24 +112,20 @@ class LogInViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = .white
-        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(mainScrollView)
-        scrollViewContentView.translatesAutoresizingMaskIntoConstraints = false
         mainScrollView.addSubview(scrollViewContentView)
         [logoImageView, textFieldsView, logInButton].forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
             scrollViewContentView.addSubview(view)
         }
         [loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
             textFieldsView.addSubview(view)
         }
     }
     
     private func setupConstraints() {
-        let logoOffset: CGFloat = 120
-        let logoSize: CGFloat = 100
-        let defaultOffset: CGFloat = 16
+        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
         let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),
                            mainScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                            mainScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -141,19 +138,19 @@ class LogInViewController: UIViewController {
                            
                            scrollViewContentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor),
                            
-                           logoImageView.topAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.topAnchor, constant: logoOffset),
+                           logoImageView.topAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.topAnchor, constant: Constants.logoOffset),
                            logoImageView.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
-                           logoImageView.heightAnchor.constraint(equalToConstant: logoSize),
-                           logoImageView.widthAnchor.constraint(equalToConstant: logoSize),
+                           logoImageView.heightAnchor.constraint(equalToConstant: Constants.logoSize ),
+                           logoImageView.widthAnchor.constraint(equalToConstant: Constants.logoSize),
                            
-                           textFieldsView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: logoOffset),
-                           textFieldsView.leadingAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.leadingAnchor, constant: defaultOffset),
-                           textFieldsView.trailingAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.trailingAnchor, constant: -defaultOffset),
-                           textFieldsView.heightAnchor.constraint(equalToConstant: 100),
+                           textFieldsView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: Constants.logoOffset),
+                           textFieldsView.leadingAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.leadingAnchor, constant: Constants.defaultOffset),
+                           textFieldsView.trailingAnchor.constraint(equalTo: scrollViewContentView.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.defaultOffset),
+                           textFieldsView.heightAnchor.constraint(equalToConstant: Constants.textFieldsViewHeight),
                            
                            loginTextField.topAnchor.constraint(equalTo: textFieldsView.topAnchor),
-                           loginTextField.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor, constant: defaultOffset),
-                           loginTextField.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor, constant: -defaultOffset),
+                           loginTextField.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor, constant: Constants.defaultOffset),
+                           loginTextField.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor, constant: -Constants.defaultOffset),
                            loginTextField.bottomAnchor.constraint(equalTo: textFieldsView.centerYAnchor),
                            
                            passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor),
@@ -166,11 +163,11 @@ class LogInViewController: UIViewController {
                            textFieldsViewSeparator.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
                            textFieldsViewSeparator.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
                            
-                           logInButton.topAnchor.constraint(equalTo: textFieldsView.bottomAnchor, constant: defaultOffset),
+                           logInButton.topAnchor.constraint(equalTo: textFieldsView.bottomAnchor, constant: Constants.defaultOffset),
                            logInButton.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
                            logInButton.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
-                           logInButton.heightAnchor.constraint(equalToConstant: 50),
-                           logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -defaultOffset)]
+                           logInButton.heightAnchor.constraint(equalToConstant: Constants.logInButtonHeight),
+                           logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -199,5 +196,15 @@ class LogInViewController: UIViewController {
         let profileViewController = ProfileViewController()
         profileViewController.posts = Post.postsExample
         navigationController?.pushViewController(profileViewController, animated: true)
+    }
+}
+
+extension LogInViewController {
+    private struct Constants {
+        static let logoOffset: CGFloat = 120
+        static let logoSize: CGFloat = 100
+        static let defaultOffset: CGFloat = 16
+        static let textFieldsViewHeight: CGFloat = 100
+        static let logInButtonHeight: CGFloat = 50
     }
 }

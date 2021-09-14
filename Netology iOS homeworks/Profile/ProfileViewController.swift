@@ -42,11 +42,11 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupViews() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
     }
     
     private func setupConstraints() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [tableView.topAnchor.constraint(equalTo: view.topAnchor),
                            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -71,7 +71,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
         let headerView = ProfileHeaderView()
-        headerView.configure(image: #imageLiteral(resourceName: "Cat"), title: "Hipster Cat", currentStatus: nil)
+        headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
         return headerView
     }
 }

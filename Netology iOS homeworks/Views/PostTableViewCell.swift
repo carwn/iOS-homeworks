@@ -75,28 +75,27 @@ class PostTableViewCell: UITableViewCell {
         }
         descriptionLabel.setContentHuggingPriority(.required, for: .vertical)
         descriptionLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-        let defaultOffset: CGFloat = 16
-        let constraints = [authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: defaultOffset),
-                           authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: defaultOffset),
-                           authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -defaultOffset),
+        let constraints = [authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.defaultOffset),
+                           authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.defaultOffset),
+                           authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.defaultOffset),
         
                            postImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
                            postImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-                           postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 12),
+                           postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: Constants.authorLabelBottomOffset),
                            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
         
                            descriptionLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
-                           descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: defaultOffset),
+                           descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: Constants.defaultOffset),
                            descriptionLabel.trailingAnchor.constraint(equalTo: authorLabel.trailingAnchor),
         
                            likesLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
-                           likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: defaultOffset),
-                           likesLabel.trailingAnchor.constraint(lessThanOrEqualTo: viewsLabel.leadingAnchor, constant: -defaultOffset),
-                           likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -defaultOffset),
+                           likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.defaultOffset),
+                           likesLabel.trailingAnchor.constraint(lessThanOrEqualTo: viewsLabel.leadingAnchor, constant: -Constants.defaultOffset),
+                           likesLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultOffset),
         
-                           viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: defaultOffset),
-                           viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -defaultOffset),
-                           viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -defaultOffset)]
+                           viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.defaultOffset),
+                           viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.defaultOffset),
+                           viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -114,5 +113,12 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = description
         likesLabel.text = "Likes: \(likes?.description ?? "-")"
         viewsLabel.text = "Views: \(views?.description ?? "-")"
+    }
+}
+
+extension PostTableViewCell {
+    private struct Constants {
+        static let defaultOffset: CGFloat = 16
+        static let authorLabelBottomOffset: CGFloat = 12
     }
 }

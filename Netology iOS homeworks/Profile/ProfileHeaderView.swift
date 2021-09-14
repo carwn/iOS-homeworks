@@ -113,7 +113,7 @@ class ProfileHeaderView: UIView {
     }
     
     // MARK: - Public Methods
-    func configure(image: UIImage, title: String, currentStatus: String?) {
+    func configure(image: UIImage?, title: String, currentStatus: String?) {
         avatarImageView.image = image
         fullNameLabel.text = title
         statusText = currentStatus
