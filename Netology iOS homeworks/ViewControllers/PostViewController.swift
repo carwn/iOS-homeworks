@@ -8,6 +8,11 @@
 import UIKit
 
 class PostViewController: UIViewController {
+    
+    struct Post {
+        let title: String
+    }
+    
     var post: Post?
     
     override func viewDidLoad() {

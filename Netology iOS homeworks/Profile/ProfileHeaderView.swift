@@ -107,12 +107,13 @@ class ProfileHeaderView: UIView {
                            
                            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: defaulOffset),
                            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -defaulOffset),
-                           setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: defaulOffset)]
+                           setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: defaulOffset),
+                           setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -defaulOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
     // MARK: - Public Methods
-    func configure(image: UIImage, title: String, currentStatus: String?) {
+    func configure(image: UIImage?, title: String, currentStatus: String?) {
         avatarImageView.image = image
         fullNameLabel.text = title
         statusText = currentStatus

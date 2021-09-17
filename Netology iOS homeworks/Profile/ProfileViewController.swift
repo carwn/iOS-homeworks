@@ -9,38 +9,69 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    // MARK: - Public Properties
+    
+    var posts: [Post] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Private Properties
+    
+    private let postTableViewCellIdentifier = String(describing: PostTableViewCell.self)
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postTableViewCellIdentifier)
+        tableView.allowsSelection = false
+        tableView.keyboardDismissMode = .onDrag
+        return tableView
+    }()
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        navigationItem.title = "Profile"
-        addHeaderView()
-        addButton(withTitle: "Best button ever")
+        setupViews()
+        setupConstraints()
     }
     
-    private func addHeaderView() {
-        let headerView: ProfileHeaderView = ProfileHeaderView()
-        view.addSubview(headerView)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        headerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        headerView.configure(image: #imageLiteral(resourceName: "Cat"), title: "Hipster Cat", currentStatus: nil)
+    // MARK: - Private Methods
+    
+    private func setupViews() {
+        view.addSubview(tableView)
     }
+    
+    private func setupConstraints() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [tableView.topAnchor.constraint(equalTo: view.topAnchor),
+                           tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                           tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                           tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+        NSLayoutConstraint.activate(constraints)
+    }
+}
 
-    private func addProfileView() {
-        let profileView = ProfileView(frame: view.bounds)
-        view.addSubview(profileView)
-        profileView.configure(name: "John Smith", birthday: "01.01.1990", place: "Cupertino", photo: #imageLiteral(resourceName: "AvatarTemplate"), caption: "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.")
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        posts.count
     }
     
-    private func addButton(withTitle title: String) {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        view.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        button.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        button.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: postTableViewCellIdentifier, for: indexPath) as! PostTableViewCell
+        cell.post = posts[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section == 0 else {
+            return nil
+        }
+        let headerView = ProfileHeaderView()
+        headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
+        return headerView
     }
 }
