@@ -41,6 +41,11 @@ class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     // MARK: - Private Methods
     
     private func setupViews() {
@@ -86,6 +91,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         case .photos:
             let cell = tableView.dequeueReusableCell(withIdentifier: photosTableViewCellIdentifier, for: indexPath) as! PhotosTableViewCell
             cell.photos = Array(PhotosStore.testPhotoNames.prefix(through: 3)).compactMap { UIImage(named: $0) }
+            cell.onTapForwardArrowAction = { [weak self] in
+                self?.navigationController?.pushViewController(PhotosViewController(), animated: true)
+            }
             return cell
         case .posts:
             let cell = tableView.dequeueReusableCell(withIdentifier: postTableViewCellIdentifier, for: indexPath) as! PostTableViewCell
