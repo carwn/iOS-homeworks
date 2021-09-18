@@ -18,7 +18,9 @@ class PhotosViewController: UIViewController {
     private let photosCollectionViewCellIdentifier = String(describing: PhotosCollectionViewCell.self)
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photosCollectionViewCellIdentifier)
@@ -65,5 +67,32 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photosCollectionViewCellIdentifier, for: indexPath) as! PhotosCollectionViewCell
         cell.configure(image: photos[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let photosInRowCount = Constants.photosInRowCount
+        let photosOffsetsCount = photosInRowCount > 0 ? photosInRowCount - 1 : 0
+        let totalOffset = Constants.defaultOffset * CGFloat(2 + photosOffsetsCount)
+        let size = (collectionView.bounds.width - totalOffset) / CGFloat(photosInRowCount)
+        return CGSize(width: size, height: size)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        Constants.defaultOffset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        Constants.defaultOffset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: Constants.defaultOffset, left: Constants.defaultOffset, bottom: Constants.defaultOffset, right: Constants.defaultOffset)
+    }
+}
+
+extension PhotosViewController {
+    private struct Constants {
+        static let defaultOffset: CGFloat = 8
+        static let photosInRowCount = 3
     }
 }
