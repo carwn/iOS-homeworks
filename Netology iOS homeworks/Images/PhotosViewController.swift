@@ -9,6 +9,10 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     
+    // MARK: - Public Properties
+    
+    var photos: [UIImage] = []
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

@@ -17,8 +17,6 @@ class PhotosTableViewCell: UITableViewCell {
         }
     }
     
-    var onTapForwardArrowAction: (() -> Void)?
-    
     // MARK: - Private Properties
     
     private let titleLabel: UILabel = {
@@ -33,8 +31,6 @@ class PhotosTableViewCell: UITableViewCell {
         let image = UIImage(systemName: "arrow.forward")
         let imageView = UIImageView(image: image)
         imageView.tintColor = .black
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(forwardArrowTapped)))
         return imageView
     }()
     
@@ -102,10 +98,6 @@ class PhotosTableViewCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 6
         return imageView
-    }
-    
-    @objc func forwardArrowTapped() {
-        onTapForwardArrowAction?()
     }
 }
 

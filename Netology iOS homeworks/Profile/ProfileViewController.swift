@@ -17,6 +17,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    var photos: [UIImage] = PhotosStore.testPhotoNames.compactMap { UIImage(named: $0) } {
+        didSet {
+            tableView.reloadSections(IndexSet(integer: Section.photos.rawValue), with: .automatic)
+        }
+    }
+    
     // MARK: - Private Properties
     
     private let postTableViewCellIdentifier = String(describing: PostTableViewCell.self)
@@ -28,7 +34,6 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postTableViewCellIdentifier)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: photosTableViewCellIdentifier)
-        tableView.allowsSelection = false
         tableView.keyboardDismissMode = .onDrag
         return tableView
     }()
@@ -63,15 +68,8 @@ class ProfileViewController: UIViewController {
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
-    private enum Section: CaseIterable {
+    private enum Section: Int, CaseIterable {
         case photos, posts
-        init?(section: Int) {
-            switch section {
-            case 0: self = .photos
-            case 1: self = .posts
-            default: return nil
-            }
-        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -79,7 +77,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch Section(section: section) {
+        switch Section(rawValue: section) {
         case .photos: return 1
         case .posts: return posts.count
         case nil: return 0
@@ -87,17 +85,16 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch Section(section: indexPath.section) {
+        switch Section(rawValue: indexPath.section) {
         case .photos:
             let cell = tableView.dequeueReusableCell(withIdentifier: photosTableViewCellIdentifier, for: indexPath) as! PhotosTableViewCell
-            cell.photos = Array(PhotosStore.testPhotoNames.prefix(through: 3)).compactMap { UIImage(named: $0) }
-            cell.onTapForwardArrowAction = { [weak self] in
-                self?.navigationController?.pushViewController(PhotosViewController(), animated: true)
-            }
+            cell.photos = Array(photos.prefix(through: 3))
+            cell.selectionStyle = .default
             return cell
         case .posts:
             let cell = tableView.dequeueReusableCell(withIdentifier: postTableViewCellIdentifier, for: indexPath) as! PostTableViewCell
             cell.post = posts[indexPath.row]
+            cell.selectionStyle = .none
             return cell
         default:
             return UITableViewCell()
@@ -111,5 +108,14 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         let headerView = ProfileHeaderView()
         headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == Section.photos.rawValue {
+            let photosVC = PhotosViewController()
+            photosVC.photos = photos
+            navigationController?.pushViewController(photosVC, animated: true)
+        }
     }
 }
