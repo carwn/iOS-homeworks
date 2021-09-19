@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController {
                 avatarView.layer.add(cornerRadiusAnimation, forKey: "cornerRadiusAnimation")
                 let scale: CGFloat = self.view.bounds.width / avatarView.bounds.width
                 avatarView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.midX - avatarView.center.x, y: UIScreen.main.bounds.midY - avatarView.center.y).scaledBy(x: scale, y: scale)
-                backgroundView.layer.opacity = 0.6
+                backgroundView.layer.opacity = 0.7
             }
             UIView.addKeyframe(withRelativeStartTime: 5/8, relativeDuration: 3/8) {
                 self.closeAvatarButton.layer.opacity = 1
@@ -79,6 +79,7 @@ class ProfileViewController: UIViewController {
         }
         self.avatarView = avatarView
         self.avatarBackgroundView = backgroundView
+        tableView.isScrollEnabled = false
     }
     
     private func cornerRadiusAnimation(fromValue: CGFloat, toValue: CGFloat, duration: TimeInterval) -> CAAnimation {
@@ -109,6 +110,7 @@ class ProfileViewController: UIViewController {
         }
         self.avatarView = nil
         self.avatarBackgroundView = nil
+        tableView.isScrollEnabled = true
     }
 }
 
