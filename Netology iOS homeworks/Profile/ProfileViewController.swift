@@ -31,6 +31,15 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var closeAvatarButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(hideAvatarView), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .white
+        button.layer.opacity = 0
+        return button
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -42,22 +51,43 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupViews() {
-        view.addSubviews(tableView)
+        view.addSubviews(tableView, closeAvatarButton)
     }
     
     private func setupConstraints() {
-        [tableView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        let constraints = tableView.constraints(equalTo: view)
+        [tableView, closeAvatarButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let constraints = tableView.constraints(equalTo: view) + [closeAvatarButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                                                                  closeAvatarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)]
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func animateAvatarView(avatarView: UIView, backgroundView: UIView) {
+    private func showAvatarView(avatarView: UIView, backgroundView: UIView) {
         backgroundView.frame = view.bounds
-        UIView.animate(withDuration: 1) {
-            let scale: CGFloat = self.view.bounds.width / avatarView.bounds.width
-            avatarView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.midX - avatarView.center.x, y: UIScreen.main.bounds.midY - avatarView.center.y).scaledBy(x: scale, y: scale)
-            backgroundView.layer.opacity = 0.7
+        UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: []) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 5/8) {
+                let scale: CGFloat = self.view.bounds.width / avatarView.bounds.width
+                avatarView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.midX - avatarView.center.x, y: UIScreen.main.bounds.midY - avatarView.center.y).scaledBy(x: scale, y: scale)
+                backgroundView.layer.opacity = 0.6
+            }
+            UIView.addKeyframe(withRelativeStartTime: 5/8, relativeDuration: 3/8) {
+                self.closeAvatarButton.layer.opacity = 1
+            }
         }
+        self.avatarView = avatarView
+        self.avatarBackgroundView = backgroundView
+    }
+    
+    private weak var avatarView: UIView?
+    private weak var avatarBackgroundView: UIView?
+    
+    @objc private func hideAvatarView() {
+        UIView.animate(withDuration: 0.5) {
+            self.avatarView?.transform = .identity
+            self.avatarBackgroundView?.layer.opacity = 0
+            self.closeAvatarButton.layer.opacity = 0
+        }
+        self.avatarView = nil
+        self.avatarBackgroundView = nil
     }
 }
 
@@ -79,7 +109,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         let headerView = ProfileHeaderView()
         headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
         headerView.avatarViewTappedClosure = { [weak self] views in
-            self?.animateAvatarView(avatarView: views.avatarView, backgroundView: views.backgroundView)
+            self?.showAvatarView(avatarView: views.avatarView, backgroundView: views.backgroundView)
         }
         return headerView
     }
