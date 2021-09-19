@@ -11,7 +11,7 @@ class ProfileHeaderView: UIView {
     
     // MARK: - Public Properties
     
-    var avatarViewTappedClosure: ((UIView) -> Void)?
+    var avatarViewTappedClosure: (((avatarView: UIView, backgroundView: UIView)) -> Void)?
     
     // MARK: - Private Properties
     
@@ -73,6 +73,13 @@ class ProfileHeaderView: UIView {
         return textField
     }()
     
+    private let avatarBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.layer.opacity = 0
+        return view
+    }()
+    
     private var statusText: String?
     
     // MARK: - Initializers
@@ -87,7 +94,7 @@ class ProfileHeaderView: UIView {
     }
     
     private func commonInit() {
-        [avatarImageView, fullNameLabel, statusLabel, setStatusButton, statusTextField].forEach { view in
+        [fullNameLabel, statusLabel, setStatusButton, statusTextField, avatarBackgroundView, avatarImageView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
@@ -151,6 +158,6 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func avatarImageTapAction() {
-        avatarViewTappedClosure?(avatarImageView)
+        avatarViewTappedClosure?((avatarView: avatarImageView, backgroundView: avatarBackgroundView))
     }
 }

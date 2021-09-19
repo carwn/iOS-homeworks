@@ -31,13 +31,6 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private let showAvatarBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        view.layer.opacity = 0
-        return view
-    }()
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -49,21 +42,21 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupViews() {
-        view.addSubviews(tableView, showAvatarBackgroundView)
+        view.addSubviews(tableView)
     }
     
     private func setupConstraints() {
-        [tableView, showAvatarBackgroundView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        let constraints = tableView.constraints(equalTo: view) + showAvatarBackgroundView.constraints(equalTo: view)
+        [tableView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let constraints = tableView.constraints(equalTo: view)
         NSLayoutConstraint.activate(constraints)
     }
     
-    private func animateAvatarView(avatarView: UIView) {
+    private func animateAvatarView(avatarView: UIView, backgroundView: UIView) {
+        backgroundView.frame = view.bounds
         UIView.animate(withDuration: 1) {
-            avatarView.center = self.view.center
             let scale: CGFloat = self.view.bounds.width / avatarView.bounds.width
-            avatarView.transform = CGAffineTransform(scaleX: scale, y: scale)
-            self.showAvatarBackgroundView.layer.opacity = 0.7
+            avatarView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.midX - avatarView.center.x, y: UIScreen.main.bounds.midY - avatarView.center.y).scaledBy(x: scale, y: scale)
+            backgroundView.layer.opacity = 0.7
         }
     }
 }
@@ -85,8 +78,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let headerView = ProfileHeaderView()
         headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
-        headerView.avatarViewTappedClosure = { [weak self] avatarView in
-            self?.animateAvatarView(avatarView: avatarView)
+        headerView.avatarViewTappedClosure = { [weak self] views in
+            self?.animateAvatarView(avatarView: views.avatarView, backgroundView: views.backgroundView)
         }
         return headerView
     }
