@@ -65,6 +65,10 @@ class ProfileViewController: UIViewController {
         backgroundView.frame = view.bounds
         UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: []) {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 5/8) {
+                let cornerRadiusAnimation = self.cornerRadiusAnimation(fromValue: avatarView.layer.cornerRadius,
+                                                                       toValue: 0,
+                                                                       duration: 0.5)
+                avatarView.layer.add(cornerRadiusAnimation, forKey: "cornerRadiusAnimation")
                 let scale: CGFloat = self.view.bounds.width / avatarView.bounds.width
                 avatarView.transform = CGAffineTransform(translationX: UIScreen.main.bounds.midX - avatarView.center.x, y: UIScreen.main.bounds.midY - avatarView.center.y).scaledBy(x: scale, y: scale)
                 backgroundView.layer.opacity = 0.6
@@ -77,11 +81,28 @@ class ProfileViewController: UIViewController {
         self.avatarBackgroundView = backgroundView
     }
     
+    private func cornerRadiusAnimation(fromValue: CGFloat, toValue: CGFloat, duration: TimeInterval) -> CAAnimation {
+        let cornerRadiusAnimation = CABasicAnimation(keyPath: "cornerRadius")
+        cornerRadiusAnimation.fromValue = fromValue
+        cornerRadiusAnimation.toValue = toValue
+        cornerRadiusAnimation.duration = duration
+        cornerRadiusAnimation.fillMode = .forwards
+        cornerRadiusAnimation.isRemovedOnCompletion = false
+        return cornerRadiusAnimation
+    }
+    
     private weak var avatarView: UIView?
     private weak var avatarBackgroundView: UIView?
     
     @objc private func hideAvatarView() {
-        UIView.animate(withDuration: 0.5) {
+        let duration: TimeInterval = 0.5
+        UIView.animate(withDuration: duration) {
+            if let avatarView = self.avatarView {
+                let cornerRadiusAnimation = self.cornerRadiusAnimation(fromValue: 0,
+                                                                       toValue: avatarView.bounds.height / 2,
+                                                                       duration: duration)
+                avatarView.layer.add(cornerRadiusAnimation, forKey: "cornerRadiusAnimation")
+            }
             self.avatarView?.transform = .identity
             self.avatarBackgroundView?.layer.opacity = 0
             self.closeAvatarButton.layer.opacity = 0
