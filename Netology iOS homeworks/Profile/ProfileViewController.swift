@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController {
     
     private func setupConstraints() {
         [tableView, closeAvatarButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        let constraints = tableView.constraints(equalTo: view) + [closeAvatarButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        let constraints = tableView.constraints(equalTo: view) + [closeAvatarButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
                                                                   closeAvatarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)]
         NSLayoutConstraint.activate(constraints)
     }
