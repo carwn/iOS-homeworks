@@ -9,6 +9,12 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+    // MARK: - Public Properties
+    
+    var avatarViewTappedClosure: ((UIView) -> Void)?
+    
+    // MARK: - Private Properties
+    
     private let avatarImageViewHeight: CGFloat = 110
     
     private lazy var avatarImageView: UIImageView = {
@@ -21,6 +27,9 @@ class ProfileHeaderView: UIView {
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = avatarImageViewHeight / 2
         imageView.clipsToBounds = true
+        
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarImageTapAction)))
         
         return imageView
     }()
@@ -139,5 +148,9 @@ class ProfileHeaderView: UIView {
             }
         }()
         statusLabel.text = statusTextForLabel
+    }
+    
+    @objc private func avatarImageTapAction() {
+        avatarViewTappedClosure?(avatarImageView)
     }
 }

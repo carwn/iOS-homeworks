@@ -53,6 +53,12 @@ class ProfileViewController: UIViewController {
                            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
         NSLayoutConstraint.activate(constraints)
     }
+    
+    private func animateAvatarView(avatarView: UIView) {
+        UIView.animate(withDuration: 1) {
+            avatarView.center = self.view.center
+        }
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -72,6 +78,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
         let headerView = ProfileHeaderView()
         headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
+        headerView.avatarViewTappedClosure = { [weak self] avatarView in
+            self?.animateAvatarView(avatarView: avatarView)
+        }
         return headerView
     }
 }
