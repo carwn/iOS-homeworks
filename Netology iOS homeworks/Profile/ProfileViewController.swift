@@ -31,6 +31,13 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
+    private let showAvatarBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.layer.opacity = 0
+        return view
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -42,21 +49,21 @@ class ProfileViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupViews() {
-        view.addSubview(tableView)
+        view.addSubviews(tableView, showAvatarBackgroundView)
     }
     
     private func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = [tableView.topAnchor.constraint(equalTo: view.topAnchor),
-                           tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                           tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                           tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+        [tableView, showAvatarBackgroundView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        let constraints = tableView.constraints(equalTo: view) + showAvatarBackgroundView.constraints(equalTo: view)
         NSLayoutConstraint.activate(constraints)
     }
     
     private func animateAvatarView(avatarView: UIView) {
         UIView.animate(withDuration: 1) {
             avatarView.center = self.view.center
+            let scale: CGFloat = self.view.bounds.width / avatarView.bounds.width
+            avatarView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self.showAvatarBackgroundView.layer.opacity = 0.7
         }
     }
 }
