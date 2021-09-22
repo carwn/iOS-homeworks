@@ -27,4 +27,15 @@ extension UIView {
         leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: spacing).isActive = true
         safeArea.trailingAnchor.constraint(equalTo: trailingAnchor, constant: spacing).isActive = true
     }
+    
+    func addSubviews(_ views: UIView...) {
+        views.forEach { addSubview($0) }
+    }
+    
+    func constraints(equalTo otherView: UIView) -> [NSLayoutConstraint] {
+        [self.topAnchor.constraint(equalTo: otherView.topAnchor),
+         self.leadingAnchor.constraint(equalTo: otherView.leadingAnchor),
+         self.trailingAnchor.constraint(equalTo: otherView.trailingAnchor),
+         self.bottomAnchor.constraint(equalTo: otherView.bottomAnchor)]
+    }
 }

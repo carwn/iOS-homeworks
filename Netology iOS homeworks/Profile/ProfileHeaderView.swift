@@ -9,6 +9,12 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+    // MARK: - Public Properties
+    
+    var avatarViewTappedClosure: (((avatarView: UIView, backgroundView: UIView)) -> Void)?
+    
+    // MARK: - Private Properties
+    
     private let avatarImageViewHeight: CGFloat = 110
     
     private lazy var avatarImageView: UIImageView = {
@@ -21,6 +27,9 @@ class ProfileHeaderView: UIView {
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = avatarImageViewHeight / 2
         imageView.clipsToBounds = true
+        
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(avatarImageTapAction)))
         
         return imageView
     }()
@@ -64,6 +73,13 @@ class ProfileHeaderView: UIView {
         return textField
     }()
     
+    private let avatarBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.layer.opacity = 0
+        return view
+    }()
+    
     private var statusText: String?
     
     // MARK: - Initializers
@@ -78,7 +94,7 @@ class ProfileHeaderView: UIView {
     }
     
     private func commonInit() {
-        [avatarImageView, fullNameLabel, statusLabel, setStatusButton, statusTextField].forEach { view in
+        [fullNameLabel, statusLabel, setStatusButton, statusTextField, avatarBackgroundView, avatarImageView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(view)
         }
@@ -139,5 +155,9 @@ class ProfileHeaderView: UIView {
             }
         }()
         statusLabel.text = statusTextForLabel
+    }
+    
+    @objc private func avatarImageTapAction() {
+        avatarViewTappedClosure?((avatarView: avatarImageView, backgroundView: avatarBackgroundView))
     }
 }
