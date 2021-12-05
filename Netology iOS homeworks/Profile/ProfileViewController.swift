@@ -52,6 +52,9 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        #if DEBUG
+        tableView.backgroundColor = .green
+        #endif
         setupViews()
         setupConstraints()
     }
