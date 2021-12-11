@@ -20,6 +20,7 @@
 		1F9F325726D251DB00CB1285 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */; };
 		1F9F326126D2581300CB1285 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F326026D2581300CB1285 /* ProfileView.swift */; };
 		1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F326426D2612400CB1285 /* ProfileViewController.swift */; };
+		2B55B15E4656448E0E3B8C79 /* Pods_Netology_iOS_homeworks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C0630F0F913A6C4876CD5 /* Pods_Netology_iOS_homeworks.framework */; };
 		6DED7A0326F43F1C00A5CB5B /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0226F43F1C00A5CB5B /* PhotosTableViewCell.swift */; };
 		6DED7A0526F43F7600A5CB5B /* PhotosStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0426F43F7600A5CB5B /* PhotosStore.swift */; };
 		6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0626F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		036C0630F0F913A6C4876CD5 /* Pods_Netology_iOS_homeworks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Netology_iOS_homeworks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F2A9E3226DA1AC800542900 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1F2A9E3526DA1B6300542900 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		1F5B736C26EDD6440075597B /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
@@ -56,6 +58,8 @@
 		6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		6DF5CAC326D8DC6E000B030F /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstions.swift"; sourceTree = "<group>"; };
+		C53D6CD2F63824794BBD04A4 /* Pods-Netology iOS homeworks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netology iOS homeworks.release.xcconfig"; path = "Target Support Files/Pods-Netology iOS homeworks/Pods-Netology iOS homeworks.release.xcconfig"; sourceTree = "<group>"; };
+		E312B70910161C1DF1AAC7C0 /* Pods-Netology iOS homeworks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Netology iOS homeworks.debug.xcconfig"; path = "Target Support Files/Pods-Netology iOS homeworks/Pods-Netology iOS homeworks.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +67,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B55B15E4656448E0E3B8C79 /* Pods_Netology_iOS_homeworks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E60919DDEFCF017E6E3579F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				036C0630F0F913A6C4876CD5 /* Pods_Netology_iOS_homeworks.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1F2A9E3126DA1A8900542900 /* FeedTab */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +127,8 @@
 			children = (
 				1F9F324926D251DA00CB1285 /* Netology iOS homeworks */,
 				1F9F324826D251DA00CB1285 /* Products */,
+				53518A727186B91F5481F2CF /* Pods */,
+				1E60919DDEFCF017E6E3579F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,11 +152,21 @@
 				6DED7A0126F43ED600A5CB5B /* Photos */,
 				1F7B418C26F5AAAE004BEB2F /* Extenstions */,
 				1F9F325326D251DB00CB1285 /* Assets.xcassets */,
-                6DED7A0A26F7032700A5CB5B /* UIApplication+keyWindowiOS13.swift */,
+				6DED7A0A26F7032700A5CB5B /* UIApplication+keyWindowiOS13.swift */,
 				1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */,
 				1F9F325826D251DB00CB1285 /* Info.plist */,
 			);
 			path = "Netology iOS homeworks";
+			sourceTree = "<group>";
+		};
+		53518A727186B91F5481F2CF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E312B70910161C1DF1AAC7C0 /* Pods-Netology iOS homeworks.debug.xcconfig */,
+				C53D6CD2F63824794BBD04A4 /* Pods-Netology iOS homeworks.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		6DED7A0126F43ED600A5CB5B /* Photos */ = {
@@ -170,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F9F325B26D251DB00CB1285 /* Build configuration list for PBXNativeTarget "Netology iOS homeworks" */;
 			buildPhases = (
+				1B666027E6F5A9735583460D /* [CP] Check Pods Manifest.lock */,
 				1F9F324326D251DA00CB1285 /* Sources */,
 				1F9F324426D251DA00CB1285 /* Frameworks */,
 				1F9F324526D251DA00CB1285 /* Resources */,
+				290E4F0F092C96D52F82D882 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -226,6 +253,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B666027E6F5A9735583460D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Netology iOS homeworks-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		290E4F0F092C96D52F82D882 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Netology iOS homeworks/Pods-Netology iOS homeworks-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Netology iOS homeworks/Pods-Netology iOS homeworks-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Netology iOS homeworks/Pods-Netology iOS homeworks-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1F9F324326D251DA00CB1285 /* Sources */ = {
@@ -387,6 +456,7 @@
 		};
 		1F9F325C26D251DB00CB1285 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E312B70910161C1DF1AAC7C0 /* Pods-Netology iOS homeworks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -406,6 +476,7 @@
 		};
 		1F9F325D26D251DB00CB1285 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C53D6CD2F63824794BBD04A4 /* Pods-Netology iOS homeworks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
