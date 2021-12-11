@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F155D762764923300926692 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 1F155D752764923300926692 /* iOSIntPackage */; };
 		1F2A9E3326DA1AC800542900 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A9E3226DA1AC800542900 /* Post.swift */; };
 		1F2A9E3726DA1B6300542900 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A9E3526DA1B6300542900 /* InfoViewController.swift */; };
 		1F5B736D26EDD6440075597B /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5B736C26EDD6440075597B /* UIImage+extensions.swift */; };
@@ -68,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B55B15E4656448E0E3B8C79 /* Pods_Netology_iOS_homeworks.framework in Frameworks */,
+				1F155D762764923300926692 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,7 +167,6 @@
 				E312B70910161C1DF1AAC7C0 /* Pods-Netology iOS homeworks.debug.xcconfig */,
 				C53D6CD2F63824794BBD04A4 /* Pods-Netology iOS homeworks.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -206,6 +207,9 @@
 			dependencies = (
 			);
 			name = "Netology iOS homeworks";
+			packageProductDependencies = (
+				1F155D752764923300926692 /* iOSIntPackage */,
+			);
 			productName = "Netology iOS homeworks";
 			productReference = 1F9F324726D251DA00CB1285 /* Netology iOS homeworks.app */;
 			productType = "com.apple.product-type.application";
@@ -233,6 +237,9 @@
 				Base,
 			);
 			mainGroup = 1F9F323E26D251DA00CB1285;
+			packageReferences = (
+				1F155D742764923300926692 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = 1F9F324826D251DA00CB1285 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -516,6 +523,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1F155D742764923300926692 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1F155D752764923300926692 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F155D742764923300926692 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1F9F323F26D251DA00CB1285 /* Project object */;
 }
