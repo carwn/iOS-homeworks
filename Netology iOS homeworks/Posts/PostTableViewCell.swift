@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     
@@ -13,6 +14,12 @@ class PostTableViewCell: UITableViewCell {
     var post: Post? {
         didSet {
             updateFromPost()
+        }
+    }
+
+    var filter: ColorFilter = ColorFilter.allCases.randomElement() ?? .gaussianBlur(radius: 1) {
+        didSet {
+            updateImage()
         }
     }
     
@@ -53,6 +60,9 @@ class PostTableViewCell: UITableViewCell {
         label.textColor = .black
         return label
     }()
+
+    private let imageProcessor = ImageProcessor()
+    private var imageName: String?
     
     // MARK: - Initializers
     
@@ -65,7 +75,14 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
-    
+
+    // MARK: - Lifecycle
+
+    override func prepareForReuse() {
+        post = nil
+        super.prepareForReuse()
+    }
+
     // MARK: - Private Methods
     
     private func commonInit() {
@@ -109,10 +126,28 @@ class PostTableViewCell: UITableViewCell {
     
     private func updateView(withAuthor author: String?, imageName: String?, description: String?, likes: Int?, views: Int?) {
         authorLabel.text = author ?? "No author"
-        postImageView.image = imageName != nil ? UIImage(named: imageName!) : nil
+        self.imageName = imageName
+        updateImage()
         descriptionLabel.text = description
         likesLabel.text = "Likes: \(likes?.description ?? "-")"
         viewsLabel.text = "Views: \(views?.description ?? "-")"
+    }
+
+    private func updateImage() {
+        guard let imageName = imageName,
+              let image = UIImage(named: imageName) else {
+            postImageView.image = nil
+            return
+        }
+        imageProcessor.processImageAsync(sourceImage: image, filter: filter) { [weak self] cgImage in
+            guard let self = self,
+                  self.imageName == imageName else {
+                      return
+                  }
+            DispatchQueue.main.async {
+                self.postImageView.image = cgImage != nil ? UIImage(cgImage: cgImage!) : nil
+            }
+        }
     }
 }
 
