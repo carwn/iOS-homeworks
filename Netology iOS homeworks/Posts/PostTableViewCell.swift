@@ -24,7 +24,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     // MARK: - Private Properties
-    let authorLabel: UILabel = {
+    private let authorLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
@@ -32,14 +32,14 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let postImageView: UIImageView = {
+    private let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         return imageView
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemGray
@@ -47,14 +47,14 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let likesLabel: UILabel = {
+    private let likesLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
         return label
     }()
     
-    let viewsLabel: UILabel = {
+    private let viewsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
