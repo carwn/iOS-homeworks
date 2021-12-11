@@ -19,6 +19,7 @@ class ProfileHeaderView: UIView {
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .purple
         imageView.contentMode = .scaleAspectFit
         
         imageView.layer.borderWidth = 3
