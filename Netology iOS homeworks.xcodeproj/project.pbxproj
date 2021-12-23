@@ -207,6 +207,8 @@
 				C53D6CD2F63824794BBD04A4 /* Pods-Netology iOS homeworks.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+			};
 		1FF35ABD275CCFC1008AF342 /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
