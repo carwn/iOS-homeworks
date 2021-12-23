@@ -7,6 +7,7 @@
 
 import UIKit
 import iOSIntPackage
+import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
