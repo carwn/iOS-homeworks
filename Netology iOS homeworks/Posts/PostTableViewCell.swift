@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import iOSIntPackage
+import StorageService
 
 class PostTableViewCell: UITableViewCell {
     
@@ -15,9 +17,15 @@ class PostTableViewCell: UITableViewCell {
             updateFromPost()
         }
     }
+
+    var filter: ColorFilter = ColorFilter.allCases.randomElement() ?? .gaussianBlur(radius: 1) {
+        didSet {
+            updateImage()
+        }
+    }
     
     // MARK: - Private Properties
-    let authorLabel: UILabel = {
+    private let authorLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
@@ -25,14 +33,14 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let postImageView: UIImageView = {
+    private let postImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .black
         return imageView
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .systemGray
@@ -40,19 +48,22 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let likesLabel: UILabel = {
+    private let likesLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
         return label
     }()
     
-    let viewsLabel: UILabel = {
+    private let viewsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
         return label
     }()
+
+    private let imageProcessor = ImageProcessor()
+    private var imageName: String?
     
     // MARK: - Initializers
     
@@ -65,7 +76,14 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
-    
+
+    // MARK: - Lifecycle
+
+    override func prepareForReuse() {
+        post = nil
+        super.prepareForReuse()
+    }
+
     // MARK: - Private Methods
     
     private func commonInit() {
@@ -109,10 +127,28 @@ class PostTableViewCell: UITableViewCell {
     
     private func updateView(withAuthor author: String?, imageName: String?, description: String?, likes: Int?, views: Int?) {
         authorLabel.text = author ?? "No author"
-        postImageView.image = imageName != nil ? UIImage(named: imageName!) : nil
+        self.imageName = imageName
+        updateImage()
         descriptionLabel.text = description
         likesLabel.text = "Likes: \(likes?.description ?? "-")"
         viewsLabel.text = "Views: \(views?.description ?? "-")"
+    }
+
+    private func updateImage() {
+        guard let imageName = imageName,
+              let image = UIImage(named: imageName) else {
+            postImageView.image = nil
+            return
+        }
+        imageProcessor.processImageAsync(sourceImage: image, filter: filter) { [weak self] cgImage in
+            guard let self = self,
+                  self.imageName == imageName else {
+                      return
+                  }
+            DispatchQueue.main.async {
+                self.postImageView.image = cgImage != nil ? UIImage(cgImage: cgImage!) : nil
+            }
+        }
     }
 }
 
