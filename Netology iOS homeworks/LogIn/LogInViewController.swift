@@ -51,6 +51,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         setupTextField(textField)
         textField.placeholder = "Email or phone"
+        textField.delegate = self
         return textField
     }()
     
@@ -59,6 +60,7 @@ class LogInViewController: UIViewController {
         setupTextField(textField)
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
+        textField.delegate = self
         return textField
     }()
     
@@ -220,5 +222,14 @@ extension LogInViewController {
         static let defaultOffset: CGFloat = 16
         static let textFieldsViewHeight: CGFloat = 100
         static let logInButtonHeight: CGFloat = 50
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            logInButtonPressed()
+        }
+        return true
     }
 }
