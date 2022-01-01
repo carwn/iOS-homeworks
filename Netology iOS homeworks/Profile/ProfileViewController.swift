@@ -25,6 +25,9 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Private Properties
+
+    private let userService: UserService
+    private let userName: String
     
     private let postTableViewCellIdentifier = String(describing: PostTableViewCell.self)
     private let photosTableViewCellIdentifier = String(describing: PhotosTableViewCell.self)
@@ -47,6 +50,18 @@ class ProfileViewController: UIViewController {
         button.layer.opacity = 0
         return button
     }()
+
+    // MARK: - Initializers
+
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
     
     // MARK: - Lifecycle
     
@@ -169,7 +184,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
         let headerView = ProfileHeaderView()
-        headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
+        let user = userService.user(name: userName) ?? User(fullName: "Unknow user", avatarName: nil, status: nil)
+        headerView.configure(image: user.avatar, title: user.fullName, currentStatus: user.status)
         headerView.avatarViewTappedClosure = { [weak self] views in
             self?.showAvatarView(avatarView: views.avatarView, backgroundView: views.backgroundView)
         }

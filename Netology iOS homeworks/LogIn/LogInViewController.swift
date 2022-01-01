@@ -85,6 +85,14 @@ class LogInViewController: UIViewController {
         button.addTarget(self, action: #selector(logInButtonPressed), for: .touchUpInside)
         return button
     }()
+
+    private let userService: UserService = {
+#if DEBUG
+        return TestUserService()
+#else
+        return CurrentUserService()
+#endif
+    }()
     
     // MARK: - Lifecycle
     
@@ -194,7 +202,12 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func logInButtonPressed() {
-        let profileViewController = ProfileViewController()
+        guard let userName = loginTextField.text,
+              !userName.isEmpty else {
+            present(UIAlertController.infoAlert(title: "Не введено имя пользователя", message: "Ожидаемое имя пользователя Hipster Cat"), animated: true)
+            return
+        }
+        let profileViewController = ProfileViewController(userService: userService, userName: userName)
         profileViewController.posts = Post.postsExample
         navigationController?.pushViewController(profileViewController, animated: true)
     }
