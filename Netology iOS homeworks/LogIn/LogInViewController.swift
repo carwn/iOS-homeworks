@@ -9,7 +9,21 @@ import UIKit
 import StorageService
 
 class LogInViewController: UIViewController {
-    
+
+    // MARK: - Private Properties
+    private weak var delegate: LoginViewControllerDelegate!
+
+    // MARK: - Initializers
+
+    init(delegate: LoginViewControllerDelegate) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Subviews
     
     private let mainScrollView: UIScrollView = {
@@ -51,6 +65,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         setupTextField(textField)
         textField.placeholder = "Email or phone"
+        textField.delegate = self
         return textField
     }()
     
@@ -59,6 +74,7 @@ class LogInViewController: UIViewController {
         setupTextField(textField)
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
+        textField.delegate = self
         return textField
     }()
     
@@ -204,7 +220,15 @@ class LogInViewController: UIViewController {
     @objc func logInButtonPressed() {
         guard let userName = loginTextField.text,
               !userName.isEmpty else {
-            present(UIAlertController.infoAlert(title: "Не введено имя пользователя", message: "Ожидаемое имя пользователя Hipster Cat"), animated: true)
+            present(UIAlertController.infoAlert(title: "Не введено имя пользователя", message: nil), animated: true)
+            return
+        }
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            present(UIAlertController.infoAlert(title: "Не введен пароль", message: nil), animated: true)
+            return
+        }
+        guard delegate.check(login: userName, password: password) else {
+            present(UIAlertController.infoAlert(title: "Не удалось войти", message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword"), animated: true, completion: nil)
             return
         }
         let profileViewController = ProfileViewController(userService: userService, userName: userName)
@@ -220,5 +244,14 @@ extension LogInViewController {
         static let defaultOffset: CGFloat = 16
         static let textFieldsViewHeight: CGFloat = 100
         static let logInButtonHeight: CGFloat = 50
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            logInButtonPressed()
+        }
+        return true
     }
 }
