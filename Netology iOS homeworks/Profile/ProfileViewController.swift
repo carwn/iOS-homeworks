@@ -196,7 +196,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == Section.photos.rawValue {
             let photosVC = PhotosViewController()
-            photosVC.photos = photos
+            photosVC.incomingPhotos = photos
             navigationController?.pushViewController(photosVC, animated: true)
         }
     }
