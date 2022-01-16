@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var photos: [UIImage] = []
+    var incomingPhotos: [UIImage] = []
     
     // MARK: - Private Properties
     
@@ -26,6 +27,9 @@ class PhotosViewController: UIViewController {
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photosCollectionViewCellIdentifier)
         return collectionView
     }()
+
+    private var collectionViewImages: [UIImage] = []
+    private let imagePublisher = ImagePublisherFacade()
     
     // MARK: - Lifecycle
     
@@ -34,12 +38,31 @@ class PhotosViewController: UIViewController {
         navigationItem.title = "Photo Gallery"
         setupView()
         setupConstraints()
+        imagePublisher.addImagesWithTimer(time: 0.6, repeat: 21, userImages: incomingPhotos)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        // хорошо бы здесь иметь возможность получить текущий массив изображений из ImagePublisherFacade
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        imagePublisher.subscribe(self)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imagePublisher.removeSubscription(for: self)
+    }
+
+    // проверка, что PhotosViewController не участвует в цикличной ссылки памяти и удаляется
+#if DEBUG
+    deinit {
+        print(#function)
+    }
+#endif
     
     // MARK: - Private Methods
     
@@ -60,12 +83,12 @@ class PhotosViewController: UIViewController {
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        collectionViewImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photosCollectionViewCellIdentifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.configure(image: photos[indexPath.row])
+        cell.configure(image: collectionViewImages[indexPath.row])
         return cell
     }
     
@@ -94,5 +117,12 @@ extension PhotosViewController {
     private struct Constants {
         static let defaultOffset: CGFloat = 8
         static let photosInRowCount = 3
+    }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        collectionViewImages = images
+        collectionView.reloadData()
     }
 }
