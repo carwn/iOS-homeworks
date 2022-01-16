@@ -66,6 +66,9 @@ class LogInViewController: UIViewController {
         setupTextField(textField)
         textField.placeholder = "Email or phone"
         textField.delegate = self
+#if DEBUG
+        textField.text = "Hipster Cat"
+#endif
         return textField
     }()
     
@@ -75,6 +78,9 @@ class LogInViewController: UIViewController {
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
         textField.delegate = self
+#if DEBUG
+        textField.text = "StrongPassword"
+#endif
         return textField
     }()
     
