@@ -32,6 +32,38 @@ class FeedViewController: UIViewController {
         return stack
     }()
 
+    private lazy var inputTextStackView: UIStackView = {
+        let inputTextStackView = UIStackView(arrangedSubviews: [inputTextView, spinner, resultLabel])
+        inputTextStackView.axis = .vertical
+        inputTextStackView.spacing = 10
+        return inputTextStackView
+    }()
+
+    private lazy var spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        return spinner
+    }()
+
+    private lazy var resultLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+
+    private let wordChecker: WordChecker
+
+    // MARK: - Initializers
+    init(wordChecker: WordChecker) {
+        self.wordChecker = wordChecker
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +76,7 @@ class FeedViewController: UIViewController {
     private func setupViewsAndConstraints() {
         let container = UIView()
         container.addSubview(buttonsStackView)
-        container.addSubview(inputTextView)
+        container.addSubview(inputTextStackView)
         view.addSubview(container)
         container.center(in: view)
 
@@ -52,9 +84,9 @@ class FeedViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
         }
-        inputTextView.snp.makeConstraints { make in
+        inputTextStackView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.top.equalTo(buttonsStackView.snp_bottomMargin).offset(30)
+            make.top.equalTo(buttonsStackView.snp_bottomMargin).offset(25)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
             make.width.equalTo(view).multipliedBy(0.85)
@@ -72,6 +104,28 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: InputTextViewDelegate {
     func userInputedText(text: String?) {
-        print(text as Any)
+        guard let text = text, !text.isEmpty else {
+            present(UIAlertController.infoAlert(title: "Не введен текст"), animated: true)
+            return
+        }
+        spinner.startAnimating()
+        resultLabel.isHidden = true
+        wordChecker.check(word: text) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            self.spinner.stopAnimating()
+            self.resultLabel.text = result.description
+            func color(result: WordChecker.Result) -> UIColor {
+                switch result {
+                case .correct:
+                    return .green
+                case .notCorrect, .checkError:
+                    return .red
+                }
+            }
+            self.resultLabel.textColor = color(result: result)
+            self.resultLabel.isHidden = false
+        }
     }
 }
