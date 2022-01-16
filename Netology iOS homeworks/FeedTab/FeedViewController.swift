@@ -93,6 +93,19 @@ class FeedViewController: UIViewController {
         }
     }
 
+    private func updateResultLabelText(_ result: WordChecker.Result) {
+        let color: UIColor = {
+            switch result {
+            case .correct:
+                return .green
+            case .notCorrect, .checkError:
+                return .red
+            }
+        }()
+        self.resultLabel.textColor = color
+        self.resultLabel.text = result.description
+    }
+
     @objc
     private func pushPostViewControllerButtonPressed() {
         let post = PostViewController.Post(title: "Hello")
@@ -115,16 +128,7 @@ extension FeedViewController: InputTextViewDelegate {
                 return
             }
             self.spinner.stopAnimating()
-            self.resultLabel.text = result.description
-            func color(result: WordChecker.Result) -> UIColor {
-                switch result {
-                case .correct:
-                    return .green
-                case .notCorrect, .checkError:
-                    return .red
-                }
-            }
-            self.resultLabel.textColor = color(result: result)
+            self.updateResultLabelText(result)
             self.resultLabel.isHidden = false
         }
     }
