@@ -15,10 +15,11 @@ class FeedViewController: UIViewController {
         addStackView()
     }
     
-    private func pushPostViewControllerButton(number: Int) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setTitle("PushPostViewController #\(number)", for: .normal)
-        button.addTarget(self, action: #selector(pushPostViewControllerButtonPressed), for: .touchUpInside)
+    private func pushPostViewControllerButton(number: Int) -> SystemButton {
+        let button = SystemButton(title: "PushPostViewController #\(number)")
+        button.onTapHandler = { [weak self] in
+            self?.pushPostViewControllerButtonPressed()
+        }
         return button
     }
     

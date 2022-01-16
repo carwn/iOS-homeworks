@@ -42,9 +42,10 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var closeAvatarButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(hideAvatarView), for: .touchUpInside)
+    private lazy var closeAvatarButton: SystemButton = {
+        let button = SystemButton { [weak self] in
+            self?.hideAvatarView()
+        }
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .white
         button.layer.opacity = 0

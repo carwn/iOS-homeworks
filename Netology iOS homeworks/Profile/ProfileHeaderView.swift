@@ -50,16 +50,16 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    private lazy var setStatusButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Set status", for: .normal)
+    private lazy var setStatusButton: SystemButton = {
+        let button = SystemButton(title: "Set status", titleColor: .white) { [weak self] in
+            self?.setStatusButtonPressed()
+        }
         button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(setStatusButtonPressed), for: .touchUpInside)
         return button
     }()
     
