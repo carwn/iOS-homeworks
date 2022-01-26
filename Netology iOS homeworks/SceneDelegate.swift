@@ -14,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var loginInspector: LoginInspector = {
         factory.makeLoginInspector()
     }()
+    private let wordChecker = WordChecker()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -30,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func feedViewController() -> UIViewController {
-        let feedVC = UINavigationController(rootViewController: FeedViewController())
+        let feedVC = UINavigationController(rootViewController: FeedViewController(wordChecker: wordChecker))
         feedVC.tabBarItem = UITabBarItem(title: "Feed",
                                          image: UIImage(systemName: "f.square"),
                                          selectedImage: UIImage(systemName: "f.square.fill"))

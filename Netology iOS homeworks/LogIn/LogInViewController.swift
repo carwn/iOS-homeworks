@@ -91,20 +91,19 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
     }
     
-    private let logInButton: UIButton = {
-        let button = UIButton()
+    private lazy var logInButton: SystemButton = {
+        let button = SystemButton(title: "Log In", titleColor: .white) { [weak self] in
+            self?.logInButtonPressed()
+        }
         let bluePixelImage = UIImage(named: "blue_pixel")
         button.setBackgroundImage(bluePixelImage, for: .normal)
         let bluePixelImageWithAlpha80 = bluePixelImage?.withAlpha(0.8)
         button.setBackgroundImage(bluePixelImageWithAlpha80, for: .selected)
         button.setBackgroundImage(bluePixelImageWithAlpha80, for: .highlighted)
         button.setBackgroundImage(bluePixelImageWithAlpha80, for: .disabled)
-        button.setTitle("Log In", for: .normal)
-        button.titleLabel?.textColor = .white
         button.layer.masksToBounds = false
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(logInButtonPressed), for: .touchUpInside)
         return button
     }()
 
