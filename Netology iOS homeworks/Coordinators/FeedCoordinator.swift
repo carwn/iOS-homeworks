@@ -10,19 +10,38 @@ import UIKit
 class FeedCoordinator: TabBarCoordinator {
     
     var rootViewController: UIViewController {
-        feedViewController
+        navigationController
     }
     
-    private let feedViewController: UIViewController
+    private let wordChecker: WordChecker
+    
+    private lazy var navigationController: UINavigationController = {
+        let navigationController = UINavigationController(rootViewController: feedViewController)
+        navigationController.tabBarItem = UITabBarItem(title: "Feed",
+                                                       image: UIImage(systemName: "f.square"),
+                                                       selectedImage: UIImage(systemName: "f.square.fill"))
+        return navigationController
+    }()
+    
+    private lazy var feedViewController: UIViewController = {
+        let feedViewController = FeedViewController(wordChecker: wordChecker, coordinator: self)
+        feedViewController.onPushPostViewControllerButtonPressed = { [weak self] post in
+            self?.pushPostViewController(post: post)
+        }
+        return feedViewController
+    }()
     
     init(wordChecker: WordChecker) {
-        feedViewController = UINavigationController(rootViewController: FeedViewController(wordChecker: wordChecker))
-        feedViewController.tabBarItem = UITabBarItem(title: "Feed",
-                                                     image: UIImage(systemName: "f.square"),
-                                                     selectedImage: UIImage(systemName: "f.square.fill"))
+        self.wordChecker = wordChecker
     }
     
     func start() {
         print("FeedCoordinator start")
+    }
+    
+    private func pushPostViewController(post: PostViewController.Post) {
+        let postVC = PostViewController()
+        postVC.post = post
+        navigationController.pushViewController(postVC, animated: true)
     }
 }
