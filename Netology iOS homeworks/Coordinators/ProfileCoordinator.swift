@@ -9,17 +9,20 @@ import UIKit
 
 class ProfileCoordinator: TabBarCoordinator {
     
-    override var rootViewController: UIViewController? {
+    var rootViewController: UIViewController {
         logInViewController
     }
     
     private let logInViewController: UIViewController
     
-    init(delegate: LoginViewControllerDelegate, indexInTabBar: Int, tabBarController: UITabBarController) {
+    init(delegate: LoginViewControllerDelegate) {
         logInViewController = UINavigationController(rootViewController: LogInViewController(delegate: delegate))
         logInViewController.tabBarItem = UITabBarItem(title: "Profile",
                                                       image: UIImage(systemName: "person"),
                                                       selectedImage: UIImage(systemName: "person.fill"))
-        super.init(indexInTabBar: indexInTabBar, tabBarController: tabBarController)
+    }
+    
+    func start() {
+        print("ProfileCoordinator start")
     }
 }

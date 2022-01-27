@@ -9,17 +9,20 @@ import UIKit
 
 class FeedCoordinator: TabBarCoordinator {
     
-    override var rootViewController: UIViewController? {
+    var rootViewController: UIViewController {
         feedViewController
     }
     
     private let feedViewController: UIViewController
     
-    init(wordChecker: WordChecker, indexInTabBar: Int, tabBarController: UITabBarController) {
+    init(wordChecker: WordChecker) {
         feedViewController = UINavigationController(rootViewController: FeedViewController(wordChecker: wordChecker))
         feedViewController.tabBarItem = UITabBarItem(title: "Feed",
                                                      image: UIImage(systemName: "f.square"),
                                                      selectedImage: UIImage(systemName: "f.square.fill"))
-        super.init(indexInTabBar: indexInTabBar, tabBarController: tabBarController)
+    }
+    
+    func start() {
+        print("FeedCoordinator start")
     }
 }

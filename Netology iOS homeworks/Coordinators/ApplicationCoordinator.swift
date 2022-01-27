@@ -8,35 +8,37 @@
 import Foundation
 import UIKit
 
-final class ApplicationCoordinator: BaseCoordinator, Coordinator {
+final class ApplicationCoordinator: NSObject, Coordinator {
 
     private var window: UIWindow?
     private let scene: UIWindowScene
 
-    private let tabBarController: UITabBarController = {
-        let tabBarController = UITabBarController()
-        return tabBarController
-    }()
+    private let tabBarController: UITabBarController
     
-    private let factory: LoginFactory = DefaultLoginFactory()
-    private lazy var loginInspector: LoginInspector = {
-        factory.makeLoginInspector()
-    }()
+    private let feedCoordinator: FeedCoordinator
+    private let profileCoordinator: ProfileCoordinator
+    
+    private let factory: LoginFactory
+    private let loginInspector: LoginInspector
     private let wordChecker = WordChecker()
     
-    init(scene: UIWindowScene) {
+    init(scene: UIWindowScene, factory: LoginFactory) {
         self.scene = scene
+        self.factory = factory
+        tabBarController = UITabBarController()
+        loginInspector = factory.makeLoginInspector()
+        feedCoordinator = FeedCoordinator(wordChecker: wordChecker)
+        profileCoordinator = ProfileCoordinator(delegate: loginInspector)
+        tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController], animated: false)
         super.init()
+        tabBarController.delegate = self
     }
 
     func start() {
         initWindow()
-        let feedCoordinator = FeedCoordinator(wordChecker: wordChecker, indexInTabBar: 0, tabBarController: tabBarController)
-        addDependency(feedCoordinator)
-        let profileCoordinator = ProfileCoordinator(delegate: loginInspector, indexInTabBar: 1, tabBarController: tabBarController)
-        addDependency(profileCoordinator)
-        tabBarController.setViewControllers(childCoordinators.compactMap { $0 as? TabBarCoordinator }.compactMap { $0.rootViewController }, animated: false)
-        startFeedFlow()
+        if let selectedViewController = tabBarController.selectedViewController {
+            startFlow(viewController: selectedViewController)
+        }
     }
 
     private func initWindow() {
@@ -47,10 +49,27 @@ final class ApplicationCoordinator: BaseCoordinator, Coordinator {
     }
     
     private func startFeedFlow() {
-        childCoordinators.first(where: { $0 is FeedCoordinator } )?.start()
+        feedCoordinator.start()
     }
 
     private func startProfileFlow() {
-        childCoordinators.first(where: { $0 is ProfileCoordinator })?.start()
+        profileCoordinator.start()
+    }
+    
+    private func startFlow(viewController: UIViewController) {
+        switch viewController {
+        case profileCoordinator.rootViewController:
+            startProfileFlow()
+        case feedCoordinator.rootViewController:
+            startFeedFlow()
+        default:
+            break
+        }
+    }
+}
+
+extension ApplicationCoordinator: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        startFlow(viewController: viewController)
     }
 }
