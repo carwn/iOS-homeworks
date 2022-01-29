@@ -6,26 +6,16 @@
 //
 
 import UIKit
-import StorageService
 
 class LogInViewController: UIViewController {
-
-    // MARK: - Public Properties
-    struct ShowProfileViewParams {
-        let userName: String
-        let posts: [Post]
-    }
-    var showProfileViewClosure: ((ShowProfileViewParams) -> Void)?
     
     // MARK: - Private Properties
-    private weak var delegate: LoginViewControllerDelegate!
-    private let userService: UserService
+    private let presenter: LoginViewOutput
 
     // MARK: - Initializers
 
-    init(delegate: LoginViewControllerDelegate, userService: UserService) {
-        self.delegate = delegate
-        self.userService = userService
+    init(presenter: LoginViewOutput) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -224,20 +214,7 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func logInButtonPressed() {
-        guard let userName = loginTextField.text,
-              !userName.isEmpty else {
-            present(UIAlertController.infoAlert(title: "Не введено имя пользователя", message: nil), animated: true)
-            return
-        }
-        guard let password = passwordTextField.text, !password.isEmpty else {
-            present(UIAlertController.infoAlert(title: "Не введен пароль", message: nil), animated: true)
-            return
-        }
-        guard delegate.check(login: userName, password: password) else {
-            present(UIAlertController.infoAlert(title: "Не удалось войти", message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword"), animated: true, completion: nil)
-            return
-        }
-        showProfileViewClosure?(ShowProfileViewParams(userName: userName, posts: Post.postsExample))
+        presenter.logInButtonPressed(login: loginTextField.text, password: passwordTextField.text)
     }
 }
 
@@ -257,5 +234,11 @@ extension LogInViewController: UITextFieldDelegate {
             logInButtonPressed()
         }
         return true
+    }
+}
+
+extension LogInViewController: LoginViewInput {
+    func showLogInError(title: String, message: String?) {
+        present(UIAlertController.infoAlert(title: title, message: message), animated: true)
     }
 }

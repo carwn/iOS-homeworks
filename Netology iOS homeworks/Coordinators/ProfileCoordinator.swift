@@ -26,12 +26,14 @@ class ProfileCoordinator: TabBarCoordinator {
     }()
     
     init(delegate: LoginViewControllerDelegate) {
-        logInViewController = LogInViewController(delegate: delegate, userService: userService)
+        let logInPresenter = LoginViewPresenter(delegate: delegate)
+        logInViewController = LogInViewController(presenter: logInPresenter)
+        logInPresenter.viewController = logInViewController
         navigationController = UINavigationController(rootViewController: logInViewController)
         navigationController.tabBarItem = UITabBarItem(title: "Profile",
                                                       image: UIImage(systemName: "person"),
                                                       selectedImage: UIImage(systemName: "person.fill"))
-        logInViewController.showProfileViewClosure = { [weak self] params in
+        logInPresenter.showProfileViewClosure = { [weak self] params in
             self?.pushProfileViewController(userName: params.userName, posts: params.posts)
         }
     }
