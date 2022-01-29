@@ -42,6 +42,14 @@ class FeedCoordinator: TabBarCoordinator {
     private func pushPostViewController(post: PostViewController.Post) {
         let postVC = PostViewController()
         postVC.post = post
+        postVC.onShowInfoButtonPressed = { [weak self] in
+            self?.showInfoViewController()
+        }
         navigationController.pushViewController(postVC, animated: true)
+    }
+    
+    private func showInfoViewController() {
+        let infoVC = InfoViewController()
+        navigationController.present(infoVC, animated: true, completion: nil)
     }
 }
