@@ -10,13 +10,22 @@ import StorageService
 
 class LogInViewController: UIViewController {
 
+    // MARK: - Public Properties
+    struct ShowProfileViewParams {
+        let userName: String
+        let posts: [Post]
+    }
+    var showProfileViewClosure: ((ShowProfileViewParams) -> Void)?
+    
     // MARK: - Private Properties
     private weak var delegate: LoginViewControllerDelegate!
+    private let userService: UserService
 
     // MARK: - Initializers
 
-    init(delegate: LoginViewControllerDelegate) {
+    init(delegate: LoginViewControllerDelegate, userService: UserService) {
         self.delegate = delegate
+        self.userService = userService
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -105,14 +114,6 @@ class LogInViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
         return button
-    }()
-
-    private let userService: UserService = {
-#if DEBUG
-        return TestUserService()
-#else
-        return CurrentUserService()
-#endif
     }()
     
     // MARK: - Lifecycle
@@ -236,9 +237,7 @@ class LogInViewController: UIViewController {
             present(UIAlertController.infoAlert(title: "Не удалось войти", message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword"), animated: true, completion: nil)
             return
         }
-        let profileViewController = ProfileViewController(userService: userService, userName: userName)
-        profileViewController.posts = Post.postsExample
-        navigationController?.pushViewController(profileViewController, animated: true)
+        showProfileViewClosure?(ShowProfileViewParams(userName: userName, posts: Post.postsExample))
     }
 }
 

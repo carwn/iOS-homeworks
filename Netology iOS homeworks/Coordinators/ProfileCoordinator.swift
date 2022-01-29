@@ -6,23 +6,43 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileCoordinator: TabBarCoordinator {
     
     var rootViewController: UIViewController {
-        logInViewController
+        navigationController
     }
     
-    private let logInViewController: UIViewController
+    private let navigationController: UINavigationController
+    private let logInViewController: LogInViewController
+    
+    private let userService: UserService = {
+#if DEBUG
+        return TestUserService()
+#else
+        return CurrentUserService()
+#endif
+    }()
     
     init(delegate: LoginViewControllerDelegate) {
-        logInViewController = UINavigationController(rootViewController: LogInViewController(delegate: delegate))
-        logInViewController.tabBarItem = UITabBarItem(title: "Profile",
+        logInViewController = LogInViewController(delegate: delegate, userService: userService)
+        navigationController = UINavigationController(rootViewController: logInViewController)
+        navigationController.tabBarItem = UITabBarItem(title: "Profile",
                                                       image: UIImage(systemName: "person"),
                                                       selectedImage: UIImage(systemName: "person.fill"))
+        logInViewController.showProfileViewClosure = { [weak self] params in
+            self?.showProfile(userName: params.userName, posts: params.posts)
+        }
     }
     
     func start() {
         print("ProfileCoordinator start")
+    }
+    
+    private func showProfile(userName: String, posts: [Post]) {
+        let profileViewController = ProfileViewController(userService: userService, userName: userName)
+        profileViewController.posts = posts
+        navigationController.pushViewController(profileViewController, animated: true)
     }
 }
