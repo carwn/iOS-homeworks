@@ -6,7 +6,14 @@
 //
 
 import Foundation
+import StorageService
 
-protocol LoginViewOutput {
+struct ShowProfileViewParams {
+    let userName: String
+    let posts: [Post]
+}
+
+protocol LoginViewOutput: AnyObject {
+    var showProfileViewClosure: ((ShowProfileViewParams) -> Void)? { set get }
     func logInButtonPressed(login: String?, password: String?)
 }

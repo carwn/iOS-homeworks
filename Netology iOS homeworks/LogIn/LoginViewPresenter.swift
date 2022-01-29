@@ -12,13 +12,9 @@ class LoginViewPresenter {
     
     // MARK: - Public Properties
     weak var viewController: LoginViewInput?
-    
-    struct ShowProfileViewParams {
-        let userName: String
-        let posts: [Post]
-    }
     var showProfileViewClosure: ((ShowProfileViewParams) -> Void)?
     
+    // MARK: - Private Properties
     private weak var delegate: LoginViewControllerDelegate!
     
     init(delegate: LoginViewControllerDelegate) {
