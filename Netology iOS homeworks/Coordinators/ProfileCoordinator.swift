@@ -32,7 +32,7 @@ class ProfileCoordinator: TabBarCoordinator {
                                                       image: UIImage(systemName: "person"),
                                                       selectedImage: UIImage(systemName: "person.fill"))
         logInViewController.showProfileViewClosure = { [weak self] params in
-            self?.showProfile(userName: params.userName, posts: params.posts)
+            self?.pushProfileViewController(userName: params.userName, posts: params.posts)
         }
     }
     
@@ -40,9 +40,18 @@ class ProfileCoordinator: TabBarCoordinator {
         print("ProfileCoordinator start")
     }
     
-    private func showProfile(userName: String, posts: [Post]) {
+    private func pushProfileViewController(userName: String, posts: [Post]) {
         let profileViewController = ProfileViewController(userService: userService, userName: userName)
         profileViewController.posts = posts
+        profileViewController.onPhotosRowSelected = { [weak self] photos in
+            self?.pushPhotosViewController(photos: photos)
+        }
         navigationController.pushViewController(profileViewController, animated: true)
+    }
+    
+    private func pushPhotosViewController(photos: [UIImage]) {
+        let photosVC = PhotosViewController()
+        photosVC.incomingPhotos = photos
+        navigationController.pushViewController(photosVC, animated: true)
     }
 }

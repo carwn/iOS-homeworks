@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    var onPhotosRowSelected: (([UIImage]) -> Void)?
+    
     // MARK: - Private Properties
 
     private let userService: UserService
@@ -196,9 +198,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == Section.photos.rawValue {
-            let photosVC = PhotosViewController()
-            photosVC.incomingPhotos = photos
-            navigationController?.pushViewController(photosVC, animated: true)
+            onPhotosRowSelected?(photos)
         }
     }
 }
