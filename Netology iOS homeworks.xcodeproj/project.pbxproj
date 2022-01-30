@@ -39,6 +39,7 @@
 		2B55B15E4656448E0E3B8C79 /* Pods_Netology_iOS_homeworks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C0630F0F913A6C4876CD5 /* Pods_Netology_iOS_homeworks.framework */; };
 		6D426FC227808C4A003DC4CE /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D426FC127808C4A003DC4CE /* LoginFactory.swift */; };
 		6D426FC427808C99003DC4CE /* DefaultLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D426FC327808C99003DC4CE /* DefaultLoginFactory.swift */; };
+		6DC0BA5927A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */; };
 		6DED7A0326F43F1C00A5CB5B /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0226F43F1C00A5CB5B /* PhotosTableViewCell.swift */; };
 		6DED7A0526F43F7600A5CB5B /* PhotosStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0426F43F7600A5CB5B /* PhotosStore.swift */; };
 		6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0626F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift */; };
@@ -107,6 +108,7 @@
 		1FFC9FD5279448A60069C288 /* WordChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordChecker.swift; sourceTree = "<group>"; };
 		6D426FC127808C4A003DC4CE /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		6D426FC327808C99003DC4CE /* DefaultLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginFactory.swift; sourceTree = "<group>"; };
+		6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task8ProcessImagesOnThreadTester.swift; sourceTree = "<group>"; };
 		6DED7A0226F43F1C00A5CB5B /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		6DED7A0426F43F7600A5CB5B /* PhotosStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosStore.swift; sourceTree = "<group>"; };
 		6DED7A0626F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAllArrangedSubviews.swift"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				1F9F324C26D251DA00CB1285 /* SceneDelegate.swift */,
 				1FF286C3278072AA00CE8D01 /* LoginChecker.swift */,
 				1FFC9FD5279448A60069C288 /* WordChecker.swift */,
+				6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */,
 				6D426FC527808CA4003DC4CE /* LoginFactory */,
 				1FE231142764C0A600235C80 /* UserService */,
 				1F2A9E3126DA1A8900542900 /* FeedTab */,
@@ -492,6 +495,7 @@
 				1F5B736D26EDD6440075597B /* UIImage+extensions.swift in Sources */,
 				1FE231132764C0A100235C80 /* User.swift in Sources */,
 				1FF286C6278073E800CE8D01 /* LoginViewControllerDelegate.swift in Sources */,
+				6DC0BA5927A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift in Sources */,
 				1FFC9FD6279448A60069C288 /* WordChecker.swift in Sources */,
 				1FE2311A2764C22F00235C80 /* CurrentUserService.swift in Sources */,
 				6D426FC227808C4A003DC4CE /* LoginFactory.swift in Sources */,
