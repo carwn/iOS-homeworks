@@ -27,6 +27,8 @@ class PhotosViewController: UIViewController {
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photosCollectionViewCellIdentifier)
         return collectionView
     }()
+    
+    private let spinner = UIActivityIndicatorView(style: .large)
 
     private var collectionViewImages: [UIImage] = []
     private let imagePublisher = ImagePublisherFacade()
@@ -38,7 +40,7 @@ class PhotosViewController: UIViewController {
         navigationItem.title = "Photo Gallery"
         setupView()
         setupConstraints()
-        imagePublisher.addImagesWithTimer(time: 0.6, repeat: 21, userImages: incomingPhotos)
+        startPhotosProcessing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,16 +69,34 @@ class PhotosViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupView() {
-        view.addSubview(collectionView)
+        view.addSubviews(collectionView, spinner)
     }
     
     private func setupConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        [collectionView, spinner].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         let constraints: [NSLayoutConstraint] = [collectionView.topAnchor.constraint(equalTo: view.topAnchor),
                                                  collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                                  collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+                                                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                                                 spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                                 spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func startPhotosProcessing() {
+        guard let filter = ColorFilter.allCases.randomElement() else {
+            return
+        }
+        spinner.startAnimating()
+        ImageProcessor().processImagesOnThread(sourceImages: incomingPhotos, filter: filter, qos: .userInteractive) { [weak self] images in
+            DispatchQueue.main.async {
+                guard let self = self else {
+                    return
+                }
+                self.spinner.stopAnimating()
+                self.imagePublisher.addImagesWithTimer(time: 0.6, repeat: 21, userImages: images.compactMap { $0 }.map { UIImage(cgImage: $0) } )
+            }
+        }
     }
 }
 
