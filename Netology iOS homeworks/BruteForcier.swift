@@ -9,11 +9,18 @@ import Foundation
 
 class BruteForcier {
     
-    enum BruteForceError: Error {
+    enum BruteForceError: LocalizedError {
         case timeout
+        
+        var errorDescription: String? {
+            switch self {
+            case .timeout:
+                return "Таймаут"
+            }
+        }
     }
     
-    var allCharacters: [String] = (String.letters + String.digits).map { String($0) }
+    var allCharacters = String.myCharacters.map { String($0) }
     var timeoutInSeconds = 10
     
     private let testClosure: (String) -> Bool
@@ -84,6 +91,7 @@ extension String {
     static let punctuation = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     static let letters = lowercase + uppercase
     static let printable = digits + letters + punctuation
+    static let myCharacters = String.letters + String.digits
 
     mutating func replace(at index: Int, with character: Character) {
         var stringArray = Array(self)
