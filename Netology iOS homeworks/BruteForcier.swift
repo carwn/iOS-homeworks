@@ -9,20 +9,30 @@ import Foundation
 
 class BruteForcier {
     
-    var allCharacters: [String] = (String.letters + String.digits).reduce(into: [String]()) { partialResult, nextChar in
-        partialResult.append(String(nextChar))
+    enum BruteForceError: Error {
+        case timeout
     }
     
+    var allCharacters: [String] = (String.letters + String.digits).map { String($0) }
+    var timeoutInSeconds = 10
+    
     private let testClosure: (String) -> Bool
+    private var isTimeout = false
+    private var timeoutTimerID: UUID? // защита от ситуации когда после удачного брутфорса метод запускается еще раз пока таймер предыдущего еще не сработал
     
     init(testClosure: @escaping (String) -> Bool) {
         self.testClosure = testClosure
     }
     
-    func bruteForce(complition: (String) -> Void) {
+    func bruteForce(complition: (String) -> Void) throws {
+        setupTimer()
         var currentTestString = generateBruteForce("", fromArray: allCharacters)
         while testClosure(currentTestString) == false {
-            currentTestString = generateBruteForce(currentTestString, fromArray: allCharacters)
+            if isTimeout {
+                throw BruteForceError.timeout
+            } else {
+                currentTestString = generateBruteForce(currentTestString, fromArray: allCharacters)
+            }
         }
         complition(currentTestString)
     }
@@ -53,6 +63,18 @@ class BruteForcier {
         return index < array.count ? Character(array[index])
                                    : Character("")
     }
+    
+    private func setupTimer() {
+        let timeoutTimerID = UUID()
+        self.timeoutTimerID = timeoutTimerID
+        self.isTimeout = false
+        DispatchQueue.global().asyncAfter(deadline: .nowAfter(seconds: timeoutInSeconds)) { [weak self] in
+            guard let self = self else { return }
+            if self.timeoutTimerID == timeoutTimerID {
+                self.isTimeout = true
+            }
+        }
+    }
 }
 
 extension String {
@@ -67,5 +89,11 @@ extension String {
         var stringArray = Array(self)
         stringArray[index] = character
         self = String(stringArray)
+    }
+}
+
+extension DispatchTime {
+    static func nowAfter(seconds: Int) -> DispatchTime {
+        .init(uptimeNanoseconds: DispatchTime.now().uptimeNanoseconds + UInt64(1_000_000_000 * seconds))
     }
 }
