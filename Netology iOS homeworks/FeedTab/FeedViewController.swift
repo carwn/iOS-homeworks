@@ -10,6 +10,9 @@ import SnapKit
 
 class FeedViewController: UIViewController {
 
+    // MARK: - Public Properties
+    var onPushPostViewControllerButtonPressed: ((PostViewController.Post) -> Void)?
+    
     // MARK: - Private Properties
     private lazy var inputTextView: InputTextView = {
         let inputTextView = InputTextView()
@@ -53,10 +56,12 @@ class FeedViewController: UIViewController {
     }()
 
     private let wordChecker: WordChecker
+    private weak var coordinator: FeedCoordinator?
 
     // MARK: - Initializers
-    init(wordChecker: WordChecker) {
+    init(wordChecker: WordChecker, coordinator: FeedCoordinator) {
         self.wordChecker = wordChecker
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -109,9 +114,7 @@ class FeedViewController: UIViewController {
     @objc
     private func pushPostViewControllerButtonPressed() {
         let post = PostViewController.Post(title: "Hello")
-        let postVC = PostViewController()
-        postVC.post = post
-        navigationController?.pushViewController(postVC, animated: true)
+        onPushPostViewControllerButtonPressed?(post)
     }
 }
 

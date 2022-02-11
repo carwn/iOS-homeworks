@@ -10,40 +10,14 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    private let factory: LoginFactory = DefaultLoginFactory()
-    private lazy var loginInspector: LoginInspector = {
-        factory.makeLoginInspector()
-    }()
-    private let wordChecker = WordChecker()
+
+    private let factory = DefaultLoginFactory()
+    private var appCoordinator: ApplicationCoordinator!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = rootViewController()
-        window?.makeKeyAndVisible()
-    }
-    
-    private func rootViewController() -> UIViewController {
-        let tabBar = UITabBarController()
-        tabBar.setViewControllers([feedViewController(), profileViewController()], animated: false)
-        return tabBar
-    }
-    
-    private func feedViewController() -> UIViewController {
-        let feedVC = UINavigationController(rootViewController: FeedViewController(wordChecker: wordChecker))
-        feedVC.tabBarItem = UITabBarItem(title: "Feed",
-                                         image: UIImage(systemName: "f.square"),
-                                         selectedImage: UIImage(systemName: "f.square.fill"))
-        return feedVC
-    }
-    
-    private func profileViewController() -> UIViewController {
-        let profileVC = UINavigationController(rootViewController: LogInViewController(delegate: loginInspector))
-        profileVC.tabBarItem = UITabBarItem(title: "Profile",
-                                            image: UIImage(systemName: "person"),
-                                            selectedImage: UIImage(systemName: "person.fill"))
-        return profileVC
+        guard let scene = (scene as? UIWindowScene) else { return }
+        appCoordinator = ApplicationCoordinator(scene: scene, factory: factory)
+        appCoordinator.start()
     }
 }
 
