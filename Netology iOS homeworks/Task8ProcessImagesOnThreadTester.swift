@@ -10,21 +10,25 @@ import iOSIntPackage
 import StorageService
 
 class Task8ProcessImagesOnThreadTester {
-    let qoss: [QualityOfService] = [.background, .utility, .default, .userInitiated, .userInteractive]
-    let filters: [ColorFilter] = ColorFilter.allCases
-    let postImages: [UIImage] = Post.postsExample.compactMap { UIImage(named: $0.image) }
-    let photos: [UIImage] = PhotosStore.testPhotoNames.compactMap { UIImage(named: $0) }
     
-    func start(specificImages: [UIImage]? = nil,
-               specificQos: QualityOfService? = nil,
-               specificFilter: ColorFilter? = nil) {
+    static let defaultPostImages: [UIImage] = Post.postsExample.compactMap { UIImage(named: $0.image) }
+    static let defaultPhotos: [UIImage] = PhotosStore.testPhotoNames.compactMap { UIImage(named: $0) }
+    
+    var qoss: [QualityOfService]?
+    var filters: [ColorFilter]?
+    var images: [UIImage]?
+    
+    private static let defaultQoss: [QualityOfService] = [.background, .utility, .default, .userInitiated, .userInteractive]
+    private static let defaultFilters: [ColorFilter] = ColorFilter.allCases
+    
+    func start() {
         DispatchQueue.main.async {
             print("Start test")
         }
         let imageProcessor = ImageProcessor()
-        for images in specificImages != nil ? [specificImages!] : [postImages, photos] {
-            for filter in specificFilter != nil ? [specificFilter!] : filters {
-                for qos in specificQos != nil ? [specificQos!] : qoss {
+        for images in images != nil ? [images!] : [Self.defaultPostImages, Self.defaultPhotos] {
+            for filter in filters != nil ? filters! : Self.defaultFilters {
+                for qos in qoss != nil ? qoss! : Self.defaultQoss {
                     DispatchQueue.global().async {
                         let startTime = CFAbsoluteTimeGetCurrent()
                         imageProcessor.processImagesOnThread(sourceImages: images, filter: filter, qos: qos) { processedImages in

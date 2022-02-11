@@ -14,7 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         DispatchQueue.global().async {
             let tester = Task8ProcessImagesOnThreadTester()
-            tester.start(specificImages: tester.photos, specificQos: .default, specificFilter: .bloom(intensity: 1))
+            tester.images = Task8ProcessImagesOnThreadTester.defaultPhotos
+            tester.qoss = [.default]
+            tester.filters = [.bloom(intensity: 1)]
+            tester.start()
         }
         return true
     }
