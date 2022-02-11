@@ -6,17 +6,16 @@
 //
 
 import UIKit
-import StorageService
 
 class LogInViewController: UIViewController {
-
+    
     // MARK: - Private Properties
-    private weak var delegate: LoginViewControllerDelegate!
+    private let presenter: LoginViewOutput
 
     // MARK: - Initializers
 
-    init(delegate: LoginViewControllerDelegate) {
-        self.delegate = delegate
+    init(presenter: LoginViewOutput) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -105,14 +104,6 @@ class LogInViewController: UIViewController {
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
         return button
-    }()
-
-    private let userService: UserService = {
-#if DEBUG
-        return TestUserService()
-#else
-        return CurrentUserService()
-#endif
     }()
     
     // MARK: - Lifecycle
@@ -223,22 +214,7 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func logInButtonPressed() {
-        guard let userName = loginTextField.text,
-              !userName.isEmpty else {
-            present(UIAlertController.infoAlert(title: "Не введено имя пользователя", message: nil), animated: true)
-            return
-        }
-        guard let password = passwordTextField.text, !password.isEmpty else {
-            present(UIAlertController.infoAlert(title: "Не введен пароль", message: nil), animated: true)
-            return
-        }
-        guard delegate.check(login: userName, password: password) else {
-            present(UIAlertController.infoAlert(title: "Не удалось войти", message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword"), animated: true, completion: nil)
-            return
-        }
-        let profileViewController = ProfileViewController(userService: userService, userName: userName)
-        profileViewController.posts = Post.postsExample
-        navigationController?.pushViewController(profileViewController, animated: true)
+        presenter.logInButtonPressed(login: loginTextField.text, password: passwordTextField.text)
     }
 }
 
@@ -258,5 +234,11 @@ extension LogInViewController: UITextFieldDelegate {
             logInButtonPressed()
         }
         return true
+    }
+}
+
+extension LogInViewController: LoginViewInput {
+    func showLogInError(title: String, message: String?) {
+        present(UIAlertController.infoAlert(title: title, message: message), animated: true)
     }
 }
