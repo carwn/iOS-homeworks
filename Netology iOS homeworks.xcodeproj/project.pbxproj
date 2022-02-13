@@ -49,6 +49,9 @@
 		6DC0BA5527A576BB00094007 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */; };
 		6DC0BA5727A5802F00094007 /* ModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5627A5802F00094007 /* ModuleFactory.swift */; };
 		6DC0BA5927A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */; };
+		6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F91D27B0E7C2009544CC /* BruteForcier.swift */; };
+		6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */; };
+		6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */; };
 		6DED7A0326F43F1C00A5CB5B /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0226F43F1C00A5CB5B /* PhotosTableViewCell.swift */; };
 		6DED7A0526F43F7600A5CB5B /* PhotosStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0426F43F7600A5CB5B /* PhotosStore.swift */; };
 		6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DED7A0626F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift */; };
@@ -67,6 +70,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1FF35ABB275CCFC1008AF342;
 			remoteInfo = StorageService;
+		};
+		6D54F92727B0EFFA009544CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F9F323F26D251DA00CB1285 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F9F324626D251DA00CB1285;
+			remoteInfo = "Netology iOS homeworks";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -127,6 +137,10 @@
 		6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewOutput.swift; sourceTree = "<group>"; };
 		6DC0BA5627A5802F00094007 /* ModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleFactory.swift; sourceTree = "<group>"; };
 		6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task8ProcessImagesOnThreadTester.swift; sourceTree = "<group>"; };
+		6D54F91D27B0E7C2009544CC /* BruteForcier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcier.swift; sourceTree = "<group>"; };
+		6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Netology iOS homeworksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcierTests.swift; sourceTree = "<group>"; };
+		6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomStringGenerator.swift; sourceTree = "<group>"; };
 		6DED7A0226F43F1C00A5CB5B /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		6DED7A0426F43F7600A5CB5B /* PhotosStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosStore.swift; sourceTree = "<group>"; };
 		6DED7A0626F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+removeAllArrangedSubviews.swift"; sourceTree = "<group>"; };
@@ -152,6 +166,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1FF35AB9275CCFC1008AF342 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D54F92027B0EFFA009544CC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,6 +240,7 @@
 			children = (
 				1F9F324926D251DA00CB1285 /* Netology iOS homeworks */,
 				1FF35ABD275CCFC1008AF342 /* StorageService */,
+				6D54F92427B0EFFA009544CC /* Netology iOS homeworksTests */,
 				1F9F324826D251DA00CB1285 /* Products */,
 				53518A727186B91F5481F2CF /* Pods */,
 				1E60919DDEFCF017E6E3579F /* Frameworks */,
@@ -230,6 +252,7 @@
 			children = (
 				1F9F324726D251DA00CB1285 /* Netology iOS homeworks.app */,
 				1FF35ABC275CCFC1008AF342 /* StorageService.framework */,
+				6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,6 +266,8 @@
 				1FFC9FD5279448A60069C288 /* WordChecker.swift */,
 				6DC0BA5627A5802F00094007 /* ModuleFactory.swift */,
 				6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */,
+				6D54F91D27B0E7C2009544CC /* BruteForcier.swift */,
+				6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */,
 				6D426FC527808CA4003DC4CE /* LoginFactory */,
 				1FE231142764C0A600235C80 /* UserService */,
 				1F2A9E3126DA1A8900542900 /* FeedTab */,
@@ -322,6 +347,14 @@
 			path = LoginFactory;
 			sourceTree = "<group>";
 		};
+		6D54F92427B0EFFA009544CC /* Netology iOS homeworksTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */,
+			);
+			path = "Netology iOS homeworksTests";
+			sourceTree = "<group>";
+		};
 		6DED7A0126F43ED600A5CB5B /* Photos */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,13 +429,31 @@
 			productReference = 1FF35ABC275CCFC1008AF342 /* StorageService.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		6D54F92227B0EFFA009544CC /* Netology iOS homeworksTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D54F92927B0EFFA009544CC /* Build configuration list for PBXNativeTarget "Netology iOS homeworksTests" */;
+			buildPhases = (
+				6D54F91F27B0EFFA009544CC /* Sources */,
+				6D54F92027B0EFFA009544CC /* Frameworks */,
+				6D54F92127B0EFFA009544CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D54F92827B0EFFA009544CC /* PBXTargetDependency */,
+			);
+			name = "Netology iOS homeworksTests";
+			productName = "Netology iOS homeworksTests";
+			productReference = 6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1F9F323F26D251DA00CB1285 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					1F9F324626D251DA00CB1285 = {
@@ -410,6 +461,10 @@
 					};
 					1FF35ABB275CCFC1008AF342 = {
 						CreatedOnToolsVersion = 13.1;
+					};
+					6D54F92227B0EFFA009544CC = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 1F9F324626D251DA00CB1285;
 					};
 				};
 			};
@@ -431,6 +486,7 @@
 			targets = (
 				1F9F324626D251DA00CB1285 /* Netology iOS homeworks */,
 				1FF35ABB275CCFC1008AF342 /* StorageService */,
+				6D54F92227B0EFFA009544CC /* Netology iOS homeworksTests */,
 			);
 		};
 /* End PBXProject section */
@@ -446,6 +502,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1FF35ABA275CCFC1008AF342 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D54F92127B0EFFA009544CC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,6 +570,7 @@
 				1FF286C4278072AA00CE8D01 /* LoginChecker.swift in Sources */,
 				6D01CB1427A1657D00CE9481 /* FeedCoordinator.swift in Sources */,
 				1F5B736F26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift in Sources */,
+				6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */,
 				6DED7A0B26F7032700A5CB5B /* UIApplication+keyWindowiOS13.swift in Sources */,
 				1F9F326126D2581300CB1285 /* ProfileView.swift in Sources */,
 				1FF286C82780744F00CE8D01 /* LoginInspector.swift in Sources */,
@@ -519,6 +583,7 @@
 				6D426FC427808C99003DC4CE /* DefaultLoginFactory.swift in Sources */,
 				1FFC9FD4279433CD0069C288 /* InputTextView.swift in Sources */,
 				6DC0BA5527A576BB00094007 /* LoginViewOutput.swift in Sources */,
+				6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */,
 				6DF5CABC26D8AB3C000B030F /* FeedViewController.swift in Sources */,
 				1F9F324B26D251DA00CB1285 /* AppDelegate.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
@@ -555,6 +620,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6D54F91F27B0EFFA009544CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -562,6 +635,11 @@
 			isa = PBXTargetDependency;
 			target = 1FF35ABB275CCFC1008AF342 /* StorageService */;
 			targetProxy = 1FF35AC0275CCFC1008AF342 /* PBXContainerItemProxy */;
+		};
+		6D54F92827B0EFFA009544CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F9F324626D251DA00CB1285 /* Netology iOS homeworks */;
+			targetProxy = 6D54F92727B0EFFA009544CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -799,6 +877,46 @@
 			};
 			name = Release;
 		};
+		6D54F92A27B0EFFA009544CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3T976NF4W2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "carwnSoft.Netology-iOS-homeworksTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netology iOS homeworks.app/Netology iOS homeworks";
+			};
+			name = Debug;
+		};
+		6D54F92B27B0EFFA009544CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3T976NF4W2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "carwnSoft.Netology-iOS-homeworksTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Netology iOS homeworks.app/Netology iOS homeworks";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -825,6 +943,15 @@
 			buildConfigurations = (
 				1FF35AC5275CCFC1008AF342 /* Debug */,
 				1FF35AC6275CCFC1008AF342 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D54F92927B0EFFA009544CC /* Build configuration list for PBXNativeTarget "Netology iOS homeworksTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D54F92A27B0EFFA009544CC /* Debug */,
+				6D54F92B27B0EFFA009544CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
