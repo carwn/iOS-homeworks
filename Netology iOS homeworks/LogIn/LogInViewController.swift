@@ -106,6 +106,23 @@ class LogInViewController: UIViewController {
         button.layer.cornerRadius = 10
         return button
     }()
+    
+    private lazy var guessPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Подобрать пароль", for: .normal)
+        button.addTarget(self, action: #selector(guessPasswordButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private let guessPasswordActivityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    private lazy var guessPasswordStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [guessPasswordButton, guessPasswordActivityIndicator])
+        stack.axis = .horizontal
+        stack.spacing = Constants.defaultOffset
+        stack.alignment = .center
+        return stack
+    }()
 
     private let userService: UserService = {
 #if DEBUG
@@ -144,7 +161,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(scrollViewContentView)
-        [logoImageView, textFieldsView, logInButton].forEach { view in
+        [logoImageView, textFieldsView, logInButton, guessPasswordStackView].forEach { view in
             scrollViewContentView.addSubview(view)
         }
         [loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
@@ -153,7 +170,7 @@ class LogInViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
+        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator, guessPasswordStackView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -197,7 +214,10 @@ class LogInViewController: UIViewController {
                            logInButton.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
                            logInButton.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
                            logInButton.heightAnchor.constraint(equalToConstant: Constants.logInButtonHeight),
-                           logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
+                           
+                           guessPasswordStackView.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: Constants.defaultOffset),
+                           guessPasswordStackView.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
+                           guessPasswordStackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -239,6 +259,33 @@ class LogInViewController: UIViewController {
         let profileViewController = ProfileViewController(userService: userService, userName: userName)
         profileViewController.posts = Post.postsExample
         navigationController?.pushViewController(profileViewController, animated: true)
+    }
+    
+    @objc func guessPasswordButtonPressed() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let gena = RandomStringGenerator()
+            let randomPassword = gena.generate() ?? "K2s"
+            DispatchQueue.main.async { [weak self] in
+                self?.guessPasswordActivityIndicator.startAnimating()
+            }
+            let bf = BruteForcier() { $0 == randomPassword }
+            do {
+                try bf.bruteForce(complition: { password in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.passwordTextField.text = password
+                        self.passwordTextField.isSecureTextEntry = false
+                    }
+                })
+            } catch let error as NSError {
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(UIAlertController.infoAlert(title: error.localizedDescription, message: "Пароль был: \(randomPassword)"), animated: true)
+                }
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.guessPasswordActivityIndicator.stopAnimating()
+            }
+        }
     }
 }
 
