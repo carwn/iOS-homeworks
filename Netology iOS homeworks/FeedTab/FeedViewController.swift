@@ -54,9 +54,33 @@ class FeedViewController: UIViewController {
         label.isHidden = true
         return label
     }()
+    
+    private lazy var timerLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .body)
+        return label
+    }()
+    
+    private let randomColorSquare: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = Constants.randomColorSquareCornerRadius
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = Constants.randomColorSquareBorderWidth
+        return view
+    }()
+    
+    private lazy var timerUIStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [timerLabel, randomColorSquare])
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = Constants.randomColorSquareHorizontalSpacing
+        return stack
+    }()
 
     private let wordChecker: WordChecker
     private weak var coordinator: FeedCoordinator?
+    private var secondsToChangeColor = 5
+    private var everySecondTimer: Timer?
 
     // MARK: - Initializers
     init(wordChecker: WordChecker, coordinator: FeedCoordinator) {
@@ -74,7 +98,23 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "FeedViewController"
         view.backgroundColor = UIColor(named: "BackgroundColor")
+        updateTimerLabelText()
+        setRandomColorForSquareView()
         setupViewsAndConstraints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        createTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        destroyTimer()
+    }
+    
+    deinit {
+        destroyTimer()
     }
 
     // MARK: - Private Methods
@@ -85,6 +125,16 @@ class FeedViewController: UIViewController {
         view.addSubview(container)
         container.center(in: view)
 
+        view.addSubview(timerUIStackView)
+        timerUIStackView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(container.snp_topMargin).offset(-60)
+        }
+        
+        randomColorSquare.snp.makeConstraints { make in
+            make.size.equalTo(CGSize(width: Constants.randomColorSquareFace, height: Constants.randomColorSquareFace))
+        }
+        
         buttonsStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview()
@@ -116,6 +166,39 @@ class FeedViewController: UIViewController {
         let post = PostViewController.Post(title: "Hello")
         onPushPostViewControllerButtonPressed?(post)
     }
+    
+    private func updateTimerLabelText() {
+        timerLabel.text = "До изменения цвета: \(secondsToChangeColor)"
+    }
+    
+    private func setRandomColorForSquareView() {
+        randomColorSquare.backgroundColor = .random
+    }
+    
+    private func createTimer() {
+        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
+            self?.everySecondTimerFire()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+        everySecondTimer = timer
+    }
+    
+    private func destroyTimer() {
+        guard let everySecondTimer = everySecondTimer else {
+            return
+        }
+        everySecondTimer.invalidate()
+        self.everySecondTimer = nil
+    }
+    
+    private func everySecondTimerFire() {
+        secondsToChangeColor -= 1
+        if secondsToChangeColor == 0 {
+            setRandomColorForSquareView()
+            secondsToChangeColor = 5
+        }
+        updateTimerLabelText()
+    }
 }
 
 extension FeedViewController: InputTextViewDelegate {
@@ -134,5 +217,14 @@ extension FeedViewController: InputTextViewDelegate {
             self.updateResultLabelText(result)
             self.resultLabel.isHidden = false
         }
+    }
+}
+
+extension FeedViewController {
+    enum Constants {
+        static let randomColorSquareFace: CGFloat = 40
+        static let randomColorSquareCornerRadius: CGFloat = randomColorSquareFace / 5
+        static let randomColorSquareBorderWidth: CGFloat = randomColorSquareFace / 15
+        static let randomColorSquareHorizontalSpacing: CGFloat = randomColorSquareFace / 2.5
     }
 }

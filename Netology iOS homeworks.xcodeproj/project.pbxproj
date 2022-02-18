@@ -47,6 +47,7 @@
 		6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F91D27B0E7C2009544CC /* BruteForcier.swift */; };
 		6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */; };
 		6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */; };
+		6DBA679B27BF7EAF00468CF5 /* UIColor+randomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */; };
 		6DC0BA5127A5765800094007 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5027A5765800094007 /* LoginViewPresenter.swift */; };
 		6DC0BA5327A576B000094007 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5227A576B000094007 /* LoginViewInput.swift */; };
 		6DC0BA5527A576BB00094007 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */; };
@@ -136,6 +137,7 @@
 		6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Netology iOS homeworksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcierTests.swift; sourceTree = "<group>"; };
 		6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomStringGenerator.swift; sourceTree = "<group>"; };
+		6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+randomColor.swift"; sourceTree = "<group>"; };
 		6DC0BA5027A5765800094007 /* LoginViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewPresenter.swift; sourceTree = "<group>"; };
 		6DC0BA5227A576B000094007 /* LoginViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewInput.swift; sourceTree = "<group>"; };
 		6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewOutput.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				6DED7A0626F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift */,
 				1F5B736E26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift */,
 				1FE2311D2764C65A00235C80 /* UIAlertController+infoAlert.swift */,
+				6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -602,6 +605,7 @@
 				6D01CB1227A1657700CE9481 /* ProfileCoordinator.swift in Sources */,
 				1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */,
 				6D01CB1027A164BC00CE9481 /* ApplicationCoordinator.swift in Sources */,
+				6DBA679B27BF7EAF00468CF5 /* UIColor+randomColor.swift in Sources */,
 				6DC0BA5327A576B000094007 /* LoginViewInput.swift in Sources */,
 				1F2A9E3726DA1B6300542900 /* InfoViewController.swift in Sources */,
 				6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
