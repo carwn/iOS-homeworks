@@ -253,6 +253,7 @@ class LogInViewController: UIViewController {
                 self?.guessPasswordActivityIndicator.startAnimating()
             }
             let bf = BruteForcier() { $0 == randomPassword }
+            // Задание 1 - вызов throw - метода и обработка ошибок
             do {
                 try bf.bruteForce(complition: { password in
                     DispatchQueue.main.async { [weak self] in
@@ -261,7 +262,7 @@ class LogInViewController: UIViewController {
                         self.passwordTextField.isSecureTextEntry = false
                     }
                 })
-            } catch let error as NSError {
+            } catch {
                 DispatchQueue.main.async { [weak self] in
                     self?.present(UIAlertController.infoAlert(title: error.localizedDescription, message: "Пароль был: \(randomPassword)"), animated: true)
                 }
