@@ -246,9 +246,13 @@ class LogInViewController: UIViewController {
     }
     
     @objc func guessPasswordButtonPressed() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let gena = RandomStringGenerator()
-            let randomPassword = gena.generate() ?? "K2s"
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let randomPassword = self?.randomPassword else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(UIAlertController.infoAlert(title: "Не удалось сгенерировать случайный пароль"), animated: true)
+                }
+                return
+            }
             DispatchQueue.main.async { [weak self] in
                 self?.guessPasswordActivityIndicator.startAnimating()
             }
@@ -270,6 +274,17 @@ class LogInViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.guessPasswordActivityIndicator.stopAnimating()
             }
+        }
+    }
+    
+    private var randomPassword: String? {
+        let gena = RandomStringGenerator()
+        // gena.minLength = 8 // раскомментирование приведет к невозможности сгенерировать пароль
+        do {
+            return try gena.generate()
+        } catch {
+            assertionFailure("Не удалось создать случайный пароль. \(error.localizedDescription)")
+            return nil
         }
     }
 }
