@@ -32,10 +32,13 @@ extension LoginViewPresenter: LoginViewOutput {
             viewController?.showLogInError(title: "Не введен пароль", message: nil)
             return
         }
-        guard delegate.check(login: userName, password: password) else {
-            viewController?.showLogInError(title: "Не удалось войти", message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword")
-            return
+        delegate.check(login: userName, password: password) { [weak self] result in
+            switch result {
+            case .success(let posts):
+                self?.showProfileViewClosure?(ShowProfileViewParams(userName: userName, posts: posts))
+            case .failure(let error):
+                self?.viewController?.showLogInError(title: error.localizedDescription, message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword")
+            }
         }
-        showProfileViewClosure?(ShowProfileViewParams(userName: userName, posts: Post.postsExample))
     }
 }

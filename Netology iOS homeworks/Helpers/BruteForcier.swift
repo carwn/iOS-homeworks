@@ -9,7 +9,8 @@ import Foundation
 
 class BruteForcier {
     
-    enum BruteForceError: LocalizedError {
+    // Задание 1 - собственный домен ошибок
+    enum BruteForcierError: LocalizedError {
         case timeout
         
         var errorDescription: String? {
@@ -31,12 +32,13 @@ class BruteForcier {
         self.testClosure = testClosure
     }
     
+    // Задание 1 - метод, выбрасывающий ошибки
     func bruteForce(complition: (String) -> Void) throws {
         setupTimer()
         var currentTestString = generateBruteForce("", fromArray: allCharacters)
         while testClosure(currentTestString) == false {
             if isTimeout {
-                throw BruteForceError.timeout
+                throw BruteForcierError.timeout
             } else {
                 currentTestString = generateBruteForce(currentTestString, fromArray: allCharacters)
             }
