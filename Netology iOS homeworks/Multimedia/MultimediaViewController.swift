@@ -55,6 +55,9 @@ extension MultimediaViewController: UITableViewDataSource {
         cell.pauseButtonClosure = { [weak self] in
             self?.audioPlayer.pause()
         }
+        cell.stopButtonClosure = { [weak self] in
+            self?.audioPlayer.stop()
+        }
         cell.selectionStyle = .none
         return cell
     }

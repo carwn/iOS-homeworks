@@ -13,6 +13,7 @@ class AudioPlayerCell: UITableViewCell {
     
     var playButtonClosure: (() -> Void)?
     var pauseButtonClosure: (() -> Void)?
+    var stopButtonClosure: (() -> Void)?
     
     // MARK: - Private Properties
     
@@ -36,6 +37,13 @@ class AudioPlayerCell: UITableViewCell {
         return button
     }()
     
+    private lazy var stopButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        button.addTarget(self, action: #selector(stopButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -53,12 +61,13 @@ class AudioPlayerCell: UITableViewCell {
         titleLabel.text = audioPlayer.currentAudioName
         playButton.isHidden = audioPlayer.currentAudioIsPlaying
         pauseButton.isHidden = !audioPlayer.currentAudioIsPlaying
+        stopButton.isHidden = !audioPlayer.currentAudioIsPlaying && audioPlayer.currentAudioIsInStartPosition
     }
     
     // MARK: - Private Methods
     
     private func commonInit() {
-        let buttonsStack = UIStackView(arrangedSubviews: [playButton, pauseButton])
+        let buttonsStack = UIStackView(arrangedSubviews: [playButton, pauseButton, stopButton])
         buttonsStack.axis = .horizontal
         buttonsStack.spacing = Constants.defaultOffset
         buttonsStack.alignment = .center
@@ -80,6 +89,10 @@ class AudioPlayerCell: UITableViewCell {
     
     @objc private func pauseButtonPressed() {
         pauseButtonClosure?()
+    }
+    
+    @objc private func stopButtonPressed() {
+        stopButtonClosure?()
     }
 }
 

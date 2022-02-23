@@ -58,6 +58,13 @@ extension DefaultAudioPlayer: AudioPlayer {
         return audioPlayer.isPlaying
     }
     
+    var currentAudioIsInStartPosition: Bool {
+        guard let audioPlayer = audioPlayer else {
+            return true
+        }
+        return audioPlayer.currentTime == 0
+    }
+    
     func play() {
         if audioPlayer == nil {
             preparePlayer()
@@ -76,6 +83,12 @@ extension DefaultAudioPlayer: AudioPlayer {
         } else {
             audioPlayer.play()
         }
+        delegate?.audioPlayerStatusDidChange()
+    }
+    
+    func stop() {
+        audioPlayer?.stop()
+        audioPlayer?.currentTime = 0
         delegate?.audioPlayerStatusDidChange()
     }
 }

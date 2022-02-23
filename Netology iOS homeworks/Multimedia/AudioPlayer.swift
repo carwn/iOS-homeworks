@@ -10,7 +10,9 @@ import Foundation
 protocol AudioPlayer: AnyObject {
     var currentAudioName: String { get }
     var currentAudioIsPlaying: Bool { get }
+    var currentAudioIsInStartPosition: Bool { get }
     
     func play()
     func pause()
+    func stop()
 }
