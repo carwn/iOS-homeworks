@@ -31,7 +31,7 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         loginInspector = factory.makeLoginInspector()
         feedCoordinator = FeedCoordinator(wordChecker: wordChecker)
         profileCoordinator = ProfileCoordinator(delegate: loginInspector)
-        multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs)
+        multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs, youtubeVideos: multimediaStore.youtubeVideos)
         tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController, multimediaCoordinator.rootViewController], animated: false)
         super.init()
         tabBarController.delegate = self

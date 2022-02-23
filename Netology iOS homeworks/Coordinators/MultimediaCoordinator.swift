@@ -11,9 +11,9 @@ class MultimediaCoordinator {
     
     private let multimediaViewController: MultimediaViewController
     
-    init(audioURLs: [URL]) {
+    init(audioURLs: [URL], youtubeVideos: [MultimediaStore.YoutubeVideoDescription]) {
         let audioPlayer = DefaultAudioPlayer(audioURLs: audioURLs)
-        let multimediaViewController = MultimediaViewController(audioPlayer: audioPlayer)
+        let multimediaViewController = MultimediaViewController(audioPlayer: audioPlayer, youtubeVideos: youtubeVideos)
         multimediaViewController.tabBarItem = UITabBarItem(title: "Мультимедиа",
                                                            image: UIImage(systemName: "music.note.tv"),
                                                            selectedImage: UIImage(systemName: "music.note.tv.fill"))

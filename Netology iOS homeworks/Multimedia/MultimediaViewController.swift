@@ -7,20 +7,27 @@
 
 import UIKit
 import AVFoundation
+import YouTubeiOSPlayerHelper
 
 class MultimediaViewController: UIViewController {
     
     private let audioPlayer: AudioPlayer
+    private let youtubeVideos: [MultimediaStore.YoutubeVideoDescription]
+    private var shownVideoId: String?
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(AudioPlayerCell.self, forCellReuseIdentifier: String(describing: AudioPlayerCell.self))
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+        tableView.register(YoutubeVideoCell.self, forCellReuseIdentifier: String(describing: YoutubeVideoCell.self))
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
     }()
     
-    required init(audioPlayer: AudioPlayer) {
+    required init(audioPlayer: AudioPlayer, youtubeVideos: [MultimediaStore.YoutubeVideoDescription]) {
         self.audioPlayer = audioPlayer
+        self.youtubeVideos = youtubeVideos
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,16 +45,59 @@ class MultimediaViewController: UIViewController {
 
 extension MultimediaViewController: UITableViewDataSource {
     
+    private enum Sections: Int, CaseIterable {
+        case audioPlayer, youtubeVideo
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        Sections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        switch Sections(rawValue: section) {
+        case .audioPlayer: return 1
+        case .youtubeVideo: return shownVideoId == nil ? youtubeVideos.count : youtubeVideos.count + 1
+        default: return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AudioPlayerCell.self), for: indexPath) as! AudioPlayerCell
+        switch Sections.init(rawValue: indexPath.section) {
+        case .audioPlayer:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AudioPlayerCell.self), for: indexPath) as! AudioPlayerCell
+            configureAudioPlayerCell(cell)
+            return cell
+        case .youtubeVideo:
+            if let videoId = shownVideoId, indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: YoutubeVideoCell.self), for: indexPath) as! YoutubeVideoCell
+                cell.videoId = videoId
+                cell.selectionStyle = .none
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+                let youtubeVideo = youtubeVideo(forIndexPath: indexPath)
+                cell.textLabel?.numberOfLines = 0
+                cell.textLabel?.text = youtubeVideo?.title
+                cell.accessoryType = youtubeVideo?.videoId == shownVideoId ? .checkmark : .none
+                return cell
+            }
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    private func youtubeVideo(forIndexPath indexPath: IndexPath) -> MultimediaStore.YoutubeVideoDescription? {
+        guard indexPath.section == Sections.youtubeVideo.rawValue else {
+            return nil
+        }
+        let index = shownVideoId == nil ? indexPath.row : indexPath.row - 1
+        guard youtubeVideos.indices.contains(index) else {
+            return nil
+        }
+        return youtubeVideos[index]
+    }
+    
+    private func configureAudioPlayerCell(_ cell: AudioPlayerCell) {
         cell.configure(audioPlayer: audioPlayer)
         cell.playButtonClosure = { [weak self] in
             self?.audioPlayer.play()
@@ -65,16 +115,75 @@ extension MultimediaViewController: UITableViewDataSource {
             self?.audioPlayer.previousFile()
         }
         cell.selectionStyle = .none
-        return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Аудио плееер"
+        switch Sections(rawValue: section) {
+        case .audioPlayer: return "Аудио плееер"
+        case .youtubeVideo: return "YouTube видео"
+        default: return nil
+        }
     }
 }
 
 extension MultimediaViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch Sections(rawValue: indexPath.section) {
+        case .youtubeVideo:
+            if let newVideoId = youtubeVideo(forIndexPath: indexPath)?.videoId {
+                let oldShowVideoId = shownVideoId
+                shownVideoId = newVideoId
+                if oldShowVideoId == nil {
+                    insertYoutubeVideo(selectedIndexPath: indexPath)
+                } else if newVideoId == oldShowVideoId {
+                    shownVideoId = nil
+                    removeYoutubeVideo(selectedIndexPath: indexPath)
+                } else {
+                    replaceYoutubeVideo(selectedIndexPath: indexPath, oldSelectedIndexPath: IndexPath(row: youtubeVideos.firstIndex(where: { $0.videoId == oldShowVideoId })! + 1, section: Sections.youtubeVideo.rawValue))
+                }
+            }
+        default:
+            break
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard
+            indexPath.section == Sections.youtubeVideo.rawValue,
+            shownVideoId != nil,
+            indexPath.row == 0
+        else {
+            return UITableView.automaticDimension
+        }
+        return (tableView.bounds.width - tableView.layoutMargins.left - tableView.layoutMargins.right) * 9 / 16
+    }
+    
+    private func removeYoutubeVideo(selectedIndexPath: IndexPath) {
+        tableView.beginUpdates()
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.youtubeVideo.rawValue)) as? YoutubeVideoCell {
+            cell.videoId = nil
+        }
+        tableView.deleteRows(at: [IndexPath(row: 0, section: Sections.youtubeVideo.rawValue)], with: .bottom)
+        tableView.reloadRows(at: [selectedIndexPath], with: .fade)
+        tableView.endUpdates()
+    }
+    
+    private func insertYoutubeVideo(selectedIndexPath: IndexPath) {
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: 0, section: Sections.youtubeVideo.rawValue)], with: .bottom)
+        tableView.reloadRows(at: [selectedIndexPath], with: .fade)
+        tableView.endUpdates()
+    }
+    
+    private func replaceYoutubeVideo(selectedIndexPath: IndexPath, oldSelectedIndexPath: IndexPath) {
+        tableView.beginUpdates()
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.youtubeVideo.rawValue)) as? YoutubeVideoCell {
+            cell.videoId = shownVideoId
+        }
+        tableView.reloadRows(at: [IndexPath(row: 0, section: Sections.youtubeVideo.rawValue), selectedIndexPath, oldSelectedIndexPath], with: .fade)
+        tableView.endUpdates()
+    }
 }
 
 extension MultimediaViewController: AudioPlayerDelegate {
