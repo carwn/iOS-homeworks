@@ -12,12 +12,13 @@ import YouTubeiOSPlayerHelper
 class MultimediaViewController: UIViewController {
     
     private let audioPlayer: AudioPlayer
+    private let audioRecorder: AudioRecorder
     private let youtubeVideos: [MultimediaStore.YoutubeVideoDescription]
     private var shownVideoId: String?
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-        tableView.register(AudioPlayerCell.self, forCellReuseIdentifier: String(describing: AudioPlayerCell.self))
+        tableView.register(TitleButtonsCell.self, forCellReuseIdentifier: String(describing: TitleButtonsCell.self))
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.register(YoutubeVideoCell.self, forCellReuseIdentifier: String(describing: YoutubeVideoCell.self))
         tableView.dataSource = self
@@ -25,8 +26,9 @@ class MultimediaViewController: UIViewController {
         return tableView
     }()
     
-    required init(audioPlayer: AudioPlayer, youtubeVideos: [MultimediaStore.YoutubeVideoDescription]) {
+    required init(audioPlayer: AudioPlayer, audioRecorder: AudioRecorder, youtubeVideos: [MultimediaStore.YoutubeVideoDescription]) {
         self.audioPlayer = audioPlayer
+        self.audioRecorder = audioRecorder
         self.youtubeVideos = youtubeVideos
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +48,7 @@ class MultimediaViewController: UIViewController {
 extension MultimediaViewController: UITableViewDataSource {
     
     private enum Sections: Int, CaseIterable {
-        case audioPlayer, youtubeVideo
+        case audioPlayer, youtubeVideo, recordAudio
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,7 +57,7 @@ extension MultimediaViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Sections(rawValue: section) {
-        case .audioPlayer: return 1
+        case .audioPlayer, .recordAudio: return 1
         case .youtubeVideo: return shownVideoId == nil ? youtubeVideos.count : youtubeVideos.count + 1
         default: return 0
         }
@@ -64,7 +66,7 @@ extension MultimediaViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch Sections.init(rawValue: indexPath.section) {
         case .audioPlayer:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AudioPlayerCell.self), for: indexPath) as! AudioPlayerCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TitleButtonsCell.self), for: indexPath) as! TitleButtonsCell
             configureAudioPlayerCell(cell)
             return cell
         case .youtubeVideo:
@@ -81,6 +83,10 @@ extension MultimediaViewController: UITableViewDataSource {
                 cell.accessoryType = youtubeVideo?.videoId == shownVideoId ? .checkmark : .none
                 return cell
             }
+        case .recordAudio:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TitleButtonsCell.self), for: indexPath) as! TitleButtonsCell
+            configureRecordCell(cell)
+            return cell
         default:
             return UITableViewCell()
         }
@@ -97,7 +103,7 @@ extension MultimediaViewController: UITableViewDataSource {
         return youtubeVideos[index]
     }
     
-    private func configureAudioPlayerCell(_ cell: AudioPlayerCell) {
+    private func configureAudioPlayerCell(_ cell: TitleButtonsCell) {
         cell.configure(audioPlayer: audioPlayer)
         cell.playButtonClosure = { [weak self] in
             self?.audioPlayer.play()
@@ -117,10 +123,25 @@ extension MultimediaViewController: UITableViewDataSource {
         cell.selectionStyle = .none
     }
     
+    private func configureRecordCell(_ cell: TitleButtonsCell) {
+        cell.configure(audioRecorder: audioRecorder)
+        cell.playButtonClosure = { [weak self] in
+            self?.audioRecorder.play()
+        }
+        cell.stopButtonClosure = { [weak self] in
+            self?.audioRecorder.stop()
+        }
+        cell.recordButtonClosure = { [weak self] in
+            self?.audioRecorder.record()
+        }
+        cell.selectionStyle = .none
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch Sections(rawValue: section) {
         case .audioPlayer: return "Аудио плееер"
         case .youtubeVideo: return "YouTube видео"
+        case .recordAudio: return "Запись аудио"
         default: return nil
         }
     }
@@ -188,9 +209,18 @@ extension MultimediaViewController: UITableViewDelegate {
 
 extension MultimediaViewController: AudioPlayerDelegate {
     func audioPlayerStatusDidChange() {
-        guard let audioCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? AudioPlayerCell else {
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.audioPlayer.rawValue)) as? TitleButtonsCell else {
             return
         }
-        audioCell.configure(audioPlayer: audioPlayer)
+        cell.configure(audioPlayer: audioPlayer)
+    }
+}
+
+extension MultimediaViewController: AudioRecorderDelegate {
+    func audioRecorderStatusDidChange() {
+        guard let cell = tableView.cellForRow(at: IndexPath(row: 0, section: Sections.recordAudio.rawValue)) as? TitleButtonsCell else {
+            return
+        }
+        cell.configure(audioRecorder: audioRecorder)
     }
 }

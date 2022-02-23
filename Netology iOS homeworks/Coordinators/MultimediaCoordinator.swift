@@ -13,11 +13,13 @@ class MultimediaCoordinator {
     
     init(audioURLs: [URL], youtubeVideos: [MultimediaStore.YoutubeVideoDescription]) {
         let audioPlayer = DefaultAudioPlayer(audioURLs: audioURLs)
-        let multimediaViewController = MultimediaViewController(audioPlayer: audioPlayer, youtubeVideos: youtubeVideos)
+        let audioRecorder = DefaultAudioRecorder()
+        let multimediaViewController = MultimediaViewController(audioPlayer: audioPlayer, audioRecorder: audioRecorder, youtubeVideos: youtubeVideos)
         multimediaViewController.tabBarItem = UITabBarItem(title: "Мультимедиа",
                                                            image: UIImage(systemName: "music.note.tv"),
                                                            selectedImage: UIImage(systemName: "music.note.tv.fill"))
         audioPlayer.delegate = multimediaViewController
+        audioRecorder.delegate = multimediaViewController
         self.multimediaViewController = multimediaViewController
     }
 }

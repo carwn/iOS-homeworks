@@ -1,5 +1,5 @@
 //
-//  AudioPlayerCell.swift
+//  TitleButtonsCell.swift
 //  Netology iOS homeworks
 //
 //  Created by Александр Шелихов on 23.02.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AudioPlayerCell: UITableViewCell {
+class TitleButtonsCell: UITableViewCell {
     
     // MARK: - Public Properties
     
@@ -16,6 +16,7 @@ class AudioPlayerCell: UITableViewCell {
     var stopButtonClosure: (() -> Void)?
     var nextButtonClosure: (() -> Void)?
     var previousButtonClosure: (() -> Void)?
+    var recordButtonClosure: (() -> Void)?
     
     // MARK: - Private Properties
     
@@ -60,6 +61,13 @@ class AudioPlayerCell: UITableViewCell {
         return button
     }()
     
+    private lazy var recordButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "record.circle.fill"), for: .normal)
+        button.addTarget(self, action: #selector(recordButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -80,12 +88,23 @@ class AudioPlayerCell: UITableViewCell {
         stopButton.isHidden = !audioPlayer.currentAudioIsPlaying && audioPlayer.currentAudioIsInStartPosition
         nextButton.isHidden = !audioPlayer.hasNextFile
         previousButton.isHidden = !audioPlayer.hasPreviousFile
+        recordButton.isHidden = true
+    }
+    
+    func configure(audioRecorder: AudioRecorder) {
+        titleLabel.text = audioRecorder.status.description
+        playButton.isHidden = !audioRecorder.status.needPlayButton
+        pauseButton.isHidden = true
+        stopButton.isHidden = !audioRecorder.status.needStopButton
+        nextButton.isHidden = true
+        previousButton.isHidden = true
+        recordButton.isHidden = !audioRecorder.status.needRecordButton
     }
     
     // MARK: - Private Methods
     
     private func commonInit() {
-        let buttonsStack = UIStackView(arrangedSubviews: [playButton, pauseButton, stopButton, previousButton, nextButton])
+        let buttonsStack = UIStackView(arrangedSubviews: [recordButton, playButton, pauseButton, stopButton, previousButton, nextButton])
         buttonsStack.axis = .horizontal
         buttonsStack.spacing = Constants.defaultOffset
         buttonsStack.alignment = .center
@@ -124,9 +143,13 @@ class AudioPlayerCell: UITableViewCell {
     @objc private func previousButtonPressed() {
         previousButtonClosure?()
     }
+    
+    @objc private func recordButtonPressed() {
+        recordButtonClosure?()
+    }
 }
 
-extension AudioPlayerCell {
+extension TitleButtonsCell {
     private struct Constants {
         static let defaultOffset: CGFloat = 16
     }
