@@ -14,6 +14,8 @@ class AudioPlayerCell: UITableViewCell {
     var playButtonClosure: (() -> Void)?
     var pauseButtonClosure: (() -> Void)?
     var stopButtonClosure: (() -> Void)?
+    var nextButtonClosure: (() -> Void)?
+    var previousButtonClosure: (() -> Void)?
     
     // MARK: - Private Properties
     
@@ -44,6 +46,20 @@ class AudioPlayerCell: UITableViewCell {
         return button
     }()
     
+    private lazy var nextButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+        button.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var previousButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "backward.fill"), for: .normal)
+        button.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Initializers
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -62,20 +78,26 @@ class AudioPlayerCell: UITableViewCell {
         playButton.isHidden = audioPlayer.currentAudioIsPlaying
         pauseButton.isHidden = !audioPlayer.currentAudioIsPlaying
         stopButton.isHidden = !audioPlayer.currentAudioIsPlaying && audioPlayer.currentAudioIsInStartPosition
+        nextButton.isHidden = !audioPlayer.hasNextFile
+        previousButton.isHidden = !audioPlayer.hasPreviousFile
     }
     
     // MARK: - Private Methods
     
     private func commonInit() {
-        let buttonsStack = UIStackView(arrangedSubviews: [playButton, pauseButton, stopButton])
+        let buttonsStack = UIStackView(arrangedSubviews: [playButton, pauseButton, stopButton, previousButton, nextButton])
         buttonsStack.axis = .horizontal
         buttonsStack.spacing = Constants.defaultOffset
         buttonsStack.alignment = .center
         contentView.addSubviews(titleLabel, buttonsStack)
+        titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        buttonsStack.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        buttonsStack.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         [titleLabel, buttonsStack].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         NSLayoutConstraint.activate([titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.defaultOffset),
                                      titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.defaultOffset),
-                                     titleLabel.trailingAnchor.constraint(equalTo: buttonsStack.leadingAnchor, constant: Constants.defaultOffset),
+                                     titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: buttonsStack.leadingAnchor, constant: -Constants.defaultOffset),
                                      titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultOffset),
                                      
                                      buttonsStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.defaultOffset),
@@ -93,6 +115,14 @@ class AudioPlayerCell: UITableViewCell {
     
     @objc private func stopButtonPressed() {
         stopButtonClosure?()
+    }
+    
+    @objc private func nextButtonPressed() {
+        nextButtonClosure?()
+    }
+    
+    @objc private func previousButtonPressed() {
+        previousButtonClosure?()
     }
 }
 

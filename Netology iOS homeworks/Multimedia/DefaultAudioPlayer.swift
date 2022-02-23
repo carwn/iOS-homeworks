@@ -32,11 +32,20 @@ class DefaultAudioPlayer {
         guard let currentAudioIndex = currentAudioIndex else {
             return
         }
+        invalidatePlayer()
         guard let newAudioPlayer = try? AVAudioPlayer(contentsOf: audioURLs[currentAudioIndex]) else {
             return
         }
         newAudioPlayer.prepareToPlay()
         audioPlayer = newAudioPlayer
+    }
+    
+    private func invalidatePlayer() {
+        guard let audioPlayer = audioPlayer else {
+            return
+        }
+        audioPlayer.stop()
+        self.audioPlayer = nil
     }
 }
 
@@ -65,6 +74,20 @@ extension DefaultAudioPlayer: AudioPlayer {
         return audioPlayer.currentTime == 0
     }
     
+    var hasNextFile: Bool {
+        guard let currentAudioIndex = currentAudioIndex else {
+            return false
+        }
+        return audioURLs.indices.contains(currentAudioIndex + 1)
+    }
+    
+    var hasPreviousFile: Bool {
+        guard let currentAudioIndex = currentAudioIndex else {
+            return false
+        }
+        return audioURLs.indices.contains(currentAudioIndex - 1)
+    }
+    
     func play() {
         if audioPlayer == nil {
             preparePlayer()
@@ -90,5 +113,39 @@ extension DefaultAudioPlayer: AudioPlayer {
         audioPlayer?.stop()
         audioPlayer?.currentTime = 0
         delegate?.audioPlayerStatusDidChange()
+    }
+    
+    func nextFile() {
+        guard hasNextFile else {
+            return
+        }
+        guard let currentAudioIndex = currentAudioIndex else {
+            return
+        }
+        self.currentAudioIndex = currentAudioIndex + 1
+        if currentAudioIsPlaying {
+            invalidatePlayer()
+            play()
+        } else {
+            preparePlayer()
+            delegate?.audioPlayerStatusDidChange()
+        }
+    }
+    
+    func previousFile() {
+        guard hasPreviousFile else {
+            return
+        }
+        guard let currentAudioIndex = currentAudioIndex else {
+            return
+        }
+        self.currentAudioIndex = currentAudioIndex - 1
+        if currentAudioIsPlaying {
+            invalidatePlayer()
+            play()
+        } else {
+            preparePlayer()
+            delegate?.audioPlayerStatusDidChange()
+        }
     }
 }
