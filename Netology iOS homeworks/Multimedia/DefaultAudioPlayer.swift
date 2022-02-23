@@ -7,7 +7,7 @@
 
 import AVFAudio
 
-class DefaultAudioPlayer {
+class DefaultAudioPlayer: NSObject {
     
     weak var delegate: AudioPlayerDelegate?
     
@@ -19,6 +19,7 @@ class DefaultAudioPlayer {
     
     init(audioURLs: [URL]) {
         self.audioURLs = audioURLs
+        super.init()
         preparePlayer()
     }
     
@@ -36,6 +37,7 @@ class DefaultAudioPlayer {
         guard let newAudioPlayer = try? AVAudioPlayer(contentsOf: audioURLs[currentAudioIndex]) else {
             return
         }
+        newAudioPlayer.delegate = self
         newAudioPlayer.prepareToPlay()
         audioPlayer = newAudioPlayer
     }
@@ -147,5 +149,11 @@ extension DefaultAudioPlayer: AudioPlayer {
             preparePlayer()
             delegate?.audioPlayerStatusDidChange()
         }
+    }
+}
+
+extension DefaultAudioPlayer: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        delegate?.audioPlayerStatusDidChange()
     }
 }
