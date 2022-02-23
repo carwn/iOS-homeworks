@@ -93,7 +93,7 @@ class TitleButtonsCell: UITableViewCell {
     
     func configure(audioRecorder: AudioRecorder) {
         titleLabel.text = audioRecorder.status.description
-        playButton.isHidden = !audioRecorder.status.needPlayButton
+        playButton.isHidden = !audioRecorder.hasRecord || audioRecorder.status.needStopButton
         pauseButton.isHidden = true
         stopButton.isHidden = !audioRecorder.status.needStopButton
         nextButton.isHidden = true

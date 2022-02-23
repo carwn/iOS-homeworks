@@ -150,6 +150,10 @@ extension DefaultAudioPlayer: AudioPlayer {
             delegate?.audioPlayerStatusDidChange()
         }
     }
+    
+    func reopenFile() {
+        preparePlayer()
+    }
 }
 
 extension DefaultAudioPlayer: AVAudioPlayerDelegate {

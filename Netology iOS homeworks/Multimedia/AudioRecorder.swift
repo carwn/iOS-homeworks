@@ -12,8 +12,8 @@ enum AudioRecorderStatus: CustomStringConvertible {
     case microphoneAccessDenied
     case ready
     case recording
-    case hasRecord
     case playing
+    case recordFail
     
     var description: String {
         switch self {
@@ -25,27 +25,18 @@ enum AudioRecorderStatus: CustomStringConvertible {
             return "Готов к записи"
         case .recording:
             return "Идет запись..."
-        case .hasRecord:
-            return "Есть запись"
         case .playing:
             return "Воспроизведение..."
+        case .recordFail:
+            return "Запись не удалась"
         }
     }
     
     var needRecordButton: Bool {
         switch self {
-        case .microphoneAccessUnknow, .microphoneAccessDenied, .ready, .hasRecord:
+        case .microphoneAccessUnknow, .ready, .recordFail:
             return true
-        case .recording, .playing:
-            return false
-        }
-    }
-    
-    var needPlayButton: Bool {
-        switch self {
-        case .hasRecord:
-            return true
-        case .microphoneAccessUnknow, .microphoneAccessDenied, .ready, .recording, .playing:
+        case .recording, .playing, .microphoneAccessDenied:
             return false
         }
     }
@@ -54,7 +45,7 @@ enum AudioRecorderStatus: CustomStringConvertible {
         switch self {
         case .recording, .playing:
             return true
-        case .microphoneAccessUnknow, .microphoneAccessDenied, .ready, .hasRecord:
+        case .microphoneAccessUnknow, .microphoneAccessDenied, .ready, .recordFail:
             return false
         }
     }
@@ -62,6 +53,7 @@ enum AudioRecorderStatus: CustomStringConvertible {
 
 protocol AudioRecorder: AnyObject {
     var status: AudioRecorderStatus { get }
+    var hasRecord: Bool { get }
     
     func record()
     func play()

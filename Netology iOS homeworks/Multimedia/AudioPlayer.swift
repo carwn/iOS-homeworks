@@ -19,4 +19,6 @@ protocol AudioPlayer: AnyObject {
     func stop()
     func nextFile()
     func previousFile()
+    
+    func reopenFile()
 }

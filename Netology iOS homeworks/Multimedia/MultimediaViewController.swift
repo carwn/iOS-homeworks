@@ -223,4 +223,8 @@ extension MultimediaViewController: AudioRecorderDelegate {
         }
         cell.configure(audioRecorder: audioRecorder)
     }
+    
+    func showError(title: String, message: String?) {
+        present(UIAlertController.infoAlert(title: title, message: message), animated: true)
+    }
 }

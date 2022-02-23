@@ -9,4 +9,5 @@ import Foundation
 
 protocol AudioRecorderDelegate: AnyObject {
     func audioRecorderStatusDidChange()
+    func showError(title: String, message: String?)
 }
