@@ -9,11 +9,13 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    let networkService = NetworkService()
+    var appConfiguration: AppConfiguration!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        appConfiguration = AppConfiguration.allCases.randomElement()!
+        networkService.printServerResponce(fromURL: appConfiguration.url)
         return true
     }
 
