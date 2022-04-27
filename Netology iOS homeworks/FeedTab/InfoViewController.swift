@@ -16,9 +16,9 @@ class InfoViewController: UIViewController {
     }
     
     private func addShowAlertButton() {
-        let button = UIButton(type: .system)
-        button.setTitle("Show alert", for: .normal)
-        button.addTarget(self, action: #selector(showAlertButtonPressed), for: .touchUpInside)
+        let button = SystemButton(title: "Show alert") { [weak self] in
+            self?.showAlertButtonPressed()
+        }
         view.addSubview(button)
         button.center(in: view)
     }

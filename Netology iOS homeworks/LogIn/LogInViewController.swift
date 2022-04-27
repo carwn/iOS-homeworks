@@ -9,6 +9,20 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
+    // MARK: - Private Properties
+    private let presenter: LoginViewOutput
+
+    // MARK: - Initializers
+
+    init(presenter: LoginViewOutput) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Subviews
     
     private let mainScrollView: UIScrollView = {
@@ -50,6 +64,10 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         setupTextField(textField)
         textField.placeholder = "Email or phone"
+        textField.delegate = self
+#if DEBUG
+        textField.text = "Hipster Cat"
+#endif
         return textField
     }()
     
@@ -58,6 +76,10 @@ class LogInViewController: UIViewController {
         setupTextField(textField)
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
+        textField.delegate = self
+#if DEBUG
+        textField.text = "StrongPassword"
+#endif
         return textField
     }()
     
@@ -68,21 +90,45 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
     }
     
-    private let logInButton: UIButton = {
-        let button = UIButton()
+    private lazy var logInButton: SystemButton = {
+        let button = SystemButton(title: "Log In", titleColor: .white) { [weak self] in
+            self?.logInButtonPressed()
+        }
         let bluePixelImage = UIImage(named: "blue_pixel")
         button.setBackgroundImage(bluePixelImage, for: .normal)
         let bluePixelImageWithAlpha80 = bluePixelImage?.withAlpha(0.8)
         button.setBackgroundImage(bluePixelImageWithAlpha80, for: .selected)
         button.setBackgroundImage(bluePixelImageWithAlpha80, for: .highlighted)
         button.setBackgroundImage(bluePixelImageWithAlpha80, for: .disabled)
-        button.setTitle("Log In", for: .normal)
-        button.titleLabel?.textColor = .white
         button.layer.masksToBounds = false
         button.clipsToBounds = true
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(logInButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var guessPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Подобрать пароль", for: .normal)
+        button.addTarget(self, action: #selector(guessPasswordButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private let guessPasswordActivityIndicator = UIActivityIndicatorView(style: .medium)
+    
+    private lazy var guessPasswordStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [guessPasswordButton, guessPasswordActivityIndicator])
+        stack.axis = .horizontal
+        stack.spacing = Constants.defaultOffset
+        stack.alignment = .center
+        return stack
+    }()
+
+    private let userService: UserService = {
+#if DEBUG
+        return TestUserService()
+#else
+        return CurrentUserService()
+#endif
     }()
     
     // MARK: - Lifecycle
@@ -114,7 +160,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(scrollViewContentView)
-        [logoImageView, textFieldsView, logInButton].forEach { view in
+        [logoImageView, textFieldsView, logInButton, guessPasswordStackView].forEach { view in
             scrollViewContentView.addSubview(view)
         }
         [loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
@@ -123,7 +169,7 @@ class LogInViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
+        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator, guessPasswordStackView].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -167,7 +213,10 @@ class LogInViewController: UIViewController {
                            logInButton.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
                            logInButton.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
                            logInButton.heightAnchor.constraint(equalToConstant: Constants.logInButtonHeight),
-                           logInButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
+                           
+                           guessPasswordStackView.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: Constants.defaultOffset),
+                           guessPasswordStackView.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
+                           guessPasswordStackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -193,9 +242,50 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func logInButtonPressed() {
-        let profileViewController = ProfileViewController()
-        profileViewController.posts = Post.postsExample
-        navigationController?.pushViewController(profileViewController, animated: true)
+        presenter.logInButtonPressed(login: loginTextField.text, password: passwordTextField.text)
+    }
+    
+    @objc func guessPasswordButtonPressed() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let randomPassword = self?.randomPassword else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(UIAlertController.infoAlert(title: "Не удалось сгенерировать случайный пароль"), animated: true)
+                }
+                return
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.guessPasswordActivityIndicator.startAnimating()
+            }
+            let bf = BruteForcier() { $0 == randomPassword }
+            // Задание 1 - вызов throw - метода и обработка ошибок
+            do {
+                try bf.bruteForce(complition: { password in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        self.passwordTextField.text = password
+                        self.passwordTextField.isSecureTextEntry = false
+                    }
+                })
+            } catch {
+                DispatchQueue.main.async { [weak self] in
+                    self?.present(UIAlertController.infoAlert(title: error.localizedDescription, message: "Пароль был: \(randomPassword)"), animated: true)
+                }
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.guessPasswordActivityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    private var randomPassword: String? {
+        let gena = RandomStringGenerator()
+        // gena.minLength = 8 // раскомментирование приведет к невозможности сгенерировать пароль
+        do {
+            return try gena.generate()
+        } catch {
+            assertionFailure("Не удалось создать случайный пароль. \(error.localizedDescription)")
+            return nil
+        }
     }
 }
 
@@ -206,5 +296,20 @@ extension LogInViewController {
         static let defaultOffset: CGFloat = 16
         static let textFieldsViewHeight: CGFloat = 100
         static let logInButtonHeight: CGFloat = 50
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "\n" {
+            logInButtonPressed()
+        }
+        return true
+    }
+}
+
+extension LogInViewController: LoginViewInput {
+    func showLogInError(title: String, message: String?) {
+        present(UIAlertController.infoAlert(title: title, message: message), animated: true)
     }
 }

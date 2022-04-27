@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
     
@@ -23,7 +24,12 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    var onPhotosRowSelected: (([UIImage]) -> Void)?
+    
     // MARK: - Private Properties
+
+    private let userService: UserService
+    private let userName: String
     
     private let postTableViewCellIdentifier = String(describing: PostTableViewCell.self)
     private let photosTableViewCellIdentifier = String(describing: PhotosTableViewCell.self)
@@ -38,19 +44,35 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var closeAvatarButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(hideAvatarView), for: .touchUpInside)
+    private lazy var closeAvatarButton: SystemButton = {
+        let button = SystemButton { [weak self] in
+            self?.hideAvatarView()
+        }
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .white
         button.layer.opacity = 0
         return button
     }()
+
+    // MARK: - Initializers
+
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+
+    init(userService: UserService, userName: String) {
+        self.userService = userService
+        self.userName = userName
+        super.init(nibName: nil, bundle: nil)
+    }
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        #if DEBUG
+        tableView.backgroundColor = .green
+        #endif
         setupViews()
         setupConstraints()
     }
@@ -165,7 +187,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
         let headerView = ProfileHeaderView()
-        headerView.configure(image: UIImage(named: "Cat"), title: "Hipster Cat", currentStatus: nil)
+        let user = userService.user(name: userName) ?? User(fullName: "Unknow user", avatarName: nil, status: nil)
+        headerView.configure(image: user.avatar, title: user.fullName, currentStatus: user.status)
         headerView.avatarViewTappedClosure = { [weak self] views in
             self?.showAvatarView(avatarView: views.avatarView, backgroundView: views.backgroundView)
         }
@@ -175,9 +198,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == Section.photos.rawValue {
-            let photosVC = PhotosViewController()
-            photosVC.photos = photos
-            navigationController?.pushViewController(photosVC, animated: true)
+            onPhotosRowSelected?(photos)
         }
     }
 }
