@@ -10,8 +10,8 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let networkService = NetworkService()
-    var appConfiguration: AppConfiguration!
+    private let networkService = NetworkService()
+    private var appConfiguration: AppConfiguration!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         appConfiguration = AppConfiguration.allCases.randomElement()!
