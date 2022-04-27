@@ -15,6 +15,8 @@ class PostViewController: UIViewController {
     
     var post: Post?
     
+    var onShowInfoButtonPressed: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = post?.title ?? "empty post"
@@ -23,7 +25,6 @@ class PostViewController: UIViewController {
     }
     
     @objc private func showInfoButtonPressed() {
-        let infoVC = InfoViewController()
-        present(infoVC, animated: true, completion: nil)
+        onShowInfoButtonPressed?()
     }
 }

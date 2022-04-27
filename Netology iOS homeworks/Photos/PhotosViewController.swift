@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var photos: [UIImage] = []
+    var incomingPhotos: [UIImage] = []
     
     // MARK: - Private Properties
     
@@ -27,6 +28,11 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
     
+    private let spinner = UIActivityIndicatorView(style: .large)
+
+    private var collectionViewImages: [UIImage] = []
+    private let imagePublisher = ImagePublisherFacade()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -34,38 +40,75 @@ class PhotosViewController: UIViewController {
         navigationItem.title = "Photo Gallery"
         setupView()
         setupConstraints()
+        startPhotosProcessing()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        // хорошо бы здесь иметь возможность получить текущий массив изображений из ImagePublisherFacade
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        imagePublisher.subscribe(self)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imagePublisher.removeSubscription(for: self)
+    }
+
+    // проверка, что PhotosViewController не участвует в цикличной ссылки памяти и удаляется
+#if DEBUG
+    deinit {
+        print(#function)
+    }
+#endif
     
     // MARK: - Private Methods
     
     private func setupView() {
-        view.addSubview(collectionView)
+        view.addSubviews(collectionView, spinner)
     }
     
     private func setupConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        [collectionView, spinner].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         let constraints: [NSLayoutConstraint] = [collectionView.topAnchor.constraint(equalTo: view.topAnchor),
                                                  collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                                  collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]
+                                                 collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                                                 spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                                 spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor)]
         NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func startPhotosProcessing() {
+        guard let filter = ColorFilter.allCases.randomElement() else {
+            return
+        }
+        spinner.startAnimating()
+        ImageProcessor().processImagesOnThread(sourceImages: incomingPhotos, filter: filter, qos: .userInteractive) { [weak self] images in
+            DispatchQueue.main.async {
+                guard let self = self else {
+                    return
+                }
+                self.spinner.stopAnimating()
+                self.imagePublisher.addImagesWithTimer(time: 0.6, repeat: 21, userImages: images.compactMap { $0 }.map { UIImage(cgImage: $0) } )
+            }
+        }
     }
 }
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        collectionViewImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photosCollectionViewCellIdentifier, for: indexPath) as! PhotosCollectionViewCell
-        cell.configure(image: photos[indexPath.row])
+        cell.configure(image: collectionViewImages[indexPath.row])
         return cell
     }
     
@@ -94,5 +137,12 @@ extension PhotosViewController {
     private struct Constants {
         static let defaultOffset: CGFloat = 8
         static let photosInRowCount = 3
+    }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        collectionViewImages = images
+        collectionView.reloadData()
     }
 }
