@@ -17,10 +17,12 @@ final class ApplicationCoordinator: NSObject, Coordinator {
     
     private let feedCoordinator: FeedCoordinator
     private let profileCoordinator: ProfileCoordinator
+    private let multimediaCoordinator: MultimediaCoordinator
     
     private let factory: LoginFactory
     private let loginInspector: LoginInspector
     private let wordChecker = WordChecker()
+    private let multimediaStore = MultimediaStore()
     
     init(scene: UIWindowScene, factory: LoginFactory) {
         self.scene = scene
@@ -29,7 +31,8 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         loginInspector = factory.makeLoginInspector()
         feedCoordinator = FeedCoordinator(wordChecker: wordChecker)
         profileCoordinator = ProfileCoordinator(delegate: loginInspector)
-        tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController], animated: false)
+        multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs, youtubeVideos: multimediaStore.youtubeVideos)
+        tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController, multimediaCoordinator.rootViewController], animated: false)
         super.init()
         tabBarController.delegate = self
     }
@@ -56,12 +59,18 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         profileCoordinator.start()
     }
     
+    private func startMultimediaFlow() {
+        multimediaCoordinator.start()
+    }
+    
     private func startFlow(viewController: UIViewController) {
         switch viewController {
         case profileCoordinator.rootViewController:
             startProfileFlow()
         case feedCoordinator.rootViewController:
             startFeedFlow()
+        case multimediaCoordinator.rootViewController:
+            startMultimediaFlow()
         default:
             break
         }
