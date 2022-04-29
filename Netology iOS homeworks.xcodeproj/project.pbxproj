@@ -20,8 +20,6 @@
 		1F9F325726D251DB00CB1285 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */; };
 		1F9F326126D2581300CB1285 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F326026D2581300CB1285 /* ProfileView.swift */; };
 		1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F326426D2612400CB1285 /* ProfileViewController.swift */; };
-		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
-		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		1FE231132764C0A100235C80 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE231122764C0A000235C80 /* User.swift */; };
 		1FE231162764C14500235C80 /* User+avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE231152764C14500235C80 /* User+avatar.swift */; };
 		1FE231182764C1F200235C80 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE231172764C1F200235C80 /* UserService.swift */; };
@@ -49,7 +47,10 @@
 		6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F91D27B0E7C2009544CC /* BruteForcier.swift */; };
 		6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */; };
 		6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */; };
-		6DBA679B27BF7EAF00468CF5 /* UIColor+randomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */; };
+		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
+		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
+		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
+		6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */; };
 		6DB3E9FB27C5E9C800130B8E /* MultimediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FA27C5E9C800130B8E /* MultimediaViewController.swift */; };
 		6DB3E9FD27C5EB1100130B8E /* TitleButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FC27C5EB1100130B8E /* TitleButtonsCell.swift */; };
 		6DB3E9FF27C5EB5000130B8E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FE27C5EB5000130B8E /* AudioPlayer.swift */; };
@@ -68,6 +69,7 @@
 		6DB3EA1D27C656D400130B8E /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3EA1C27C656D400130B8E /* AudioRecorder.swift */; };
 		6DB3EA1F27C657DD00130B8E /* AudioRecorderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3EA1E27C657DD00130B8E /* AudioRecorderDelegate.swift */; };
 		6DB3EA2127C6581400130B8E /* DefaultAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3EA2027C6581400130B8E /* DefaultAudioRecorder.swift */; };
+		6DBA679B27BF7EAF00468CF5 /* UIColor+randomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */; };
 		6DC0BA5127A5765800094007 /* LoginViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5027A5765800094007 /* LoginViewPresenter.swift */; };
 		6DC0BA5327A576B000094007 /* LoginViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5227A576B000094007 /* LoginViewInput.swift */; };
 		6DC0BA5527A576BB00094007 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */; };
@@ -132,8 +134,6 @@
 		1F9F325826D251DB00CB1285 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F9F326026D2581300CB1285 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1F9F326426D2612400CB1285 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		1FE231122764C0A000235C80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1FE231152764C14500235C80 /* User+avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+avatar.swift"; sourceTree = "<group>"; };
 		1FE231172764C1F200235C80 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -159,7 +159,10 @@
 		6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Netology iOS homeworksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcierTests.swift; sourceTree = "<group>"; };
 		6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomStringGenerator.swift; sourceTree = "<group>"; };
-		6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+randomColor.swift"; sourceTree = "<group>"; };
+		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
+		6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLs.swift; sourceTree = "<group>"; };
 		6DB3E9FA27C5E9C800130B8E /* MultimediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewController.swift; sourceTree = "<group>"; };
 		6DB3E9FC27C5EB1100130B8E /* TitleButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleButtonsCell.swift; sourceTree = "<group>"; };
 		6DB3E9FE27C5EB5000130B8E /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		6DB3EA1C27C656D400130B8E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		6DB3EA1E27C657DD00130B8E /* AudioRecorderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderDelegate.swift; sourceTree = "<group>"; };
 		6DB3EA2027C6581400130B8E /* DefaultAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAudioRecorder.swift; sourceTree = "<group>"; };
+		6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+randomColor.swift"; sourceTree = "<group>"; };
 		6DC0BA5027A5765800094007 /* LoginViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewPresenter.swift; sourceTree = "<group>"; };
 		6DC0BA5227A576B000094007 /* LoginViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewInput.swift; sourceTree = "<group>"; };
 		6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewOutput.swift; sourceTree = "<group>"; };
@@ -307,6 +311,8 @@
 				6D73CA342813E204001563BD /* NetworkService.swift */,
 				6D73CA362813E2FE001563BD /* AppConfiguration.swift */,
 				1F9F324C26D251DA00CB1285 /* SceneDelegate.swift */,
+				6DA62B0D281BCF2000DD73DD /* TestDocument.swift */,
+				6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */,
 				6DBA679927B92F5900468CF5 /* Helpers */,
 				6D426FC527808CA4003DC4CE /* LoginFactory */,
 				1FE231142764C0A600235C80 /* UserService */,
@@ -686,6 +692,7 @@
 				1F9F324B26D251DA00CB1285 /* AppDelegate.swift in Sources */,
 				6DB3EA2127C6581400130B8E /* DefaultAudioRecorder.swift in Sources */,
 				6DB3EA0327C5ECB400130B8E /* AudioPlayerDelegate.swift in Sources */,
+				6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */,
 				6DB3EA1B27C63A4C00130B8E /* YoutubeVideoCell.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
 				6DED7A0926F473D600A5CB5B /* PhotosViewController.swift in Sources */,
@@ -693,7 +700,6 @@
 				1F5B737126EE11F90075597B /* PostTableViewCell.swift in Sources */,
 				6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */,
 				6D73CA352813E204001563BD /* NetworkService.swift in Sources */,
-				1F2A9E3326DA1AC800542900 /* Post.swift in Sources */,
 				6D01CB1227A1657700CE9481 /* ProfileCoordinator.swift in Sources */,
 				1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */,
 				6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */,
@@ -703,6 +709,7 @@
 				1F2A9E3726DA1B6300542900 /* InfoViewController.swift in Sources */,
 				6DB3EA0727C6018F00130B8E /* MultimediaStore.swift in Sources */,
 				6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
+				6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */,
 				1F9F324D26D251DA00CB1285 /* SceneDelegate.swift in Sources */,
 				1F7B418A26F59F5D004BEB2F /* PhotosCollectionViewCell.swift in Sources */,
 				1F5B736D26EDD6440075597B /* UIImage+extensions.swift in Sources */,

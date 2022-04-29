@@ -14,16 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var appConfiguration: AppConfiguration!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        DispatchQueue.global().async {
-            let tester = Task8ProcessImagesOnThreadTester()
-            tester.images = Task8ProcessImagesOnThreadTester.defaultPhotos
-            tester.qoss = [.default]
-            tester.filters = [.bloom(intensity: 1)]
-            tester.start()
-        }
         appConfiguration = AppConfiguration.allCases.randomElement()!
-        networkService.printServerResponce(fromURL: appConfiguration.url)
+        networkService.getTestDocument(from: TestURLs.task2_1) { result in
+            switch result {
+            case .success(let document):
+                print(document)
+            case .failure(let error):
+                print(error)
+            }
+        }
         return true
     }
 

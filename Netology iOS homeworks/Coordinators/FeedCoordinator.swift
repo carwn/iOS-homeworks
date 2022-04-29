@@ -36,7 +36,7 @@ class FeedCoordinator: TabBarCoordinator {
     }
     
     func start() {
-        print("FeedCoordinator start")
+        
     }
     
     private func pushPostViewController(post: PostViewController.Post) {
