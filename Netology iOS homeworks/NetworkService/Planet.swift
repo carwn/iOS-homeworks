@@ -56,11 +56,11 @@ struct Planet: Codable {
         case population, residents, films, created, edited, url
     }
     
-    init(jsonData: Data) throws {
+    static let customJSONDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
-        self = try decoder.decode(Planet.self, from: jsonData)
-    }
+        return decoder
+    }()
 }

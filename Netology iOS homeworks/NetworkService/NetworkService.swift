@@ -46,28 +46,20 @@ class NetworkService {
     }
     
     func getPlanet(from url: URL, completion: @escaping (Result<Planet, Error>) -> Void) {
-        getData(from: url) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let planet = try Planet(jsonData: data)
-                    completion(.success(planet))
-                } catch {
-                    completion(.failure(error))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+        getObject(from: url, jsonDecoder: Planet.customJSONDecoder, completion: completion)
     }
     
     func getPeople(from url: URL, completion: @escaping (Result<People, Error>) -> Void) {
+        getObject(from: url, completion: completion)
+    }
+    
+    private func getObject<T: Codable>(from url: URL, jsonDecoder: JSONDecoder = JSONDecoder(), completion: @escaping (Result<T, Error>) -> Void) {
         getData(from: url) { result in
             switch result {
             case .success(let data):
                 do {
-                    let people = try JSONDecoder().decode(People.self, from: data)
-                    completion(.success(people))
+                    let object = try jsonDecoder.decode(T.self, from: data)
+                    completion(.success(object))
                 } catch {
                     completion(.failure(error))
                 }
