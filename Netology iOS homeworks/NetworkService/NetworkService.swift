@@ -22,25 +22,52 @@ class NetworkService {
     }
     
     func getTestDocument(from url: URL, completion: @escaping (Result<TestDocument, Error>) -> Void) {
+        getData(from: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+                    guard let dictionary = jsonObject as? [String: Any] else {
+                        completion(.failure(NetworkError.unexpectedJSONContent))
+                        return
+                    }
+                    guard let testDocument = TestDocument(dictionary: dictionary) else {
+                        completion(.failure(NetworkError.cantCreateTestDocumentFromDictionary))
+                        return
+                    }
+                    completion(.success(testDocument))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getPlanet(from url: URL, completion: @escaping (Result<Planet, Error>) -> Void) {
+        getData(from: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let planet = try Planet(jsonData: data)
+                    completion(.success(planet))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func getData(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 completion(.failure(error ?? NetworkError.dataIsNil))
                 return
             }
-            do {
-                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                guard let dictionary = jsonObject as? [String: Any] else {
-                    completion(.failure(NetworkError.unexpectedJSONContent))
-                    return
-                }
-                guard let testDocument = TestDocument(dictionary: dictionary) else {
-                    completion(.failure(NetworkError.cantCreateTestDocumentFromDictionary))
-                    return
-                }
-                completion(.success(testDocument))
-            } catch {
-                completion(.failure(error))
-            }
+            completion(.success(data))
         }
         task.resume()
     }

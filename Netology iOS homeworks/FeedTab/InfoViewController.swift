@@ -15,10 +15,12 @@ class InfoViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 8
+        stack.alignment = .center
         return stack
     }()
     private let showAlertButton = SystemButton(title: "Show alert")
     private let titleLabel = UILabel(text: "Loading...")
+    private let orbitalPeriodLabel = UILabel(text: "Loading...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,7 @@ class InfoViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(showAlertButton)
         stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(orbitalPeriodLabel)
         view.addSubview(stackView)
         stackView.center(in: view)
     }
@@ -58,7 +61,23 @@ class InfoViewController: UIViewController {
             case .failure(let error):
                 guard let self = self else { return }
                 DispatchQueue.main.async {
+                    print(error)
                     self.titleLabel.text = "error"
+                    self.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                }
+            }
+        }
+        networkService.getPlanet(from: TestURLs.task2_2) { [weak self] result in
+            switch result {
+            case .success(let planet):
+                DispatchQueue.main.async {
+                    self?.orbitalPeriodLabel.text = planet.orbitalPeriod
+                }
+            case .failure(let error):
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    print(error)
+                    self.orbitalPeriodLabel.text = "error"
                     self.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
                 }
             }
