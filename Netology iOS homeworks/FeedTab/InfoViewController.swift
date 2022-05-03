@@ -9,9 +9,19 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    private var stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        return stack
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "BackgroundColor")
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        stackView.center(in: view)
         addShowAlertButton()
     }
     
@@ -19,8 +29,7 @@ class InfoViewController: UIViewController {
         let button = SystemButton(title: "Show alert") { [weak self] in
             self?.showAlertButtonPressed()
         }
-        view.addSubview(button)
-        button.center(in: view)
+        stackView.addArrangedSubview(button)
     }
     
     @objc private func showAlertButtonPressed() {
