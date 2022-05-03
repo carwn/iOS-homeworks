@@ -51,6 +51,7 @@
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
 		6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */; };
+		6DA62B122820E61600DD73DD /* UILabel+labelWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */; };
 		6DB3E9FB27C5E9C800130B8E /* MultimediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FA27C5E9C800130B8E /* MultimediaViewController.swift */; };
 		6DB3E9FD27C5EB1100130B8E /* TitleButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FC27C5EB1100130B8E /* TitleButtonsCell.swift */; };
 		6DB3E9FF27C5EB5000130B8E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FE27C5EB5000130B8E /* AudioPlayer.swift */; };
@@ -163,6 +164,7 @@
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
 		6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLs.swift; sourceTree = "<group>"; };
+		6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+labelWithText.swift"; sourceTree = "<group>"; };
 		6DB3E9FA27C5E9C800130B8E /* MultimediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewController.swift; sourceTree = "<group>"; };
 		6DB3E9FC27C5EB1100130B8E /* TitleButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleButtonsCell.swift; sourceTree = "<group>"; };
 		6DB3E9FE27C5EB5000130B8E /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				1F5B736E26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift */,
 				1FE2311D2764C65A00235C80 /* UIAlertController+infoAlert.swift */,
 				6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */,
+				6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -712,6 +715,7 @@
 				6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */,
 				1F9F324D26D251DA00CB1285 /* SceneDelegate.swift in Sources */,
 				1F7B418A26F59F5D004BEB2F /* PhotosCollectionViewCell.swift in Sources */,
+				6DA62B122820E61600DD73DD /* UILabel+labelWithText.swift in Sources */,
 				1F5B736D26EDD6440075597B /* UIImage+extensions.swift in Sources */,
 				6DC0BA5727A5802F00094007 /* ModuleFactory.swift in Sources */,
 				6DB3E9FD27C5EB1100130B8E /* TitleButtonsCell.swift in Sources */,

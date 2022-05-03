@@ -11,20 +11,22 @@ class InfoViewController: UIViewController {
     
     var networkService: NetworkService?
     
-    private var stackView: UIStackView = {
+    private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 8
         return stack
     }()
+    private let showAlertButton = SystemButton(title: "Show alert")
+    private let titleLabel = UILabel(text: "Loading...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "BackgroundColor")
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
-        stackView.center(in: view)
-        addShowAlertButton()
+        showAlertButton.onTapHandler = { [weak self] in
+            self?.showAlertButtonPressed()
+        }
+        setupViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,11 +34,12 @@ class InfoViewController: UIViewController {
         startNetworkRequest()
     }
     
-    private func addShowAlertButton() {
-        let button = SystemButton(title: "Show alert") { [weak self] in
-            self?.showAlertButtonPressed()
-        }
-        stackView.addArrangedSubview(button)
+    private func setupViews() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(showAlertButton)
+        stackView.addArrangedSubview(titleLabel)
+        view.addSubview(stackView)
+        stackView.center(in: view)
     }
     
     private func startNetworkRequest() {
@@ -46,12 +49,18 @@ class InfoViewController: UIViewController {
             present(UIAlertController.infoAlert(title: errorTitle), animated: true)
             return
         }
-        networkService.getTestDocument(from: TestURLs.task2_1) { result in
+        networkService.getTestDocument(from: TestURLs.task2_1) { [weak self] result in
             switch result {
             case .success(let document):
-                print(document)
+                DispatchQueue.main.async {
+                    self?.titleLabel.text = document.title
+                }
             case .failure(let error):
-                print(error)
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    self.titleLabel.text = "error"
+                    self.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                }
             }
         }
     }
