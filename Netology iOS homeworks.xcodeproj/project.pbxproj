@@ -53,6 +53,7 @@
 		6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */; };
 		6DA62B122820E61600DD73DD /* UILabel+labelWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */; };
 		6DA62B142820E9D700DD73DD /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B132820E9D700DD73DD /* Planet.swift */; };
+		6DA62B1B2820FE1400DD73DD /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B1A2820FE1400DD73DD /* People.swift */; };
 		6DB3E9FB27C5E9C800130B8E /* MultimediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FA27C5E9C800130B8E /* MultimediaViewController.swift */; };
 		6DB3E9FD27C5EB1100130B8E /* TitleButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FC27C5EB1100130B8E /* TitleButtonsCell.swift */; };
 		6DB3E9FF27C5EB5000130B8E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB3E9FE27C5EB5000130B8E /* AudioPlayer.swift */; };
@@ -167,6 +168,7 @@
 		6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLs.swift; sourceTree = "<group>"; };
 		6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+labelWithText.swift"; sourceTree = "<group>"; };
 		6DA62B132820E9D700DD73DD /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		6DA62B1A2820FE1400DD73DD /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		6DB3E9FA27C5E9C800130B8E /* MultimediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaViewController.swift; sourceTree = "<group>"; };
 		6DB3E9FC27C5EB1100130B8E /* TitleButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleButtonsCell.swift; sourceTree = "<group>"; };
 		6DB3E9FE27C5EB5000130B8E /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */,
 				6DA62B0D281BCF2000DD73DD /* TestDocument.swift */,
 				6DA62B132820E9D700DD73DD /* Planet.swift */,
+				6DA62B1A2820FE1400DD73DD /* People.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				6DED7A0B26F7032700A5CB5B /* UIApplication+keyWindowiOS13.swift in Sources */,
 				1F9F326126D2581300CB1285 /* ProfileView.swift in Sources */,
 				1FF286C82780744F00CE8D01 /* LoginInspector.swift in Sources */,
+				6DA62B1B2820FE1400DD73DD /* People.swift in Sources */,
 				6DC0BA5127A5765800094007 /* LoginViewPresenter.swift in Sources */,
 				6DB3E9FB27C5E9C800130B8E /* MultimediaViewController.swift in Sources */,
 				6DEF31FF26EC4F6E000D466F /* LogInViewController.swift in Sources */,

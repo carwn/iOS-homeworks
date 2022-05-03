@@ -14,13 +14,22 @@ class InfoViewController: UIViewController {
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = Constants.defaultOffset
         stack.alignment = .center
         return stack
     }()
     private let showAlertButton = SystemButton(title: "Show alert")
     private let titleLabel = UILabel(text: "Loading...")
     private let orbitalPeriodLabel = UILabel(text: "Loading...")
+    private let tableView = UITableView()
+    
+    private var residents: [People] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +37,8 @@ class InfoViewController: UIViewController {
         showAlertButton.onTapHandler = { [weak self] in
             self?.showAlertButtonPressed()
         }
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         setupViews()
     }
     
@@ -38,11 +49,19 @@ class InfoViewController: UIViewController {
     
     private func setupViews() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(showAlertButton)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(orbitalPeriodLabel)
         view.addSubview(stackView)
-        stackView.center(in: view)
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.defaultOffset),
+                                     stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.defaultOffset),
+                                     stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.defaultOffset),
+                                     tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                     tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: Constants.defaultOffset),
+                                     tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                     tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
     }
     
     private func startNetworkRequest() {
@@ -70,8 +89,10 @@ class InfoViewController: UIViewController {
         networkService.getPlanet(from: TestURLs.task2_2) { [weak self] result in
             switch result {
             case .success(let planet):
+                guard let self = self else { return }
                 DispatchQueue.main.async {
-                    self?.orbitalPeriodLabel.text = planet.orbitalPeriod
+                    self.orbitalPeriodLabel.text = planet.orbitalPeriod
+                    self.getResidents(urls: planet.residents)
                 }
             case .failure(let error):
                 guard let self = self else { return }
@@ -84,6 +105,25 @@ class InfoViewController: UIViewController {
         }
     }
     
+    private func getResidents(urls: [URL]) {
+        var residents: [People] = []
+        let group = DispatchGroup()
+        for residentURL in urls {
+            group.enter()
+            networkService?.getPeople(from: residentURL, completion: { [weak self] result in
+                switch result {
+                case .success(let people):
+                    residents.append(people)
+                case .failure(let error):
+                    self?.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                }
+                group.leave()
+            })
+        }
+        group.wait()
+        self.residents = residents
+    }
+    
     @objc private func showAlertButtonPressed() {
         let alert = UIAlertController(title: "Alert title", message: "Message text", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -93,5 +133,23 @@ class InfoViewController: UIViewController {
             print("Cancel button pressed")
         }))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension InfoViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        residents.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+        cell.textLabel?.text = residents[indexPath.row].name
+        return cell
+    }
+}
+
+extension InfoViewController {
+    enum Constants {
+        static let defaultOffset: CGFloat = 8
     }
 }

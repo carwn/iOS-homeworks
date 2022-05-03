@@ -36,6 +36,7 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController, multimediaCoordinator.rootViewController], animated: false)
         super.init()
         tabBarController.delegate = self
+        tabBarController.tabBar.backgroundColor = .systemBackground
     }
 
     func start() {

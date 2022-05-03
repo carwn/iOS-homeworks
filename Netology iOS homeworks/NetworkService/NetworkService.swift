@@ -61,6 +61,22 @@ class NetworkService {
         }
     }
     
+    func getPeople(from url: URL, completion: @escaping (Result<People, Error>) -> Void) {
+        getData(from: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let people = try JSONDecoder().decode(People.self, from: data)
+                    completion(.success(people))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     private func getData(from url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
