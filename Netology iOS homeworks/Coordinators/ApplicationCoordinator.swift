@@ -23,13 +23,14 @@ final class ApplicationCoordinator: NSObject, Coordinator {
     private let loginInspector: LoginInspector
     private let wordChecker = WordChecker()
     private let multimediaStore = MultimediaStore()
+    private let networkService = NetworkService()
     
     init(scene: UIWindowScene, factory: LoginFactory) {
         self.scene = scene
         self.factory = factory
         tabBarController = UITabBarController()
         loginInspector = factory.makeLoginInspector()
-        feedCoordinator = FeedCoordinator(wordChecker: wordChecker)
+        feedCoordinator = FeedCoordinator(wordChecker: wordChecker, networkService: networkService)
         profileCoordinator = ProfileCoordinator(delegate: loginInspector)
         multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs, youtubeVideos: multimediaStore.youtubeVideos)
         tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController, multimediaCoordinator.rootViewController], animated: false)

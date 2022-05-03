@@ -10,19 +10,10 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private let networkService = NetworkService()
     private var appConfiguration: AppConfiguration!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         appConfiguration = AppConfiguration.allCases.randomElement()!
-        networkService.getTestDocument(from: TestURLs.task2_1) { result in
-            switch result {
-            case .success(let document):
-                print(document)
-            case .failure(let error):
-                print(error)
-            }
-        }
         return true
     }
 

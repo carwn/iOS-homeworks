@@ -9,6 +9,8 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
+    var networkService: NetworkService?
+    
     private var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -25,11 +27,33 @@ class InfoViewController: UIViewController {
         addShowAlertButton()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startNetworkRequest()
+    }
+    
     private func addShowAlertButton() {
         let button = SystemButton(title: "Show alert") { [weak self] in
             self?.showAlertButtonPressed()
         }
         stackView.addArrangedSubview(button)
+    }
+    
+    private func startNetworkRequest() {
+        guard let networkService = networkService else {
+            let errorTitle = "Не задан network service"
+            assertionFailure(errorTitle)
+            present(UIAlertController.infoAlert(title: errorTitle), animated: true)
+            return
+        }
+        networkService.getTestDocument(from: TestURLs.task2_1) { result in
+            switch result {
+            case .success(let document):
+                print(document)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @objc private func showAlertButtonPressed() {
