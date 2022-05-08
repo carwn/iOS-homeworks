@@ -20,5 +20,5 @@ enum LoginViewControllerDelegateError: LocalizedError {
 }
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func check(login: String, password: String, complition: (Result<[StorageService.Post], LoginViewControllerDelegateError>) -> Void)
+    func check(login: String, password: String, complition: @escaping (Result<[StorageService.Post], LoginViewControllerDelegateError>) -> Void)
 }

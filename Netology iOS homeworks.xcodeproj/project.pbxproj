@@ -26,7 +26,6 @@
 		1FE2311A2764C22F00235C80 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE231192764C22F00235C80 /* CurrentUserService.swift */; };
 		1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE2311D2764C65A00235C80 /* UIAlertController+infoAlert.swift */; };
 		1FE231202764CF7600235C80 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE2311F2764CF7600235C80 /* TestUserService.swift */; };
-		1FF286C4278072AA00CE8D01 /* LoginChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF286C3278072AA00CE8D01 /* LoginChecker.swift */; };
 		1FF286C6278073E800CE8D01 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF286C5278073E800CE8D01 /* LoginViewControllerDelegate.swift */; };
 		1FF286C82780744F00CE8D01 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF286C72780744F00CE8D01 /* LoginInspector.swift */; };
 		1FF35ABF275CCFC1008AF342 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF35ABE275CCFC1008AF342 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -143,7 +142,6 @@
 		1FE231192764C22F00235C80 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		1FE2311D2764C65A00235C80 /* UIAlertController+infoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+infoAlert.swift"; sourceTree = "<group>"; };
 		1FE2311F2764CF7600235C80 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
-		1FF286C3278072AA00CE8D01 /* LoginChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginChecker.swift; sourceTree = "<group>"; };
 		1FF286C5278073E800CE8D01 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		1FF286C72780744F00CE8D01 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		1FF35ABC275CCFC1008AF342 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -441,7 +439,6 @@
 		6DBA679927B92F5900468CF5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				1FF286C3278072AA00CE8D01 /* LoginChecker.swift */,
 				1FFC9FD5279448A60069C288 /* WordChecker.swift */,
 				6DC0BA5627A5802F00094007 /* ModuleFactory.swift */,
 				6DC0BA5827A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift */,
@@ -677,7 +674,6 @@
 				1FE231202764CF7600235C80 /* TestUserService.swift in Sources */,
 				6DED7A0326F43F1C00A5CB5B /* PhotosTableViewCell.swift in Sources */,
 				6DF5CAC526D8DC6E000B030F /* PostViewController.swift in Sources */,
-				1FF286C4278072AA00CE8D01 /* LoginChecker.swift in Sources */,
 				6D01CB1427A1657D00CE9481 /* FeedCoordinator.swift in Sources */,
 				1F5B736F26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift in Sources */,
 				6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */,
