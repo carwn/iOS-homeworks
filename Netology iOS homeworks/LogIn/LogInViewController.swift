@@ -66,7 +66,7 @@ class LogInViewController: UIViewController {
         textField.placeholder = "Email or phone"
         textField.delegate = self
 #if DEBUG
-        textField.text = "Hipster Cat"
+        textField.text = "test@test.com"
 #endif
         return textField
     }()
@@ -78,7 +78,7 @@ class LogInViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.delegate = self
 #if DEBUG
-        textField.text = "StrongPassword"
+        textField.text = "password"
 #endif
         return textField
     }()
@@ -110,6 +110,13 @@ class LogInViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Подобрать пароль", for: .normal)
         button.addTarget(self, action: #selector(guessPasswordButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var createUserButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Создать пользователя", for: .normal)
+        button.addTarget(self, action: #selector(createUserButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -160,7 +167,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(scrollViewContentView)
-        [logoImageView, textFieldsView, logInButton, guessPasswordStackView].forEach { view in
+        [logoImageView, textFieldsView, logInButton, guessPasswordStackView, createUserButton].forEach { view in
             scrollViewContentView.addSubview(view)
         }
         [loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
@@ -169,7 +176,7 @@ class LogInViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator, guessPasswordStackView].forEach { view in
+        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView,logInButton, loginTextField, passwordTextField, textFieldsViewSeparator, guessPasswordStackView, createUserButton].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -216,7 +223,10 @@ class LogInViewController: UIViewController {
                            
                            guessPasswordStackView.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: Constants.defaultOffset),
                            guessPasswordStackView.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
-                           guessPasswordStackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
+        
+                           createUserButton.topAnchor.constraint(equalTo: guessPasswordStackView.bottomAnchor, constant: Constants.defaultOffset),
+                           createUserButton.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
+                           createUserButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -275,6 +285,22 @@ class LogInViewController: UIViewController {
                 self?.guessPasswordActivityIndicator.stopAnimating()
             }
         }
+    }
+    
+    @objc func createUserButtonPressed() {
+        let alert = UIAlertController(title: "Создать пользователя", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "email"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "password"
+        }
+        let createButton = UIAlertAction(title: "Создать", style: .default) { [weak self] action in
+            self?.presenter.createUserButtonPressed(withEmail: alert.textFields?[0].text, password: alert.textFields?[1].text)
+        }
+        alert.addAction(createButton)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        present(alert, animated: true)
     }
     
     private var randomPassword: String? {
