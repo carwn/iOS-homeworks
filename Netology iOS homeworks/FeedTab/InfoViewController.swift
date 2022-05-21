@@ -106,22 +106,27 @@ class InfoViewController: UIViewController {
     }
     
     private func getResidents(urls: [URL]) {
-        var residents: [People] = []
-        let group = DispatchGroup()
-        for residentURL in urls {
-            group.enter()
-            networkService?.getPeople(from: residentURL, completion: { [weak self] result in
-                switch result {
-                case .success(let people):
-                    residents.append(people)
-                case .failure(let error):
-                    self?.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
-                }
-                group.leave()
-            })
+        DispatchQueue.global().async { [weak self] in
+            var residents: [People] = []
+            let group = DispatchGroup()
+            for residentURL in urls {
+                guard let self = self else { return }
+                group.enter()
+                self.networkService?.getPeople(from: residentURL, completion: { [weak self] result in
+                    switch result {
+                    case .success(let people):
+                        residents.append(people)
+                    case .failure(let error):
+                        self?.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                    }
+                    group.leave()
+                })
+            }
+            group.wait()
+            DispatchQueue.main.async {
+                self?.residents = residents
+            }
         }
-        group.wait()
-        self.residents = residents
     }
     
     @objc private func showAlertButtonPressed() {
