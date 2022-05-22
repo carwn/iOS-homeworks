@@ -13,8 +13,12 @@ class BruteForcierTests: XCTestCase {
     func testExample() throws {
         let initPassword = "r2s"
         let bf = BruteForcier() { $0 == initPassword }
-        bf.bruteForce { password in
-            XCTAssertEqual(initPassword, password)
+        do {
+            try bf.bruteForce { password in
+                XCTAssertEqual(initPassword, password)
+            }
+        } catch {
+            XCTAssert(false, error.localizedDescription)
         }
     }
 }

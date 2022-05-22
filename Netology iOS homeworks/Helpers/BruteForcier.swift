@@ -33,7 +33,7 @@ class BruteForcier {
     }
     
     // Задание 1 - метод, выбрасывающий ошибки
-    func bruteForce(complition: (String) -> Void) throws {
+    func bruteForce(completion: (String) -> Void) throws {
         setupTimer()
         var currentTestString = generateBruteForce("", fromArray: allCharacters)
         while testClosure(currentTestString) == false {
@@ -43,7 +43,7 @@ class BruteForcier {
                 currentTestString = generateBruteForce(currentTestString, fromArray: allCharacters)
             }
         }
-        complition(currentTestString)
+        completion(currentTestString)
     }
     
     private func generateBruteForce(_ string: String, fromArray array: [String]) -> String {

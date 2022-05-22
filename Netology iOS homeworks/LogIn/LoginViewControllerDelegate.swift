@@ -7,18 +7,9 @@
 
 import Foundation
 import StorageService
-
-enum LoginViewControllerDelegateError: LocalizedError {
-    case unknowUserNameOrPassword
-    
-    var errorDescription: String? {
-        switch self {
-        case .unknowUserNameOrPassword:
-            return "Неверный логин или пароль"
-        }
-    }
-}
+import FirebaseAuth
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func check(login: String, password: String, complition: (Result<[StorageService.Post], LoginViewControllerDelegateError>) -> Void)
+    func check(login: String, password: String, completion: @escaping (Result<[StorageService.Post], LoginInspectorError>) -> Void)
+    func createUser(withEmail: String, password: String, completion:  @escaping (Result<FirebaseAuth.User, LoginInspectorError>) -> Void)
 }
