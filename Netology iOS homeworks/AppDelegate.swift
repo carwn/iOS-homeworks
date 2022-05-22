@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         appConfiguration = AppConfiguration.allCases.randomElement()!
         networkService.printServerResponce(fromURL: appConfiguration.url)
+        FirebaseApp.configure()
         return true
     }
 
