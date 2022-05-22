@@ -14,6 +14,7 @@ class FeedCoordinator: TabBarCoordinator {
     }
     
     private let wordChecker: WordChecker
+    private let networkService: NetworkService
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController(rootViewController: feedViewController)
@@ -31,12 +32,13 @@ class FeedCoordinator: TabBarCoordinator {
         return feedViewController
     }()
     
-    init(wordChecker: WordChecker) {
+    init(wordChecker: WordChecker, networkService: NetworkService) {
         self.wordChecker = wordChecker
+        self.networkService = networkService
     }
     
     func start() {
-        print("FeedCoordinator start")
+        
     }
     
     private func pushPostViewController(post: PostViewController.Post) {
@@ -50,6 +52,7 @@ class FeedCoordinator: TabBarCoordinator {
     
     private func showInfoViewController() {
         let infoVC = InfoViewController()
+        infoVC.networkService = networkService
         navigationController.present(infoVC, animated: true, completion: nil)
     }
 }
