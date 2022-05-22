@@ -269,7 +269,7 @@ class LogInViewController: UIViewController {
             let bf = BruteForcier() { $0 == randomPassword }
             // Задание 1 - вызов throw - метода и обработка ошибок
             do {
-                try bf.bruteForce(complition: { password in
+                try bf.bruteForce(completion: { password in
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         self.passwordTextField.text = password

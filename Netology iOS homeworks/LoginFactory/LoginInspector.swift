@@ -14,12 +14,12 @@ class LoginInspector {
 }
 
 extension LoginInspector: LoginViewControllerDelegate {
-    func check(login: String, password: String, complition: @escaping (Result<[Post], Error>) -> Void) {
+    func check(login: String, password: String, completion: @escaping (Result<[Post], Error>) -> Void) {
         FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { result, error in
             if result != nil {
-                complition(.success(Post.postsExample))
+                completion(.success(Post.postsExample))
             } else if let error = error {
-                complition(.failure(error))
+                completion(.failure(error))
             }
         }
     }
