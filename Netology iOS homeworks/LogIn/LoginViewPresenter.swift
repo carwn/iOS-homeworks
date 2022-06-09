@@ -20,9 +20,20 @@ class LoginViewPresenter {
     init(delegate: LoginViewControllerDelegate) {
         self.delegate = delegate
     }
+    
+    // MARK: - Private Methods
+    private func showProfile(login: Login) {
+        showProfileViewClosure?(ShowProfileViewParams(userName: login, posts: Post.postsExample))
+    }
 }
 
 extension LoginViewPresenter: LoginViewOutput {
+    func viewDidLoad() {
+        if let login = delegate.authorizedUserLogin {
+            showProfile(login: login)
+        }
+    }
+    
     func logInButtonPressed(login: String?, password: String?) {
         guard let userName = login, !userName.isEmpty else {
             viewController?.showLogInError(title: "Не введено имя пользователя", message: nil)
@@ -34,8 +45,8 @@ extension LoginViewPresenter: LoginViewOutput {
         }
         delegate.check(login: userName, password: password) { [weak self] result in
             switch result {
-            case .success(let posts):
-                self?.showProfileViewClosure?(ShowProfileViewParams(userName: userName, posts: posts))
+            case .success(let userName):
+                self?.showProfile(login: userName)
             case .failure(let error):
                 self?.viewController?.showLogInError(title: "Ошибка", message: error.localizedDescription)
             }

@@ -8,7 +8,14 @@
 import Foundation
 
 class DefaultLoginFactory: LoginFactory {
+    
+    init(authorizedUserService: AuthorizedUserService) {
+        self.authorizedUserService = authorizedUserService
+    }
+    
+    private let authorizedUserService: AuthorizedUserService
+    
     func makeLoginInspector() -> LoginInspector {
-        LoginInspector()
+        LoginInspector(authorizedUserService: authorizedUserService)
     }
 }

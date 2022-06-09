@@ -145,6 +145,7 @@ class LogInViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         setupViews()
         setupConstraints()
+        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {

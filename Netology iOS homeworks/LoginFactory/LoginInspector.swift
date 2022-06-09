@@ -10,14 +10,19 @@ import StorageService
 import FirebaseAuth
 
 class LoginInspector {
-
+    init(authorizedUserService: AuthorizedUserService) {
+        self.authorizedUserService = authorizedUserService
+    }
+    
+    private let authorizedUserService: AuthorizedUserService
 }
 
 extension LoginInspector: LoginViewControllerDelegate {
-    func check(login: String, password: String, completion: @escaping (Result<[Post], LoginInspectorError>) -> Void) {
-        FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { result, error in
+    func check(login: String, password: String, completion: @escaping (Result<String, LoginInspectorError>) -> Void) {
+        FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { [weak self] result, error in
             if result != nil {
-                completion(.success(Post.postsExample))
+                self?.authorizedUserService.successfulAuthorization(login: login)
+                completion(.success(login))
             } else if let error = error {
                 completion(.failure(.otherError(error)))
             }
@@ -32,5 +37,9 @@ extension LoginInspector: LoginViewControllerDelegate {
                 completion(.failure(.otherError(error)))
             }
         }
+    }
+    
+    var authorizedUserLogin: Login? {
+        authorizedUserService.authorizedUserInfo?.login
     }
 }
