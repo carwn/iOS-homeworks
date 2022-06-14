@@ -9,7 +9,9 @@ import Foundation
 import RealmSwift
 
 class RealmAuthorizedUserService {
-    private let realm = try? Realm()
+    private var realm: Realm? {
+        try? Realm()
+    }
     
     private var authorizedUser: RealmAuthorizedUser? {
         realm?.objects(RealmAuthorizedUser.self).first
