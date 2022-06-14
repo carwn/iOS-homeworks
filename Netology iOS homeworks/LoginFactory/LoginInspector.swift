@@ -39,7 +39,7 @@ extension LoginInspector: LoginViewControllerDelegate {
         }
     }
     
-    var authorizedUserLogin: Login? {
-        authorizedUserService.authorizedUserInfo?.login
+    var authorizedUser: AuthorizedUserInfo? {
+        authorizedUserService.authorizedUserInfo
     }
 }

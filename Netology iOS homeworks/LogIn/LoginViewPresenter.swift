@@ -29,8 +29,8 @@ class LoginViewPresenter {
 
 extension LoginViewPresenter: LoginViewOutput {
     func viewDidLoad() {
-        if let login = delegate.authorizedUserLogin {
-            showProfile(login: login)
+        if let authorizedUser = delegate.authorizedUser {
+            viewController?.autoAuthorizationWith(login: authorizedUser.login, password: authorizedUser.password)
         }
     }
     

@@ -90,8 +90,8 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
     }
     
-    private lazy var logInButton: SystemButton = {
-        let button = SystemButton(title: "Log In", titleColor: .white) { [weak self] in
+    private lazy var logInButton: LoadingButton = {
+        let button = LoadingButton(title: "Log In", titleColor: .white) { [weak self] in
             self?.logInButtonPressed()
         }
         let bluePixelImage = UIImage(named: "blue_pixel")
@@ -160,6 +160,7 @@ class LogInViewController: UIViewController {
         [UIControl.keyboardWillShowNotification, UIControl.keyboardDidShowNotification, UIControl.keyboardWillHideNotification].forEach { name in
             NotificationCenter.default.removeObserver(self, name: name, object: nil)
         }
+        logInButton.hideLoading()
     }
     
     // MARK: - Setup view and constraints
@@ -253,6 +254,7 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func logInButtonPressed() {
+        logInButton.showLoading()
         presenter.logInButtonPressed(login: loginTextField.text, password: passwordTextField.text)
     }
     
@@ -338,5 +340,12 @@ extension LogInViewController: UITextFieldDelegate {
 extension LogInViewController: LoginViewInput {
     func showLogInError(title: String, message: String?) {
         present(UIAlertController.infoAlert(title: title, message: message), animated: true)
+        logInButton.hideLoading()
+    }
+    
+    func autoAuthorizationWith(login: Login, password: Password) {
+        loginTextField.text = login
+        passwordTextField.text = password
+        logInButtonPressed()
     }
 }

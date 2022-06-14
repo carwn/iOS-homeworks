@@ -13,5 +13,5 @@ protocol LoginViewControllerDelegate: AnyObject {
     func check(login: String, password: String, completion: @escaping (Result<Login, LoginInspectorError>) -> Void)
     func createUser(withEmail: String, password: String, completion:  @escaping (Result<FirebaseAuth.User, LoginInspectorError>) -> Void)
     
-    var authorizedUserLogin: Login? { get }
+    var authorizedUser: AuthorizedUserInfo? { get }
 }
