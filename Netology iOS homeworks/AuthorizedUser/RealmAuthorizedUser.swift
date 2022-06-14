@@ -10,6 +10,7 @@ import RealmSwift
 
 class RealmAuthorizedUser: Object {
     @Persisted var login: Login
+    @Persisted var password: Password
     @Persisted var firstLoginDate: Date
     @Persisted var lastLoginDate: Date
 }

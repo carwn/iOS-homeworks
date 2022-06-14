@@ -9,7 +9,7 @@ import Foundation
 
 protocol AuthorizedUserService {
     
-    func successfulAuthorization(login: Login)
+    func successfulAuthorization(login: Login, password: Password)
     func logoff()
     
     var authorizedUserInfo: AuthorizedUserInfo? { get }

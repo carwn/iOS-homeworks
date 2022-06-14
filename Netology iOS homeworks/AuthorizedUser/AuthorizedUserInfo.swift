@@ -8,7 +8,8 @@
 import Foundation
 
 struct AuthorizedUserInfo {
-    var login: Login
-    var firstLogin: Date
-    var lastLogin: Date
+    let login: Login
+    let password: Password
+    let firstLogin: Date
+    let lastLogin: Date
 }

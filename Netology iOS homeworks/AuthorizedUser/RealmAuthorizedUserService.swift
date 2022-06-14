@@ -20,7 +20,7 @@ class RealmAuthorizedUserService {
 
 extension RealmAuthorizedUserService: AuthorizedUserService {
     
-    func successfulAuthorization(login: Login) {
+    func successfulAuthorization(login: Login, password: Password) {
         if let authorizedUser = authorizedUser, authorizedUser.login == login {
             realm?.beginWrite()
             authorizedUser.lastLoginDate = Date()
@@ -30,6 +30,7 @@ extension RealmAuthorizedUserService: AuthorizedUserService {
             let _ = try? realm?.write({
                 let user = RealmAuthorizedUser()
                 user.login = login
+                user.password = password
                 let now = Date()
                 user.firstLoginDate = now
                 user.lastLoginDate = now
@@ -50,6 +51,7 @@ extension RealmAuthorizedUserService: AuthorizedUserService {
             return nil
         }
         return AuthorizedUserInfo(login: authorizedUser.login,
+                                  password: authorizedUser.password,
                                   firstLogin: authorizedUser.firstLoginDate,
                                   lastLogin: authorizedUser.lastLoginDate)
     }

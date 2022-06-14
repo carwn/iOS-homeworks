@@ -21,7 +21,7 @@ extension LoginInspector: LoginViewControllerDelegate {
     func check(login: String, password: String, completion: @escaping (Result<String, LoginInspectorError>) -> Void) {
         FirebaseAuth.Auth.auth().signIn(withEmail: login, password: password) { [weak self] result, error in
             if result != nil {
-                self?.authorizedUserService.successfulAuthorization(login: login)
+                self?.authorizedUserService.successfulAuthorization(login: login, password: password)
                 completion(.success(login))
             } else if let error = error {
                 completion(.failure(.otherError(error)))
