@@ -46,6 +46,10 @@
 		6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F91D27B0E7C2009544CC /* BruteForcier.swift */; };
 		6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */; };
 		6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */; };
+		6D5E11242859C2290065E181 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11222859C2290065E181 /* Model.xcdatamodeld */; };
+		6D5E11262859C3300065E181 /* StoredPostsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11252859C3300065E181 /* StoredPostsManager.swift */; };
+		6D5E11282859C7D40065E181 /* StoredPost+Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11272859C7D40065E181 /* StoredPost+Post.swift */; };
+		6D5E112C2859CBBF0065E181 /* StoredPostsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E112B2859CBBF0065E181 /* StoredPostsManagerTests.swift */; };
 		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
@@ -166,6 +170,10 @@
 		6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Netology iOS homeworksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcierTests.swift; sourceTree = "<group>"; };
 		6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomStringGenerator.swift; sourceTree = "<group>"; };
+		6D5E11232859C2290065E181 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		6D5E11252859C3300065E181 /* StoredPostsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPostsManager.swift; sourceTree = "<group>"; };
+		6D5E11272859C7D40065E181 /* StoredPost+Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredPost+Post.swift"; sourceTree = "<group>"; };
+		6D5E112B2859CBBF0065E181 /* StoredPostsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPostsManagerTests.swift; sourceTree = "<group>"; };
 		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
@@ -325,6 +333,7 @@
 				1F9F324A26D251DA00CB1285 /* AppDelegate.swift */,
 				6D73CA362813E2FE001563BD /* AppConfiguration.swift */,
 				1F9F324C26D251DA00CB1285 /* SceneDelegate.swift */,
+				6D5E11212859C1DC0065E181 /* StoredPostsManager */,
 				6DA62B152820EAAA00DD73DD /* NetworkService */,
 				6DBA679927B92F5900468CF5 /* Helpers */,
 				6D426FC527808CA4003DC4CE /* LoginFactory */,
@@ -413,10 +422,21 @@
 		6D54F92427B0EFFA009544CC /* Netology iOS homeworksTests */ = {
 			isa = PBXGroup;
 			children = (
+				6D5E112B2859CBBF0065E181 /* StoredPostsManagerTests.swift */,
 				6DCD24842827640B009E10A9 /* FirebaseAuthTests.swift */,
 				6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */,
 			);
 			path = "Netology iOS homeworksTests";
+			sourceTree = "<group>";
+		};
+		6D5E11212859C1DC0065E181 /* StoredPostsManager */ = {
+			isa = PBXGroup;
+			children = (
+				6D5E11222859C2290065E181 /* Model.xcdatamodeld */,
+				6D5E11252859C3300065E181 /* StoredPostsManager.swift */,
+				6D5E11272859C7D40065E181 /* StoredPost+Post.swift */,
+			);
+			path = StoredPostsManager;
 			sourceTree = "<group>";
 		};
 		6DA62B152820EAAA00DD73DD /* NetworkService */ = {
@@ -715,6 +735,7 @@
 				1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */,
 				6D01CB0C27A1643700CE9481 /* Coordinator.swift in Sources */,
 				1FE231182764C1F200235C80 /* UserService.swift in Sources */,
+				6D5E11282859C7D40065E181 /* StoredPost+Post.swift in Sources */,
 				6DED7A0526F43F7600A5CB5B /* PhotosStore.swift in Sources */,
 				6DB3EA0127C5EBF400130B8E /* DefaultAudioPlayer.swift in Sources */,
 				6D426FC427808C99003DC4CE /* DefaultLoginFactory.swift in Sources */,
@@ -728,11 +749,13 @@
 				6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */,
 				6DB3EA1B27C63A4C00130B8E /* YoutubeVideoCell.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
+				6D5E11262859C3300065E181 /* StoredPostsManager.swift in Sources */,
 				6DED7A0926F473D600A5CB5B /* PhotosViewController.swift in Sources */,
 				1FFC9FD0279424910069C288 /* SystemButton.swift in Sources */,
 				1F5B737126EE11F90075597B /* PostTableViewCell.swift in Sources */,
 				6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */,
 				6D73CA352813E204001563BD /* NetworkService.swift in Sources */,
+				6D5E11242859C2290065E181 /* Model.xcdatamodeld in Sources */,
 				6D01CB1227A1657700CE9481 /* ProfileCoordinator.swift in Sources */,
 				1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */,
 				6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */,
@@ -777,6 +800,7 @@
 			files = (
 				6DCD24852827640B009E10A9 /* FirebaseAuthTests.swift in Sources */,
 				6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */,
+				6D5E112C2859CBBF0065E181 /* StoredPostsManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1154,6 +1178,19 @@
 			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		6D5E11222859C2290065E181 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6D5E11232859C2290065E181 /* Model.xcdatamodel */,
+			);
+			currentVersion = 6D5E11232859C2290065E181 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1F9F323F26D251DA00CB1285 /* Project object */;
 }
