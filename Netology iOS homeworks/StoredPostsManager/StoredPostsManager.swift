@@ -28,7 +28,11 @@ class StoredPostsManager {
     private lazy var context = container.viewContext
     
     func addPost(_ post: Post) throws {
-        let _ = StoredPost(post: post, context: context)
+        try addPosts([post])
+    }
+    
+    func addPosts(_ posts: [Post]) throws {
+        posts.forEach { let _ = StoredPost(post: $0, context: context) }
         try context.save()
     }
     
@@ -36,6 +40,11 @@ class StoredPostsManager {
         try posts().compactMap { $0.post }
     }
     
+    func postsFetchedResultsController() -> NSFetchedResultsController<StoredPost> {
+        let fetchRequest = StoredPost.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.author), ascending: true)]
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    }
     
     func removeAllPosts() throws {
         try posts().forEach { context.delete($0) }

@@ -52,6 +52,7 @@
 		6D5E112C2859CBBF0065E181 /* StoredPostsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E112B2859CBBF0065E181 /* StoredPostsManagerTests.swift */; };
 		6D5E112E2859D2240065E181 /* StoredPostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E112D2859D2240065E181 /* StoredPostsCoordinator.swift */; };
 		6D5E11302859D2D00065E181 /* StoredPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */; };
+		6D5E11322859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */; };
 		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
@@ -178,6 +179,7 @@
 		6D5E112B2859CBBF0065E181 /* StoredPostsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPostsManagerTests.swift; sourceTree = "<group>"; };
 		6D5E112D2859D2240065E181 /* StoredPostsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPostsCoordinator.swift; sourceTree = "<group>"; };
 		6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPostsViewController.swift; sourceTree = "<group>"; };
+		6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredPostsViewController+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
 		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
@@ -347,7 +349,7 @@
 				1F9E705A26E10F040019098B /* Profile */,
 				6DF5CABD26D8AB47000B030F /* Posts */,
 				6DED7A0126F43ED600A5CB5B /* Photos */,
-				6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */,
+				6D5E11332859DAC60065E181 /* StoredPostsViewController */,
 				6DB3E9F927C5E95300130B8E /* Multimedia */,
 				1F7B418C26F5AAAE004BEB2F /* Extenstions */,
 				1FFC9FCE279424740069C288 /* Views */,
@@ -443,6 +445,15 @@
 				6D5E11272859C7D40065E181 /* StoredPost+Post.swift */,
 			);
 			path = StoredPostsManager;
+			sourceTree = "<group>";
+		};
+		6D5E11332859DAC60065E181 /* StoredPostsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */,
+				6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */,
+			);
+			path = StoredPostsViewController;
 			sourceTree = "<group>";
 		};
 		6DA62B152820EAAA00DD73DD /* NetworkService */ = {
@@ -766,6 +777,7 @@
 				6D01CB1227A1657700CE9481 /* ProfileCoordinator.swift in Sources */,
 				1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */,
 				6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */,
+				6D5E11322859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift in Sources */,
 				6DA62B142820E9D700DD73DD /* Planet.swift in Sources */,
 				6D01CB1027A164BC00CE9481 /* ApplicationCoordinator.swift in Sources */,
 				6DBA679B27BF7EAF00468CF5 /* UIColor+randomColor.swift in Sources */,
