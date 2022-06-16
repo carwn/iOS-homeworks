@@ -17,4 +17,5 @@ protocol LoginViewOutput: AnyObject {
     var showProfileViewClosure: ((ShowProfileViewParams) -> Void)? { set get }
     func logInButtonPressed(login: String?, password: String?)
     func createUserButtonPressed(withEmail: String?, password: String?)
+    func viewDidLoad()
 }

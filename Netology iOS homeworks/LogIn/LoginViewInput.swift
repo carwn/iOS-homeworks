@@ -9,4 +9,5 @@ import Foundation
 
 protocol LoginViewInput: AnyObject {
     func showLogInError(title: String, message: String?)
+    func autoAuthorizationWith(login: Login, password: Password)
 }

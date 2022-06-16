@@ -46,6 +46,15 @@
 		6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F91D27B0E7C2009544CC /* BruteForcier.swift */; };
 		6D54F92627B0EFFA009544CC /* BruteForcierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */; };
 		6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */; };
+		6D5E110D28518A1B0065E181 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 6D5E110C28518A1B0065E181 /* Realm */; };
+		6D5E110F28518A1B0065E181 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6D5E110E28518A1B0065E181 /* RealmSwift */; };
+		6D5E111228518A670065E181 /* RealmAuthorizedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111128518A670065E181 /* RealmAuthorizedUser.swift */; };
+		6D5E111628518B520065E181 /* AuthorizedUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111528518B520065E181 /* AuthorizedUserService.swift */; };
+		6D5E111828518C0A0065E181 /* RealmAuthorizedUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111728518C0A0065E181 /* RealmAuthorizedUserService.swift */; };
+		6D5E111A2851965D0065E181 /* AuthorizedUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11192851965D0065E181 /* AuthorizedUserInfo.swift */; };
+		6D5E111C2851A0FA0065E181 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111B2851A0FA0065E181 /* Login.swift */; };
+		6D5E111E285825AE0065E181 /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111D285825AE0065E181 /* Password.swift */; };
+		6D5E1120285829B20065E181 /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111F285829B20065E181 /* LoadingButton.swift */; };
 		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
@@ -166,6 +175,13 @@
 		6D54F92327B0EFFA009544CC /* Netology iOS homeworksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Netology iOS homeworksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForcierTests.swift; sourceTree = "<group>"; };
 		6D54F92C27B14B81009544CC /* RandomStringGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomStringGenerator.swift; sourceTree = "<group>"; };
+		6D5E111128518A670065E181 /* RealmAuthorizedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAuthorizedUser.swift; sourceTree = "<group>"; };
+		6D5E111528518B520065E181 /* AuthorizedUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedUserService.swift; sourceTree = "<group>"; };
+		6D5E111728518C0A0065E181 /* RealmAuthorizedUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAuthorizedUserService.swift; sourceTree = "<group>"; };
+		6D5E11192851965D0065E181 /* AuthorizedUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedUserInfo.swift; sourceTree = "<group>"; };
+		6D5E111B2851A0FA0065E181 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		6D5E111D285825AE0065E181 /* Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Password.swift; sourceTree = "<group>"; };
+		6D5E111F285829B20065E181 /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
 		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
@@ -217,7 +233,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D5E110D28518A1B0065E181 /* Realm in Frameworks */,
 				2B55B15E4656448E0E3B8C79 /* Pods_Netology_iOS_homeworks.framework in Frameworks */,
+				6D5E110F28518A1B0065E181 /* RealmSwift in Frameworks */,
 				6DCD24832826137F009E10A9 /* FirebaseAuth in Frameworks */,
 				1F155D762764923300926692 /* iOSIntPackage in Frameworks */,
 				1FF35AC2275CCFC1008AF342 /* StorageService.framework in Frameworks */,
@@ -263,6 +281,8 @@
 		1F7B418B26F5A9C2004BEB2F /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
+				6D5E111B2851A0FA0065E181 /* Login.swift */,
+				6D5E111D285825AE0065E181 /* Password.swift */,
 				6DC0BA5227A576B000094007 /* LoginViewInput.swift */,
 				6DC0BA5427A576BB00094007 /* LoginViewOutput.swift */,
 				6DC0BA5027A5765800094007 /* LoginViewPresenter.swift */,
@@ -328,6 +348,7 @@
 				6DA62B152820EAAA00DD73DD /* NetworkService */,
 				6DBA679927B92F5900468CF5 /* Helpers */,
 				6D426FC527808CA4003DC4CE /* LoginFactory */,
+				6D5E111028518A320065E181 /* AuthorizedUser */,
 				1FE231142764C0A600235C80 /* UserService */,
 				1F2A9E3126DA1A8900542900 /* FeedTab */,
 				1F7B418B26F5A9C2004BEB2F /* LogIn */,
@@ -372,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				1FFC9FCF279424910069C288 /* SystemButton.swift */,
+				6D5E111F285829B20065E181 /* LoadingButton.swift */,
 				1FFC9FD3279433CD0069C288 /* InputTextView.swift */,
 			);
 			path = Views;
@@ -417,6 +439,17 @@
 				6D54F92527B0EFFA009544CC /* BruteForcierTests.swift */,
 			);
 			path = "Netology iOS homeworksTests";
+			sourceTree = "<group>";
+		};
+		6D5E111028518A320065E181 /* AuthorizedUser */ = {
+			isa = PBXGroup;
+			children = (
+				6D5E11192851965D0065E181 /* AuthorizedUserInfo.swift */,
+				6D5E111528518B520065E181 /* AuthorizedUserService.swift */,
+				6D5E111728518C0A0065E181 /* RealmAuthorizedUserService.swift */,
+				6D5E111128518A670065E181 /* RealmAuthorizedUser.swift */,
+			);
+			path = AuthorizedUser;
 			sourceTree = "<group>";
 		};
 		6DA62B152820EAAA00DD73DD /* NetworkService */ = {
@@ -527,6 +560,8 @@
 				1F155D752764923300926692 /* iOSIntPackage */,
 				6DB3EA1627C625F700130B8E /* YouTubeiOSPlayerHelper */,
 				6DCD24822826137F009E10A9 /* FirebaseAuth */,
+				6D5E110C28518A1B0065E181 /* Realm */,
+				6D5E110E28518A1B0065E181 /* RealmSwift */,
 			);
 			productName = "Netology iOS homeworks";
 			productReference = 1F9F324726D251DA00CB1285 /* Netology iOS homeworks.app */;
@@ -602,6 +637,7 @@
 				1F155D742764923300926692 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				6DB3EA1527C625F700130B8E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 				6DCD24812826137F009E10A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6D5E110B28518A1B0065E181 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 1F9F324826D251DA00CB1285 /* Products */;
 			projectDirPath = "";
@@ -713,6 +749,7 @@
 				6DB3E9FB27C5E9C800130B8E /* MultimediaViewController.swift in Sources */,
 				6DEF31FF26EC4F6E000D466F /* LogInViewController.swift in Sources */,
 				1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */,
+				6D5E111828518C0A0065E181 /* RealmAuthorizedUserService.swift in Sources */,
 				6D01CB0C27A1643700CE9481 /* Coordinator.swift in Sources */,
 				1FE231182764C1F200235C80 /* UserService.swift in Sources */,
 				6DED7A0526F43F7600A5CB5B /* PhotosStore.swift in Sources */,
@@ -723,15 +760,18 @@
 				6D54F92D27B14B81009544CC /* RandomStringGenerator.swift in Sources */,
 				6DF5CABC26D8AB3C000B030F /* FeedViewController.swift in Sources */,
 				1F9F324B26D251DA00CB1285 /* AppDelegate.swift in Sources */,
+				6D5E1120285829B20065E181 /* LoadingButton.swift in Sources */,
 				6DB3EA2127C6581400130B8E /* DefaultAudioRecorder.swift in Sources */,
 				6DB3EA0327C5ECB400130B8E /* AudioPlayerDelegate.swift in Sources */,
 				6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */,
 				6DB3EA1B27C63A4C00130B8E /* YoutubeVideoCell.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
+				6D5E111628518B520065E181 /* AuthorizedUserService.swift in Sources */,
 				6DED7A0926F473D600A5CB5B /* PhotosViewController.swift in Sources */,
 				1FFC9FD0279424910069C288 /* SystemButton.swift in Sources */,
 				1F5B737126EE11F90075597B /* PostTableViewCell.swift in Sources */,
 				6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */,
+				6D5E111E285825AE0065E181 /* Password.swift in Sources */,
 				6D73CA352813E204001563BD /* NetworkService.swift in Sources */,
 				6D01CB1227A1657700CE9481 /* ProfileCoordinator.swift in Sources */,
 				1F9E705C26E10F180019098B /* ProfileHeaderView.swift in Sources */,
@@ -743,6 +783,7 @@
 				1F2A9E3726DA1B6300542900 /* InfoViewController.swift in Sources */,
 				6DB3EA0727C6018F00130B8E /* MultimediaStore.swift in Sources */,
 				6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
+				6D5E111A2851965D0065E181 /* AuthorizedUserInfo.swift in Sources */,
 				6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */,
 				1F9F324D26D251DA00CB1285 /* SceneDelegate.swift in Sources */,
 				1F7B418A26F59F5D004BEB2F /* PhotosCollectionViewCell.swift in Sources */,
@@ -756,6 +797,8 @@
 				6DC0BA5927A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift in Sources */,
 				1FFC9FD6279448A60069C288 /* WordChecker.swift in Sources */,
 				6DB3EA1F27C657DD00130B8E /* AudioRecorderDelegate.swift in Sources */,
+				6D5E111C2851A0FA0065E181 /* Login.swift in Sources */,
+				6D5E111228518A670065E181 /* RealmAuthorizedUser.swift in Sources */,
 				1FE2311A2764C22F00235C80 /* CurrentUserService.swift in Sources */,
 				6DB3EA0527C5FF8900130B8E /* MultimediaCoordinator.swift in Sources */,
 				6D426FC227808C4A003DC4CE /* LoginFactory.swift in Sources */,
@@ -1119,6 +1162,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		6D5E110B28518A1B0065E181 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		6DB3EA1527C625F700130B8E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
@@ -1142,6 +1193,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1F155D742764923300926692 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		6D5E110C28518A1B0065E181 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D5E110B28518A1B0065E181 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		6D5E110E28518A1B0065E181 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D5E110B28518A1B0065E181 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		6DB3EA1627C625F700130B8E /* YouTubeiOSPlayerHelper */ = {
 			isa = XCSwiftPackageProductDependency;
