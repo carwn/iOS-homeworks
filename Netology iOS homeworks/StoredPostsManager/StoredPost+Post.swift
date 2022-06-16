@@ -17,6 +17,7 @@ extension StoredPost {
         imageName = post.image
         likesCount = Int64(post.likes)
         views = Int64(post.views)
+        saveDate = Date()
     }
     
     var post: Post? {

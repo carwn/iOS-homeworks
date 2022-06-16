@@ -42,7 +42,7 @@ class StoredPostsManager {
     
     func postsFetchedResultsController() -> NSFetchedResultsController<StoredPost> {
         let fetchRequest = StoredPost.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.author), ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.saveDate), ascending: true)]
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
     }
     
