@@ -41,6 +41,7 @@
 		6D01CB1227A1657700CE9481 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01CB1127A1657700CE9481 /* ProfileCoordinator.swift */; };
 		6D01CB1427A1657D00CE9481 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01CB1327A1657D00CE9481 /* FeedCoordinator.swift */; };
 		6D01CB1627A167F600CE9481 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01CB1527A167F600CE9481 /* TabBarCoordinator.swift */; };
+		6D425FF7285DA5E4002E9E54 /* RealmAuthorizedUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111728518C0A0065E181 /* RealmAuthorizedUserService.swift */; };
 		6D426FC227808C4A003DC4CE /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D426FC127808C4A003DC4CE /* LoginFactory.swift */; };
 		6D426FC427808C99003DC4CE /* DefaultLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D426FC327808C99003DC4CE /* DefaultLoginFactory.swift */; };
 		6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D54F91D27B0E7C2009544CC /* BruteForcier.swift */; };
@@ -50,7 +51,6 @@
 		6D5E110F28518A1B0065E181 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6D5E110E28518A1B0065E181 /* RealmSwift */; };
 		6D5E111228518A670065E181 /* RealmAuthorizedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111128518A670065E181 /* RealmAuthorizedUser.swift */; };
 		6D5E111628518B520065E181 /* AuthorizedUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111528518B520065E181 /* AuthorizedUserService.swift */; };
-		6D5E111828518C0A0065E181 /* RealmAuthorizedUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111728518C0A0065E181 /* RealmAuthorizedUserService.swift */; };
 		6D5E111A2851965D0065E181 /* AuthorizedUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11192851965D0065E181 /* AuthorizedUserInfo.swift */; };
 		6D5E111C2851A0FA0065E181 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111B2851A0FA0065E181 /* Login.swift */; };
 		6D5E111E285825AE0065E181 /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E111D285825AE0065E181 /* Password.swift */; };
@@ -470,25 +470,25 @@
 			path = AuthorizedUser;
 			sourceTree = "<group>";
 		};
-        6D5E11212859C1DC0065E181 /* StoredPostsManager */ = {
-            isa = PBXGroup;
-            children = (
-                6D5E11222859C2290065E181 /* Model.xcdatamodeld */,
-                6D5E11252859C3300065E181 /* StoredPostsManager.swift */,
-                6D5E11272859C7D40065E181 /* StoredPost+Post.swift */,
-            );
-            path = StoredPostsManager;
-            sourceTree = "<group>";
-        };
-        6D5E11332859DAC60065E181 /* StoredPostsViewController */ = {
-            isa = PBXGroup;
-            children = (
-                6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */,
-                6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */,
-            );
-            path = StoredPostsViewController;
-            sourceTree = "<group>";
-        };
+		6D5E11212859C1DC0065E181 /* StoredPostsManager */ = {
+			isa = PBXGroup;
+			children = (
+				6D5E11222859C2290065E181 /* Model.xcdatamodeld */,
+				6D5E11252859C3300065E181 /* StoredPostsManager.swift */,
+				6D5E11272859C7D40065E181 /* StoredPost+Post.swift */,
+			);
+			path = StoredPostsManager;
+			sourceTree = "<group>";
+		};
+		6D5E11332859DAC60065E181 /* StoredPostsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */,
+				6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */,
+			);
+			path = StoredPostsViewController;
+			sourceTree = "<group>";
+		};
 		6DA62B152820EAAA00DD73DD /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +839,7 @@
 				1FF286C6278073E800CE8D01 /* LoginViewControllerDelegate.swift in Sources */,
 				6DC0BA5927A6489E00094007 /* Task8ProcessImagesOnThreadTester.swift in Sources */,
 				1FFC9FD6279448A60069C288 /* WordChecker.swift in Sources */,
+				6D425FF7285DA5E4002E9E54 /* RealmAuthorizedUserService.swift in Sources */,
 				6DB3EA1F27C657DD00130B8E /* AudioRecorderDelegate.swift in Sources */,
 				6D5E111C2851A0FA0065E181 /* Login.swift in Sources */,
 				6D5E111228518A670065E181 /* RealmAuthorizedUser.swift in Sources */,
