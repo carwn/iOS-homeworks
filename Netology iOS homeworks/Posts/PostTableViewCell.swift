@@ -24,6 +24,8 @@ class PostTableViewCell: UITableViewCell {
         }
     }
     
+    var doubleTapClosure: (() -> Void)?
+    
     // MARK: - Private Properties
     private let authorLabel: UILabel = {
         let label = UILabel()
@@ -81,6 +83,7 @@ class PostTableViewCell: UITableViewCell {
 
     override func prepareForReuse() {
         post = nil
+        doubleTapClosure = nil
         super.prepareForReuse()
     }
 
@@ -115,6 +118,9 @@ class PostTableViewCell: UITableViewCell {
                            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.defaultOffset),
                            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognized))
+        doubleTapGesture.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTapGesture)
     }
     
     private func updateFromPost() {
@@ -149,6 +155,11 @@ class PostTableViewCell: UITableViewCell {
                 self.postImageView.image = cgImage != nil ? UIImage(cgImage: cgImage!) : nil
             }
         }
+    }
+    
+    @objc
+    private func doubleTapGestureRecognized() {
+        doubleTapClosure?()
     }
 }
 

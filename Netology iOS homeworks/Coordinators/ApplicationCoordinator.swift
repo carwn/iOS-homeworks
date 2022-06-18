@@ -18,6 +18,7 @@ final class ApplicationCoordinator: NSObject, Coordinator {
     private let feedCoordinator: FeedCoordinator
     private let profileCoordinator: ProfileCoordinator
     private let multimediaCoordinator: MultimediaCoordinator
+    private let storedPostsCoordinator: StoredPostsCoordinator
     
     private let factory: LoginFactory
     private let loginInspector: LoginInspector
@@ -33,7 +34,11 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         feedCoordinator = FeedCoordinator(wordChecker: wordChecker, networkService: networkService)
         profileCoordinator = ProfileCoordinator(delegate: loginInspector)
         multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs, youtubeVideos: multimediaStore.youtubeVideos)
-        tabBarController.setViewControllers([feedCoordinator.rootViewController, profileCoordinator.rootViewController, multimediaCoordinator.rootViewController], animated: false)
+        storedPostsCoordinator = StoredPostsCoordinator()
+        tabBarController.setViewControllers([feedCoordinator.rootViewController,
+                                             profileCoordinator.rootViewController,
+                                             multimediaCoordinator.rootViewController,
+                                             storedPostsCoordinator.rootViewController], animated: false)
         super.init()
         tabBarController.delegate = self
         tabBarController.tabBar.backgroundColor = .systemBackground
@@ -65,6 +70,10 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         multimediaCoordinator.start()
     }
     
+    private func startStoredPostsCoordinatorFlow() {
+        storedPostsCoordinator.start()
+    }
+    
     private func startFlow(viewController: UIViewController) {
         switch viewController {
         case profileCoordinator.rootViewController:
@@ -73,6 +82,8 @@ final class ApplicationCoordinator: NSObject, Coordinator {
             startFeedFlow()
         case multimediaCoordinator.rootViewController:
             startMultimediaFlow()
+        case storedPostsCoordinator.rootViewController:
+            startStoredPostsCoordinatorFlow()
         default:
             break
         }
