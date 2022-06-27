@@ -15,7 +15,7 @@ class StoredPostsViewController: UITableViewController {
             fetchedResultsController?.delegate = self
         }
     }
-    var deleteButtonPressedClosure: (() -> Void)?
+    var deleteObjectClosure: ((StoredPost) -> Void)?
     
     private let postTableViewCellIdentifier = String(describing: PostTableViewCell.self)
     
@@ -23,7 +23,6 @@ class StoredPostsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postTableViewCellIdentifier)
         navigationItem.title = "Stored posts"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteButtonPressed))
         do {
             try fetchedResultsController?.performFetch()
         } catch {
@@ -32,9 +31,11 @@ class StoredPostsViewController: UITableViewController {
         updateDeleteButtonIsActiveStatus()
     }
     
-    func updateDeleteButtonIsActiveStatus() {
+    private func updateDeleteButtonIsActiveStatus() {
         navigationItem.rightBarButtonItem?.isEnabled = !(fetchedResultsController?.fetchedObjects?.isEmpty ?? true)
     }
+    
+    // MARK: - Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         fetchedResultsController?.sections?.count ?? 0
@@ -51,8 +52,15 @@ class StoredPostsViewController: UITableViewController {
         return cell
     }
     
-    @objc
-    func deleteButtonPressed() {
-        deleteButtonPressedClosure?()
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: "Удалить", handler: { [weak self] _, _, _ in
+            guard
+                let self = self,
+                let post = self.fetchedResultsController?.object(at: indexPath)
+            else {
+                return
+            }
+            self.deleteObjectClosure?(post)
+        })])
     }
 }

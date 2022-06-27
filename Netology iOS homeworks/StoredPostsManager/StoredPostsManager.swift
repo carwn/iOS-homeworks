@@ -64,20 +64,37 @@ class StoredPostsManager {
             do {
                 try backgroundContex.save()
             } catch {
-                completion(.failure(error))
+                completion(.failure(StoredPostsManagerError.other(error: error)))
             }
         }
     }
     
-    func removeAllPosts() throws {
-        try posts(context: backgroundContex).forEach { backgroundContex.delete($0) }
-        try backgroundContex.save()
+    func removePost(_ postForRemove: StoredPost, completion: @escaping (Result<Never, Error>) -> Void) {
+        backgroundContex.perform { [weak self] in
+            guard let self = self else {
+                return
+            }
+            guard let postInBackgroundContext = self.post(id: postForRemove.objectID, context: self.backgroundContex) else {
+                completion(.failure(StoredPostsManagerError.cantDelete))
+                return
+            }
+            self.backgroundContex.delete(postInBackgroundContext)
+            do {
+                try self.backgroundContex.save()
+            } catch {
+                completion(.failure(StoredPostsManagerError.other(error: error)))
+            }
+        }
     }
     
     // MARK: - Private methods
     
     private func posts(context: NSManagedObjectContext) throws -> [StoredPost] {
         try context.fetch(StoredPost.fetchRequest())
+    }
+    
+    private func post(id: NSManagedObjectID, context: NSManagedObjectContext) -> StoredPost? {
+        context.object(with: id) as? StoredPost
     }
 }
 
