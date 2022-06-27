@@ -32,11 +32,6 @@ class StoredPostsViewController: UITableViewController {
                                                               target: self,
                                                               action: #selector(setFilterButtonPressed))]
         performFetch(reloadTableView: false)
-        updateDeleteButtonIsActiveStatus()
-    }
-    
-    func updateDeleteButtonIsActiveStatus() {
-        navigationItem.rightBarButtonItem?.isEnabled = !(fetchedResultsController?.fetchedObjects?.isEmpty ?? true)
     }
     
     @objc
