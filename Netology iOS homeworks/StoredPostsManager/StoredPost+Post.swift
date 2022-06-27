@@ -17,7 +17,7 @@ extension StoredPost {
         imageName = post.image
         likesCount = Int64(post.likes)
         views = Int64(post.views)
-        saveDate = Date()
+        saveDate = Self.dateFormatter.string(from: Date())
     }
     
     var post: Post? {
@@ -34,4 +34,10 @@ extension StoredPost {
                     likes: Int(likesCount),
                     views: Int(views))
     }
+    
+    private static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        return dateFormatter
+    }()
 }

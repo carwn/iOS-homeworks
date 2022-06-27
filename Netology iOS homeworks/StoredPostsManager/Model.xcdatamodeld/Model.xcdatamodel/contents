@@ -3,10 +3,10 @@
     <entity name="StoredPost" representedClassName="StoredPost" syncable="YES" codeGenerationType="class">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
-        <attribute name="likesCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="saveDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="likesCount" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="saveDate" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <attribute name="views" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="views" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="StoredPost" positionX="-63" positionY="-18" width="128" height="119"/>
