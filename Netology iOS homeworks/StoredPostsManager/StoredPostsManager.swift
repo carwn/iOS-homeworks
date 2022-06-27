@@ -37,6 +37,20 @@ class StoredPostsManager {
     private lazy var viewContext = container.viewContext
     private lazy var backgroundContex = container.newBackgroundContext()
     
+    // MARK: - View context
+    
+    func posts() throws -> [Post] {
+        try posts(context: viewContext).compactMap { $0.post }
+    }
+    
+    func postsFetchedResultsController() -> NSFetchedResultsController<StoredPost> {
+        let fetchRequest = StoredPost.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.saveDate), ascending: true)]
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+    }
+    
+    // MARK: - Background context
+    
     func addPost(_ post: Post, completion: @escaping (Result<Never, Error>) -> Void) {
         addPosts([post], completion: completion)
     }
@@ -55,23 +69,15 @@ class StoredPostsManager {
         }
     }
     
-    func posts() throws -> [Post] {
-        try posts().compactMap { $0.post }
-    }
-    
-    func postsFetchedResultsController() -> NSFetchedResultsController<StoredPost> {
-        let fetchRequest = StoredPost.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.saveDate), ascending: true)]
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
-    }
-    
     func removeAllPosts() throws {
-        try posts().forEach { viewContext.delete($0) }
-        try viewContext.save()
+        try posts(context: backgroundContex).forEach { backgroundContex.delete($0) }
+        try backgroundContex.save()
     }
     
-    private func posts() throws -> [StoredPost] {
-        try viewContext.fetch(StoredPost.fetchRequest())
+    // MARK: - Private methods
+    
+    private func posts(context: NSManagedObjectContext) throws -> [StoredPost] {
+        try context.fetch(StoredPost.fetchRequest())
     }
 }
 
