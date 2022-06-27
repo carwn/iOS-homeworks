@@ -23,16 +23,64 @@ class StoredPostsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postTableViewCellIdentifier)
         navigationItem.title = "Stored posts"
-        do {
-            try fetchedResultsController?.performFetch()
-        } catch {
-            fatalError("Failed to fetch entities: \(error)")
-        }
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "clear"),
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(clearFilterButtonPressed)),
+                                              UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"),
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(setFilterButtonPressed))]
+        performFetch(reloadTableView: false)
         updateDeleteButtonIsActiveStatus()
     }
     
-    private func updateDeleteButtonIsActiveStatus() {
+    func updateDeleteButtonIsActiveStatus() {
         navigationItem.rightBarButtonItem?.isEnabled = !(fetchedResultsController?.fetchedObjects?.isEmpty ?? true)
+    }
+    
+    @objc
+    private func setFilterButtonPressed() {
+        let alert = UIAlertController(title: "Фильтр по автору", message: nil, preferredStyle: .alert)
+        alert.addTextField()
+        alert.addAction(UIAlertAction(title: "Применить", style: .default, handler: { [weak self] _ in
+            let authorFilter = alert.textFields![0].text
+            self?.setAuthorFilter(authorFilter)
+        }))
+        alert.addAction(UIAlertAction(title: "Отмента", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    @objc
+    private func clearFilterButtonPressed() {
+        setAuthorFilter(nil)
+    }
+    
+    private func setAuthorFilter(_ newFilter: String?) {
+        // понимаю, что формированию предиката не место во ViewController, но уже нет сил делать по уму :(
+        let predicate: NSPredicate? = {
+            if let newFilter = newFilter {
+                return NSPredicate(format: "%K == %@", #keyPath(StoredPost.author), newFilter)
+            } else {
+                return nil
+            }
+        }()
+        fetchedResultsController?.fetchRequest.predicate = predicate
+        performFetch(reloadTableView: true)
+        if #available(iOS 15.0, *) {
+            navigationItem.rightBarButtonItems![1].isSelected = newFilter != nil
+        }
+    }
+    
+    private func performFetch(reloadTableView: Bool) {
+        do {
+            try fetchedResultsController?.performFetch()
+            if reloadTableView {
+                tableView.reloadData()
+            }
+        } catch {
+            showError(error)
+        }
     }
     
     // MARK: - Table View
