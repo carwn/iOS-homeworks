@@ -42,7 +42,7 @@ class StoredPostsViewController: UITableViewController {
             let authorFilter = alert.textFields![0].text
             self?.setAuthorFilter(authorFilter)
         }))
-        alert.addAction(UIAlertAction(title: "Отмента", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
         present(alert, animated: true)
     }
     
