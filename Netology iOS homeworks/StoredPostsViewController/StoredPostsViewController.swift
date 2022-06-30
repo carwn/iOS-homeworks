@@ -10,7 +10,7 @@ import CoreData
 
 class StoredPostsViewController: UITableViewController {
     
-    var fetchedResultsController: NSFetchedResultsController<StoredPost>? {
+    var fetchedResultsController: PostFetchedResultsController? {
         didSet {
             fetchedResultsController?.delegate = self
         }
@@ -52,15 +52,7 @@ class StoredPostsViewController: UITableViewController {
     }
     
     private func setAuthorFilter(_ newFilter: String?) {
-        // понимаю, что формированию предиката не место во ViewController, но уже нет сил делать по уму :(
-        let predicate: NSPredicate? = {
-            if let newFilter = newFilter {
-                return NSPredicate(format: "%K == %@", #keyPath(StoredPost.author), newFilter)
-            } else {
-                return nil
-            }
-        }()
-        fetchedResultsController?.fetchRequest.predicate = predicate
+        fetchedResultsController?.setAuthorFilter(newFilter)
         performFetch(reloadTableView: true)
         if #available(iOS 15.0, *) {
             navigationItem.rightBarButtonItems![1].isSelected = newFilter != nil
