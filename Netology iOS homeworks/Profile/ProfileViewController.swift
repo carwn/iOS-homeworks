@@ -179,10 +179,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             cell.selectionStyle = .none
             cell.doubleTapClosure = { [weak self] in
                 do {
-                    try StoredPostsManager.shared.addPost(post)
+                    StoredPostsManager.shared.addPost(post) { result in
+                        switch result {
+                        case .failure(let error):
+                            self?.present(UIAlertController.errorAlert(message: error.localizedDescription), animated: true)
+                        }
+                    }
                     self?.present(UIAlertController.infoAlert(title: "Успешно", message: "Пост сохранен"), animated: true)
-                } catch {
-                    self?.present(UIAlertController.errorAlert(message: error.localizedDescription), animated: true)
                 }
             }
             return cell

@@ -18,15 +18,18 @@ class StoredPostsCoordinator {
                                                             image: UIImage(systemName: "star"),
                                                             selectedImage: UIImage(systemName: "star.fill"))
         storedPostsViewController.fetchedResultsController = StoredPostsManager.shared.postsFetchedResultsController()
-        storedPostsViewController.deleteButtonPressedClosure = {
-            do {
-                try StoredPostsManager.shared.removeAllPosts()
-            } catch {
-                print(error)
-            }
-        }
         navigationController = UINavigationController(rootViewController: storedPostsViewController)
         self.storedPostsViewController = storedPostsViewController
+        storedPostsViewController.deleteObjectClosure = { post in
+            do {
+                StoredPostsManager.shared.removePost(post, completion: { [weak self] result in
+                    switch result {
+                    case .failure(let error):
+                        self?.storedPostsViewController.showError(error)
+                    }
+                })
+            }
+        }
     }
 }
 

@@ -13,7 +13,16 @@ class StoredPostsManager {
     
     static let shared = StoredPostsManager()
     
-    private init() {}
+    private init() {
+        NotificationCenter.default.addObserver(forName: .NSManagedObjectContextDidSave, object: backgroundContex, queue: nil) { [weak self] notification in
+            guard let self = self else {
+                return
+            }
+            self.viewContext.perform {
+                self.viewContext.mergeChanges(fromContextDidSave: notification)
+            }
+        }
+    }
     
     private let container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
@@ -25,34 +34,67 @@ class StoredPostsManager {
         return container
     }()
     
-    private lazy var context = container.viewContext
+    private lazy var viewContext = container.viewContext
+    private lazy var backgroundContex = container.newBackgroundContext()
     
-    func addPost(_ post: Post) throws {
-        try addPosts([post])
-    }
-    
-    func addPosts(_ posts: [Post]) throws {
-        posts.forEach { let _ = StoredPost(post: $0, context: context) }
-        try context.save()
-    }
+    // MARK: - View context
     
     func posts() throws -> [Post] {
-        try posts().compactMap { $0.post }
+        try posts(context: viewContext).compactMap { $0.post }
     }
     
     func postsFetchedResultsController() -> NSFetchedResultsController<StoredPost> {
         let fetchRequest = StoredPost.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.saveDate), ascending: true)]
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
     }
     
-    func removeAllPosts() throws {
-        try posts().forEach { context.delete($0) }
-        try context.save()
+    // MARK: - Background context
+    
+    func addPost(_ post: Post, completion: @escaping (Result<Never, Error>) -> Void) {
+        addPosts([post], completion: completion)
     }
     
-    private func posts() throws -> [StoredPost] {
+    func addPosts(_ posts: [Post], completion: @escaping (Result<Never, Error>) -> Void) {
+        backgroundContex.perform { [weak backgroundContex] in
+            guard let backgroundContex = backgroundContex else {
+                return
+            }
+            posts.forEach { let _ = StoredPost(post: $0, context: backgroundContex) }
+            do {
+                try backgroundContex.save()
+            } catch {
+                completion(.failure(StoredPostsManagerError.other(error: error)))
+            }
+        }
+    }
+    
+    func removePost(_ postForRemove: StoredPost, completion: @escaping (Result<Never, Error>) -> Void) {
+        backgroundContex.perform { [weak self] in
+            guard let self = self else {
+                return
+            }
+            guard let postInBackgroundContext = self.post(id: postForRemove.objectID, context: self.backgroundContex) else {
+                completion(.failure(StoredPostsManagerError.cantDelete))
+                return
+            }
+            self.backgroundContex.delete(postInBackgroundContext)
+            do {
+                try self.backgroundContex.save()
+            } catch {
+                completion(.failure(StoredPostsManagerError.other(error: error)))
+            }
+        }
+    }
+    
+    // MARK: - Private methods
+    
+    private func posts(context: NSManagedObjectContext) throws -> [StoredPost] {
         try context.fetch(StoredPost.fetchRequest())
+    }
+    
+    private func post(id: NSManagedObjectID, context: NSManagedObjectContext) -> StoredPost? {
+        context.object(with: id) as? StoredPost
     }
 }
 

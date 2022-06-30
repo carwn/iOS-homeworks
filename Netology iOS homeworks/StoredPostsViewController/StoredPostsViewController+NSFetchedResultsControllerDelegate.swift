@@ -9,7 +9,6 @@ import CoreData
 
 extension StoredPostsViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateDeleteButtonIsActiveStatus()
         tableView.reloadData()
     }
 }
