@@ -106,4 +106,8 @@ class StoredPostsViewController: UITableViewController {
             self.deleteObjectClosure?(post)
         })])
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        fetchedResultsController?.sections?[section].name
+    }
 }
