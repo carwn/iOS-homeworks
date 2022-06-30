@@ -10,7 +10,7 @@ import CoreData
 
 class StoredPostsViewController: UITableViewController {
     
-    var fetchedResultsController: NSFetchedResultsController<StoredPost>? {
+    var fetchedResultsController: PostFetchedResultsController? {
         didSet {
             fetchedResultsController?.delegate = self
         }
@@ -18,6 +18,7 @@ class StoredPostsViewController: UITableViewController {
     var deleteObjectClosure: ((StoredPost) -> Void)?
     
     private let postTableViewCellIdentifier = String(describing: PostTableViewCell.self)
+    private var currentFilter: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,9 @@ class StoredPostsViewController: UITableViewController {
     @objc
     private func setFilterButtonPressed() {
         let alert = UIAlertController(title: "Фильтр по автору", message: nil, preferredStyle: .alert)
-        alert.addTextField()
+        alert.addTextField { [weak self] textField in
+            textField.text = self?.currentFilter
+        }
         alert.addAction(UIAlertAction(title: "Применить", style: .default, handler: { [weak self] _ in
             let authorFilter = alert.textFields![0].text
             self?.setAuthorFilter(authorFilter)
@@ -52,19 +55,12 @@ class StoredPostsViewController: UITableViewController {
     }
     
     private func setAuthorFilter(_ newFilter: String?) {
-        // понимаю, что формированию предиката не место во ViewController, но уже нет сил делать по уму :(
-        let predicate: NSPredicate? = {
-            if let newFilter = newFilter {
-                return NSPredicate(format: "%K == %@", #keyPath(StoredPost.author), newFilter)
-            } else {
-                return nil
-            }
-        }()
-        fetchedResultsController?.fetchRequest.predicate = predicate
+        fetchedResultsController?.setAuthorFilter(newFilter)
         performFetch(reloadTableView: true)
         if #available(iOS 15.0, *) {
             navigationItem.rightBarButtonItems![1].isSelected = newFilter != nil
         }
+        currentFilter = newFilter
     }
     
     private func performFetch(reloadTableView: Bool) {
@@ -105,5 +101,9 @@ class StoredPostsViewController: UITableViewController {
             }
             self.deleteObjectClosure?(post)
         })])
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        fetchedResultsController?.sections?[section].name
     }
 }
