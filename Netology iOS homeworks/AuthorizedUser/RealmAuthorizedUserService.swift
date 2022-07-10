@@ -10,7 +10,16 @@ import RealmSwift
 
 class RealmAuthorizedUserService {
     private var realm: Realm? {
-        try? Realm()
+        guard let encryptionKey = SafeStore.shared.localDataBaseEncryptionKey else {
+            return nil
+        }
+        let configuration = Realm.Configuration(encryptionKey: encryptionKey)
+        do {
+            return try Realm(configuration: configuration)
+        } catch {
+            print("Realm init error: \(error)")
+            return nil
+        }
     }
     
     private var authorizedUser: RealmAuthorizedUser? {
