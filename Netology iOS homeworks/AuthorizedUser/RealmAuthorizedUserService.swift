@@ -17,6 +17,10 @@ class RealmAuthorizedUserService {
         do {
             return try Realm(configuration: configuration)
         } catch {
+            if error.localizedDescription.contains("Realm file decryption failed") {
+                removeRealmDataBaseFile()
+                return self.realm
+            }
             print("Realm init error: \(error)")
             return nil
         }
@@ -24,6 +28,18 @@ class RealmAuthorizedUserService {
     
     private var authorizedUser: RealmAuthorizedUser? {
         realm?.objects(RealmAuthorizedUser.self).first
+    }
+    
+    private func removeRealmDataBaseFile() {
+        guard let url = Realm.Configuration.defaultConfiguration.fileURL else {
+            return
+        }
+        do {
+            try FileManager.default.removeItem(at: url)
+            print("Realm database file removed")
+        } catch {
+            print(error)
+        }
     }
 }
 
