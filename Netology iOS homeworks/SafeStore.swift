@@ -13,17 +13,17 @@ class SafeStore {
     private init() {}
     
     private let keychain = Keychain(service: "com.example.netology.shelihov.netologyHomeworks")
-    private let localDataBaseEncryptionKeyKeychainKey = "localDataBaseEncryptionKey"
+    private let localDatabaseEncryptionKeyKeychainKey = "localDatabaseEncryptionKey"
     
-    var localDataBaseEncryptionKey: Data? {
+    var localDatabaseEncryptionKey: Data? {
         do {
-            if let key = try localDataBaseEncryptionKeyFromKeycahin() {
-                print("SafeStore. Return stored localDataBaseEncryptionKey")
+            if let key = try localDatabaseEncryptionKeyFromKeycahin() {
+                print("SafeStore. Return stored localDatabaseEncryptionKey")
                 return key
             } else {
-                let newKey = generateNewLocalDataBaseEncryptionKey()
-                try saveLocalDataBaseEncryptionKeyToKeycahin(newKey)
-                print("SafeStore. Return new localDataBaseEncryptionKey")
+                let newKey = generateNewLocalDatabaseEncryptionKey()
+                try saveLocalDatabaseEncryptionKeyToKeycahin(newKey)
+                print("SafeStore. Return new localDatabaseEncryptionKey")
                 return newKey
             }
         } catch {
@@ -32,27 +32,27 @@ class SafeStore {
         }
     }
     
-    func deleteLocalDataBaseEncryptionKey() {
+    func deleteLocalDatabaseEncryptionKey() {
         do {
-            try saveLocalDataBaseEncryptionKeyToKeycahin(nil)
+            try saveLocalDatabaseEncryptionKeyToKeycahin(nil)
         } catch {
             print(error)
         }
     }
     
-    private func localDataBaseEncryptionKeyFromKeycahin() throws -> Data? {
-        try keychain.getData(localDataBaseEncryptionKeyKeychainKey)
+    private func localDatabaseEncryptionKeyFromKeycahin() throws -> Data? {
+        try keychain.getData(localDatabaseEncryptionKeyKeychainKey)
     }
     
-    private func saveLocalDataBaseEncryptionKeyToKeycahin(_ key: Data?) throws {
+    private func saveLocalDatabaseEncryptionKeyToKeycahin(_ key: Data?) throws {
         if let key = key {
-            try keychain.set(key, key: localDataBaseEncryptionKeyKeychainKey)
+            try keychain.set(key, key: localDatabaseEncryptionKeyKeychainKey)
         } else {
-            try keychain.remove(localDataBaseEncryptionKeyKeychainKey)
+            try keychain.remove(localDatabaseEncryptionKeyKeychainKey)
         }
     }
     
-    private func generateNewLocalDataBaseEncryptionKey() -> Data {
+    private func generateNewLocalDatabaseEncryptionKey() -> Data {
         var key = Data(count: 64)
         _ = key.withUnsafeMutableBytes { (pointer: UnsafeMutableRawBufferPointer) in
             SecRandomCopyBytes(kSecRandomDefault, 64, pointer.baseAddress!)

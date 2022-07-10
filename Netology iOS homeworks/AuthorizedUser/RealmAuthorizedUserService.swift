@@ -10,7 +10,7 @@ import RealmSwift
 
 class RealmAuthorizedUserService {
     private var realm: Realm? {
-        guard let encryptionKey = SafeStore.shared.localDataBaseEncryptionKey else {
+        guard let encryptionKey = SafeStore.shared.localDatabaseEncryptionKey else {
             return nil
         }
         let configuration = Realm.Configuration(encryptionKey: encryptionKey)
@@ -18,7 +18,7 @@ class RealmAuthorizedUserService {
             return try Realm(configuration: configuration)
         } catch {
             if error.localizedDescription.contains("Realm file decryption failed") {
-                removeRealmDataBaseFile()
+                removeRealmDatabaseFile()
                 return self.realm
             }
             print("Realm init error: \(error)")
@@ -30,7 +30,7 @@ class RealmAuthorizedUserService {
         realm?.objects(RealmAuthorizedUser.self).first
     }
     
-    private func removeRealmDataBaseFile() {
+    private func removeRealmDatabaseFile() {
         guard let url = Realm.Configuration.defaultConfiguration.fileURL else {
             return
         }
