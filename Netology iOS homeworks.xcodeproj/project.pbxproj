@@ -111,6 +111,8 @@
 		6DF2A9DA28BB721900808111 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9D828BB721900808111 /* MapViewController.swift */; };
 		6DF2A9DB28BB721900808111 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF2A9D928BB721900808111 /* MapViewController.xib */; };
 		6DF2A9DD28BB72BB00808111 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9DC28BB72BB00808111 /* MapCoordinator.swift */; };
+		6DF2A9DF28BBACDC00808111 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9DE28BBACDC00808111 /* MapService.swift */; };
+		6DF2A9E128BBAEAF00808111 /* MapServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9E028BBAEAF00808111 /* MapServiceError.swift */; };
 		6DF5CABC26D8AB3C000B030F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */; };
 		6DF5CAC526D8DC6E000B030F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CAC326D8DC6E000B030F /* PostViewController.swift */; };
 		6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */; };
@@ -249,6 +251,8 @@
 		6DF2A9D828BB721900808111 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		6DF2A9D928BB721900808111 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		6DF2A9DC28BB72BB00808111 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		6DF2A9DE28BBACDC00808111 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		6DF2A9E028BBAEAF00808111 /* MapServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapServiceError.swift; sourceTree = "<group>"; };
 		6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		6DF5CAC326D8DC6E000B030F /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstions.swift"; sourceTree = "<group>"; };
@@ -579,6 +583,8 @@
 		6DF2A9D728BB71F600808111 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				6DF2A9DE28BBACDC00808111 /* MapService.swift */,
+				6DF2A9E028BBAEAF00808111 /* MapServiceError.swift */,
 				6DF2A9D828BB721900808111 /* MapViewController.swift */,
 				6DF2A9D928BB721900808111 /* MapViewController.xib */,
 			);
@@ -843,6 +849,7 @@
 				6DB3EA0327C5ECB400130B8E /* AudioPlayerDelegate.swift in Sources */,
 				6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */,
 				6DB3EA1B27C63A4C00130B8E /* YoutubeVideoCell.swift in Sources */,
+				6DF2A9E128BBAEAF00808111 /* MapServiceError.swift in Sources */,
 				6DF2A9DA28BB721900808111 /* MapViewController.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
 				6D5F88A9286D6BC800B4109A /* PostFetchedResultsController.swift in Sources */,
@@ -865,6 +872,7 @@
 				6DB3EA0727C6018F00130B8E /* MultimediaStore.swift in Sources */,
 				6DED7A0726F4607500A5CB5B /* UIStackView+removeAllArrangedSubviews.swift in Sources */,
 				6D5E111A2851965D0065E181 /* AuthorizedUserInfo.swift in Sources */,
+				6DF2A9DF28BBACDC00808111 /* MapService.swift in Sources */,
 				6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */,
 				1F9F324D26D251DA00CB1285 /* SceneDelegate.swift in Sources */,
 				1F7B418A26F59F5D004BEB2F /* PhotosCollectionViewCell.swift in Sources */,

@@ -26,6 +26,7 @@ final class ApplicationCoordinator: NSObject, Coordinator {
     private let wordChecker = WordChecker()
     private let multimediaStore = MultimediaStore()
     private let networkService = NetworkService()
+    private let mapService = MapService()
     
     init(scene: UIWindowScene, factory: LoginFactory) {
         self.scene = scene
@@ -36,7 +37,7 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         profileCoordinator = ProfileCoordinator(delegate: loginInspector)
         multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs, youtubeVideos: multimediaStore.youtubeVideos)
         storedPostsCoordinator = StoredPostsCoordinator()
-        mapCoordinator = MapCoordinator()
+        mapCoordinator = MapCoordinator(mapService: mapService)
         tabBarController.setViewControllers([feedCoordinator.rootViewController,
                                              profileCoordinator.rootViewController,
                                              multimediaCoordinator.rootViewController,
