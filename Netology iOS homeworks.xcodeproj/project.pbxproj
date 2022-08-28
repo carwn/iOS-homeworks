@@ -662,7 +662,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					1F9F324626D251DA00CB1285 = {
 						CreatedOnToolsVersion = 12.5;
@@ -825,7 +825,6 @@
 				6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */,
 				6DB3EA1B27C63A4C00130B8E /* YoutubeVideoCell.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
-				6D5E111628518B520065E181 /* AuthorizedUserService.swift in Sources */,
 				6D5F88A9286D6BC800B4109A /* PostFetchedResultsController.swift in Sources */,
 				6DED7A0926F473D600A5CB5B /* PhotosViewController.swift in Sources */,
 				1FFC9FD0279424910069C288 /* SystemButton.swift in Sources */,
