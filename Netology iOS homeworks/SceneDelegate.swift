@@ -11,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
 
-    private let factory = DefaultLoginFactory()
+    private let factory = DefaultLoginFactory(authorizedUserService: RealmAuthorizedUserService())
     private var appCoordinator: ApplicationCoordinator!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

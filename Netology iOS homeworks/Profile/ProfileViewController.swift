@@ -174,8 +174,20 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         case .posts:
             let cell = tableView.dequeueReusableCell(withIdentifier: postTableViewCellIdentifier, for: indexPath) as! PostTableViewCell
-            cell.post = posts[indexPath.row]
+            let post = posts[indexPath.row]
+            cell.post = post
             cell.selectionStyle = .none
+            cell.doubleTapClosure = { [weak self] in
+                do {
+                    StoredPostsManager.shared.addPost(post) { result in
+                        switch result {
+                        case .failure(let error):
+                            self?.present(UIAlertController.errorAlert(message: error.localizedDescription), animated: true)
+                        }
+                    }
+                    self?.present(UIAlertController.infoAlert(title: "Успешно", message: "Пост сохранен"), animated: true)
+                }
+            }
             return cell
         default:
             return UITableViewCell()

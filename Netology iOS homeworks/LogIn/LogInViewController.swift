@@ -66,7 +66,7 @@ class LogInViewController: UIViewController {
         textField.placeholder = "Email or phone"
         textField.delegate = self
 #if DEBUG
-        textField.text = "Hipster Cat"
+        textField.text = "test@test.com"
 #endif
         return textField
     }()
@@ -78,7 +78,7 @@ class LogInViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.delegate = self
 #if DEBUG
-        textField.text = "StrongPassword"
+        textField.text = "password"
 #endif
         return textField
     }()
@@ -90,8 +90,8 @@ class LogInViewController: UIViewController {
         textField.autocapitalizationType = .none
     }
     
-    private lazy var logInButton: SystemButton = {
-        let button = SystemButton(title: "Log In", titleColor: .white) { [weak self] in
+    private lazy var logInButton: LoadingButton = {
+        let button = LoadingButton(title: "Log In", titleColor: .white) { [weak self] in
             self?.logInButtonPressed()
         }
         let bluePixelImage = UIImage(named: "blue_pixel")
@@ -110,6 +110,13 @@ class LogInViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Подобрать пароль", for: .normal)
         button.addTarget(self, action: #selector(guessPasswordButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var createUserButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Создать пользователя", for: .normal)
+        button.addTarget(self, action: #selector(createUserButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -138,6 +145,7 @@ class LogInViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         setupViews()
         setupConstraints()
+        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,6 +160,7 @@ class LogInViewController: UIViewController {
         [UIControl.keyboardWillShowNotification, UIControl.keyboardDidShowNotification, UIControl.keyboardWillHideNotification].forEach { name in
             NotificationCenter.default.removeObserver(self, name: name, object: nil)
         }
+        logInButton.hideLoading()
     }
     
     // MARK: - Setup view and constraints
@@ -160,7 +169,7 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(scrollViewContentView)
-        [logoImageView, textFieldsView, logInButton, guessPasswordStackView].forEach { view in
+        [logoImageView, textFieldsView, logInButton, guessPasswordStackView, createUserButton].forEach { view in
             scrollViewContentView.addSubview(view)
         }
         [loginTextField, passwordTextField, textFieldsViewSeparator].forEach { view in
@@ -169,7 +178,7 @@ class LogInViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView, logInButton, loginTextField, passwordTextField, textFieldsViewSeparator, guessPasswordStackView].forEach { view in
+        [mainScrollView, scrollViewContentView, logoImageView, textFieldsView,logInButton, loginTextField, passwordTextField, textFieldsViewSeparator, guessPasswordStackView, createUserButton].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let constraints = [mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -216,7 +225,10 @@ class LogInViewController: UIViewController {
                            
                            guessPasswordStackView.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: Constants.defaultOffset),
                            guessPasswordStackView.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
-                           guessPasswordStackView.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
+        
+                           createUserButton.topAnchor.constraint(equalTo: guessPasswordStackView.bottomAnchor, constant: Constants.defaultOffset),
+                           createUserButton.centerXAnchor.constraint(equalTo: scrollViewContentView.centerXAnchor),
+                           createUserButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollViewContentView.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.defaultOffset)]
         NSLayoutConstraint.activate(constraints)
     }
     
@@ -242,6 +254,7 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     
     @objc func logInButtonPressed() {
+        logInButton.showLoading()
         presenter.logInButtonPressed(login: loginTextField.text, password: passwordTextField.text)
     }
     
@@ -259,7 +272,7 @@ class LogInViewController: UIViewController {
             let bf = BruteForcier() { $0 == randomPassword }
             // Задание 1 - вызов throw - метода и обработка ошибок
             do {
-                try bf.bruteForce(complition: { password in
+                try bf.bruteForce(completion: { password in
                     DispatchQueue.main.async { [weak self] in
                         guard let self = self else { return }
                         self.passwordTextField.text = password
@@ -275,6 +288,22 @@ class LogInViewController: UIViewController {
                 self?.guessPasswordActivityIndicator.stopAnimating()
             }
         }
+    }
+    
+    @objc func createUserButtonPressed() {
+        let alert = UIAlertController(title: "Создать пользователя", message: nil, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "email"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "password"
+        }
+        let createButton = UIAlertAction(title: "Создать", style: .default) { [weak self] action in
+            self?.presenter.createUserButtonPressed(withEmail: alert.textFields?[0].text, password: alert.textFields?[1].text)
+        }
+        alert.addAction(createButton)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        present(alert, animated: true)
     }
     
     private var randomPassword: String? {
@@ -311,5 +340,12 @@ extension LogInViewController: UITextFieldDelegate {
 extension LogInViewController: LoginViewInput {
     func showLogInError(title: String, message: String?) {
         present(UIAlertController.infoAlert(title: title, message: message), animated: true)
+        logInButton.hideLoading()
+    }
+    
+    func autoAuthorizationWith(login: Login, password: Password) {
+        loginTextField.text = login
+        passwordTextField.text = password
+        logInButtonPressed()
     }
 }

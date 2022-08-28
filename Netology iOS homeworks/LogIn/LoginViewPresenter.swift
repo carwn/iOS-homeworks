@@ -20,9 +20,20 @@ class LoginViewPresenter {
     init(delegate: LoginViewControllerDelegate) {
         self.delegate = delegate
     }
+    
+    // MARK: - Private Methods
+    private func showProfile(login: Login) {
+        showProfileViewClosure?(ShowProfileViewParams(userName: login, posts: Post.postsExample))
+    }
 }
 
 extension LoginViewPresenter: LoginViewOutput {
+    func viewDidLoad() {
+        if let authorizedUser = delegate.authorizedUser {
+            viewController?.autoAuthorizationWith(login: authorizedUser.login, password: authorizedUser.password)
+        }
+    }
+    
     func logInButtonPressed(login: String?, password: String?) {
         guard let userName = login, !userName.isEmpty else {
             viewController?.showLogInError(title: "Не введено имя пользователя", message: nil)
@@ -34,10 +45,29 @@ extension LoginViewPresenter: LoginViewOutput {
         }
         delegate.check(login: userName, password: password) { [weak self] result in
             switch result {
-            case .success(let posts):
-                self?.showProfileViewClosure?(ShowProfileViewParams(userName: userName, posts: posts))
+            case .success(let userName):
+                self?.showProfile(login: userName)
             case .failure(let error):
-                self?.viewController?.showLogInError(title: error.localizedDescription, message: "Ожидаемое имя пользователя Hipster Cat. Пароль: StrongPassword")
+                self?.viewController?.showLogInError(title: "Ошибка", message: error.localizedDescription)
+            }
+        }
+    }
+    
+    func createUserButtonPressed(withEmail email: String?, password: String?) {
+        guard let email = email, !email.isEmpty else {
+            viewController?.showLogInError(title: "Не введен email", message: nil)
+            return
+        }
+        guard let password = password, !password.isEmpty else {
+            viewController?.showLogInError(title: "Не введен пароль", message: nil)
+            return
+        }
+        delegate.createUser(withEmail: email, password: password) { [weak self] result in
+            switch result {
+            case .success(let user):
+                self?.viewController?.showLogInError(title: "Пользователь успешно создан", message: user.displayName)
+            case .failure(let error):
+                self?.viewController?.showLogInError(title: "Ошибка", message: error.localizedDescription)
             }
         }
     }

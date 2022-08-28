@@ -38,7 +38,7 @@ class ProfileCoordinator: TabBarCoordinator {
     }
     
     func start() {
-        print("ProfileCoordinator start")
+        
     }
     
     private func pushProfileViewController(userName: String, posts: [Post]) {
