@@ -43,10 +43,14 @@ class StoredPostsManager {
         try posts(context: viewContext).compactMap { $0.post }
     }
     
-    func postsFetchedResultsController() -> NSFetchedResultsController<StoredPost> {
+    func postsFetchedResultsController() -> PostFetchedResultsController {
         let fetchRequest = StoredPost.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.saveDate), ascending: true)]
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(StoredPost.author), ascending: true),
+                                        NSSortDescriptor(key: #keyPath(StoredPost.saveDate), ascending: true)]
+        return PostFetchedResultsController(fetchRequest: fetchRequest,
+                                            managedObjectContext: viewContext,
+                                            sectionNameKeyPath: #keyPath(StoredPost.author),
+                                            cacheName: nil)
     }
     
     // MARK: - Background context
