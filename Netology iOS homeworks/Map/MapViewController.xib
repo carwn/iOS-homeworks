@@ -23,10 +23,20 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jyB-ge-Ce8">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </mapView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcW-IB-Vtw">
+                    <rect key="frame" x="124.5" y="811" width="165" height="31"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Проложить маршрут"/>
+                    <connections>
+                        <action selector="routeButtonPressed" destination="-1" eventType="touchUpInside" id="WgX-yu-dj6"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="jcW-IB-Vtw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IW6-G5-LYC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jcW-IB-Vtw" secondAttribute="bottom" constant="20" id="LkQ-X6-e2H"/>
                 <constraint firstAttribute="bottom" secondItem="jyB-ge-Ce8" secondAttribute="bottom" id="fTq-9D-ylQ"/>
                 <constraint firstItem="jyB-ge-Ce8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lrF-dx-Mev"/>
                 <constraint firstAttribute="trailing" secondItem="jyB-ge-Ce8" secondAttribute="trailing" id="oc8-3m-fQG"/>
