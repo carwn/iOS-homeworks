@@ -113,6 +113,7 @@
 		6DF2A9DD28BB72BB00808111 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9DC28BB72BB00808111 /* MapCoordinator.swift */; };
 		6DF2A9DF28BBACDC00808111 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9DE28BBACDC00808111 /* MapService.swift */; };
 		6DF2A9E128BBAEAF00808111 /* MapServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9E028BBAEAF00808111 /* MapServiceError.swift */; };
+		6DF2A9E328BBB52700808111 /* MapService+exampleLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2A9E228BBB52700808111 /* MapService+exampleLocations.swift */; };
 		6DF5CABC26D8AB3C000B030F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */; };
 		6DF5CAC526D8DC6E000B030F /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CAC326D8DC6E000B030F /* PostViewController.swift */; };
 		6DF5CACB26DA754F000B030F /* UIView+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */; };
@@ -253,6 +254,7 @@
 		6DF2A9DC28BB72BB00808111 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		6DF2A9DE28BBACDC00808111 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
 		6DF2A9E028BBAEAF00808111 /* MapServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapServiceError.swift; sourceTree = "<group>"; };
+		6DF2A9E228BBB52700808111 /* MapService+exampleLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapService+exampleLocations.swift"; sourceTree = "<group>"; };
 		6DF5CABB26D8AB3C000B030F /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		6DF5CAC326D8DC6E000B030F /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		6DF5CACA26DA754F000B030F /* UIView+extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extenstions.swift"; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 			children = (
 				6DF2A9DE28BBACDC00808111 /* MapService.swift */,
 				6DF2A9E028BBAEAF00808111 /* MapServiceError.swift */,
+				6DF2A9E228BBB52700808111 /* MapService+exampleLocations.swift */,
 				6DF2A9D828BB721900808111 /* MapViewController.swift */,
 				6DF2A9D928BB721900808111 /* MapViewController.xib */,
 			);
@@ -829,6 +832,7 @@
 				6DEF31FF26EC4F6E000D466F /* LogInViewController.swift in Sources */,
 				1F9F326526D2612400CB1285 /* ProfileViewController.swift in Sources */,
 				6D5E111628518B520065E181 /* AuthorizedUserService.swift in Sources */,
+				6DF2A9E328BBB52700808111 /* MapService+exampleLocations.swift in Sources */,
 				6DF2A9DD28BB72BB00808111 /* MapCoordinator.swift in Sources */,
 				6D5E11262859C3300065E181 /* StoredPostsManager.swift in Sources */,
 				6D01CB0C27A1643700CE9481 /* Coordinator.swift in Sources */,

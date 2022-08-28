@@ -13,6 +13,13 @@ class MapViewController: UIViewController {
     var mapService: MapService?
     @IBOutlet weak var mapView: MKMapView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let randomLocation = MapService.ExampleLocations.allCases.randomElement() {
+            addPin(location: randomLocation)
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let mapService = mapService {
@@ -27,5 +34,12 @@ class MapViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func addPin(location: MapService.ExampleLocations) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        annotation.title = location.title
+        mapView.addAnnotation(annotation)
     }
 }

@@ -11,6 +11,7 @@ import CoreLocation
 typealias GetLocationCompletion = (Result<CLLocation, MapServiceError>) -> Void
 
 class MapService: NSObject {
+    
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
         locationManager.delegate = self
