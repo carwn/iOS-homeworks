@@ -53,7 +53,7 @@ class MapViewController: UIViewController {
                     guard let self = self else { return }
                     switch result {
                     case .success(let route):
-                        self.addRoute(route)
+                        self.replaceRoute(route)
                     case .failure(let error):
                         self.showError(error)
                     }
@@ -71,9 +71,23 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(annotation)
     }
     
+    private func replaceRoute(_ route: MKRoute) {
+        removeRoutes()
+        addRoute(route)
+    }
+    
     private func addRoute(_ route: MKRoute) {
         mapView.addOverlay(route.polyline)
-        mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+        mapView.setVisibleMapRect(route.polyline.boundingMapRect,
+                                  edgePadding: UIEdgeInsets(top: Constants.padding,
+                                                            left: Constants.padding,
+                                                            bottom: Constants.padding,
+                                                            right: Constants.padding),
+                                  animated: true)
+    }
+    
+    private func removeRoutes() {
+        mapView.removeOverlays(mapView.overlays.compactMap({ $0 as? MKPolyline }))
     }
 }
 
@@ -83,5 +97,11 @@ extension MapViewController: MKMapViewDelegate {
         renderer.strokeColor = .systemBlue
         renderer.lineWidth = 3
         return renderer
+    }
+}
+
+extension MapViewController {
+    enum Constants {
+        static let padding: CGFloat = 40
     }
 }
