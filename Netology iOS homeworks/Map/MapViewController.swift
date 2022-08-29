@@ -14,6 +14,8 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView! {
         didSet {
             mapView.delegate = self
+            mapView.showsScale = true
+            mapView.mapType = .hybrid
         }
     }
     
