@@ -16,6 +16,8 @@ class MapViewController: UIViewController {
             mapView.delegate = self
             mapView.showsScale = true
             mapView.mapType = .hybrid
+            let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(getCoordinatePressOnMap(sender:)))
+            mapView.addGestureRecognizer(gestureRecognizer)
         }
     }
     
@@ -67,9 +69,13 @@ class MapViewController: UIViewController {
     }
     
     private func addPin(location: MapService.ExampleLocations) {
+        addPin(coordinate: location.coordinate, title: location.title)
+    }
+    
+    private func addPin(coordinate: CLLocationCoordinate2D, title: String) {
         let annotation = MKPointAnnotation()
-        annotation.coordinate = location.coordinate
-        annotation.title = location.title
+        annotation.coordinate = coordinate
+        annotation.title = title
         mapView.addAnnotation(annotation)
     }
     
@@ -90,6 +96,15 @@ class MapViewController: UIViewController {
     
     private func removeRoutes() {
         mapView.removeOverlays(mapView.overlays.compactMap({ $0 as? MKPolyline }))
+    }
+    
+    @objc
+    private func getCoordinatePressOnMap(sender: UITapGestureRecognizer) {
+        if sender.state == .began {
+            let touchLocation = sender.location(in: mapView)
+            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+            addPin(coordinate: locationCoordinate, title: "user pin")
+        }
     }
 }
 
