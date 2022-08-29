@@ -68,6 +68,10 @@ class MapViewController: UIViewController {
         present(sheet, animated: true)
     }
     
+    @IBAction func trashButtonPressed(_ sender: Any) {
+        removePins()
+    }
+    
     private func addPin(location: MapService.ExampleLocations) {
         addPin(coordinate: location.coordinate, title: location.title)
     }
@@ -96,6 +100,10 @@ class MapViewController: UIViewController {
     
     private func removeRoutes() {
         mapView.removeOverlays(mapView.overlays.compactMap({ $0 as? MKPolyline }))
+    }
+    
+    private func removePins() {
+        mapView.removeAnnotations(mapView.annotations.compactMap( { $0 as? MKPointAnnotation } ))
     }
     
     @objc
