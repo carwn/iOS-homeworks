@@ -16,7 +16,7 @@ class MapViewController: UIViewController {
             mapView.delegate = self
             mapView.showsScale = true
             mapView.mapType = .hybrid
-            let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(getCoordinatePressOnMap(sender:)))
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(getCoordinatePressOnMap(sender:)))
             mapView.addGestureRecognizer(gestureRecognizer)
         }
     }
@@ -99,11 +99,9 @@ class MapViewController: UIViewController {
     
     @objc
     private func getCoordinatePressOnMap(sender: UITapGestureRecognizer) {
-        if sender.state == .began {
-            let touchLocation = sender.location(in: mapView)
-            let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-            addPin(coordinate: locationCoordinate, title: "user pin")
-        }
+        let touchLocation = sender.location(in: mapView)
+        let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+        addPin(coordinate: locationCoordinate, title: "user pin")
     }
     
     private func showConformRouteAlert(coordinate: CLLocationCoordinate2D) {
