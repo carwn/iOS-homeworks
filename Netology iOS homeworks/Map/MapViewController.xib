@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="Netology_iOS_homeworks" customModuleProvider="target">
+            <connections>
+                <outlet property="mapView" destination="jyB-ge-Ce8" id="8ah-2s-Zwk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jyB-ge-Ce8">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </mapView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ctd-JT-zEn">
+                    <rect key="frame" x="93" y="811" width="228.5" height="31"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcW-IB-Vtw">
+                            <rect key="frame" x="0.0" y="0.0" width="164.5" height="31"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Проложить маршрут"/>
+                            <connections>
+                                <action selector="routeButtonPressed" destination="-1" eventType="touchUpInside" id="WgX-yu-dj6"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrX-bh-drB">
+                            <rect key="frame" x="184.5" y="0.0" width="44" height="31"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
+                            <connections>
+                                <action selector="trashButtonPressed:" destination="-1" eventType="touchUpInside" id="urK-PQ-mSA"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ctd-JT-zEn" secondAttribute="bottom" constant="20" id="Ofe-wG-qfl"/>
+                <constraint firstAttribute="bottom" secondItem="jyB-ge-Ce8" secondAttribute="bottom" id="fTq-9D-ylQ"/>
+                <constraint firstItem="Ctd-JT-zEn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gDY-En-Wff"/>
+                <constraint firstItem="jyB-ge-Ce8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lrF-dx-Mev"/>
+                <constraint firstAttribute="trailing" secondItem="jyB-ge-Ce8" secondAttribute="trailing" id="oc8-3m-fQG"/>
+                <constraint firstItem="jyB-ge-Ce8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zVY-Ks-PMx"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="84"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="trash" catalog="system" width="121" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

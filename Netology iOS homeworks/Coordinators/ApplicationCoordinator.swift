@@ -19,12 +19,14 @@ final class ApplicationCoordinator: NSObject, Coordinator {
     private let profileCoordinator: ProfileCoordinator
     private let multimediaCoordinator: MultimediaCoordinator
     private let storedPostsCoordinator: StoredPostsCoordinator
+    private let mapCoordinator: MapCoordinator
     
     private let factory: LoginFactory
     private let loginInspector: LoginInspector
     private let wordChecker = WordChecker()
     private let multimediaStore = MultimediaStore()
     private let networkService = NetworkService()
+    private let mapService = MapService()
     
     init(scene: UIWindowScene, factory: LoginFactory) {
         self.scene = scene
@@ -35,10 +37,12 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         profileCoordinator = ProfileCoordinator(delegate: loginInspector)
         multimediaCoordinator = MultimediaCoordinator(audioURLs: multimediaStore.audioURLs, youtubeVideos: multimediaStore.youtubeVideos)
         storedPostsCoordinator = StoredPostsCoordinator()
+        mapCoordinator = MapCoordinator(mapService: mapService)
         tabBarController.setViewControllers([feedCoordinator.rootViewController,
                                              profileCoordinator.rootViewController,
                                              multimediaCoordinator.rootViewController,
-                                             storedPostsCoordinator.rootViewController], animated: false)
+                                             storedPostsCoordinator.rootViewController,
+                                             mapCoordinator.rootViewController], animated: false)
         super.init()
         tabBarController.delegate = self
         tabBarController.tabBar.backgroundColor = .systemBackground
@@ -74,6 +78,10 @@ final class ApplicationCoordinator: NSObject, Coordinator {
         storedPostsCoordinator.start()
     }
     
+    private func startMapFlow() {
+        mapCoordinator.start()
+    }
+    
     private func startFlow(viewController: UIViewController) {
         switch viewController {
         case profileCoordinator.rootViewController:
@@ -84,6 +92,8 @@ final class ApplicationCoordinator: NSObject, Coordinator {
             startMultimediaFlow()
         case storedPostsCoordinator.rootViewController:
             startStoredPostsCoordinatorFlow()
+        case mapCoordinator.rootViewController:
+            startMapFlow()
         default:
             break
         }
