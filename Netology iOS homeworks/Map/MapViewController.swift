@@ -52,16 +52,7 @@ class MapViewController: UIViewController {
         let sheet = UIAlertController(title: "Выберете назначение", message: nil, preferredStyle: .actionSheet)
         for destination in destinations {
             sheet.addAction(UIAlertAction(title: destination.title, style: .default, handler: { [weak self] _ in
-                guard let self = self else { return }
-                self.mapService?.getRoute(to: destination.coordinate) { [weak self] result in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success(let route):
-                        self.replaceRoute(route)
-                    case .failure(let error):
-                        self.showError(error)
-                    }
-                }
+                self?.getRoute(coordinate: destination.coordinate)
             }))
         }
         sheet.addAction(UIAlertAction(title: "Отмена", style: .cancel))
@@ -114,6 +105,27 @@ class MapViewController: UIViewController {
             addPin(coordinate: locationCoordinate, title: "user pin")
         }
     }
+    
+    private func showConformRouteAlert(coordinate: CLLocationCoordinate2D) {
+        let alert = UIAlertController(title: "Проложить маршрут", message: "\(coordinate.latitude)\n\(coordinate.longitude)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Проложить", style: .default, handler: { [weak self] _ in
+            self?.getRoute(coordinate: coordinate)
+        }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func getRoute(coordinate: CLLocationCoordinate2D) {
+        mapService?.getRoute(to: coordinate) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let route):
+                self.replaceRoute(route)
+            case .failure(let error):
+                self.showError(error)
+            }
+        }
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -122,6 +134,12 @@ extension MapViewController: MKMapViewDelegate {
         renderer.strokeColor = .systemBlue
         renderer.lineWidth = 3
         return renderer
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let coordinate = view.annotation?.coordinate {
+            showConformRouteAlert(coordinate: coordinate)
+        }
     }
 }
 
