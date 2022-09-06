@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Netology iOS homeworks
+
+  Created by Александр Шелихов on 02.09.2022.
+  
+*/
+
+"NSMicrophoneUsageDescription" = "Для записи звука";
+"NSLocationWhenInUseUsageDescription" = "Для показа геопозиции на карте";

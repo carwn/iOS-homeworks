@@ -67,6 +67,7 @@
 		6D5F88A9286D6BC800B4109A /* PostFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5F88A8286D6BC800B4109A /* PostFetchedResultsController.swift */; };
 		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
+		6DA51AE828C1F61100FBF364 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA51AEA28C1F61100FBF364 /* InfoPlist.strings */; };
 		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
 		6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */; };
 		6DA62B122820E61600DD73DD /* UILabel+labelWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */; };
@@ -212,6 +213,7 @@
 		6D5F88A8286D6BC800B4109A /* PostFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetchedResultsController.swift; sourceTree = "<group>"; };
 		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		6DA51AE928C1F61100FBF364 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
 		6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLs.swift; sourceTree = "<group>"; };
 		6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+labelWithText.swift"; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				6DED7A0A26F7032700A5CB5B /* UIApplication+keyWindowiOS13.swift */,
 				1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */,
 				1F9F325826D251DB00CB1285 /* Info.plist */,
+				6DA51AEA28C1F61100FBF364 /* InfoPlist.strings */,
 				6DCD247F28260C15009E10A9 /* GoogleService-Info.plist */,
 			);
 			path = "Netology iOS homeworks";
@@ -709,6 +712,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 1F9F323E26D251DA00CB1285;
 			packageReferences = (
@@ -743,6 +747,7 @@
 				6DB3EA1027C611C400130B8E /* sample-9s.mp3 in Resources */,
 				6DF2A9DB28BB721900808111 /* MapViewController.xib in Resources */,
 				6DB3EA1327C611C400130B8E /* file_example_MP3_700KB.mp3 in Resources */,
+				6DA51AE828C1F61100FBF364 /* InfoPlist.strings in Resources */,
 				1F9F325426D251DB00CB1285 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -943,6 +948,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		6DA51AEA28C1F61100FBF364 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DA51AE928C1F61100FBF364 /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -950,6 +963,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1011,6 +1025,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
