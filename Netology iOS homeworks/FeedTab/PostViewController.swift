@@ -19,9 +19,9 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = post?.title ?? "empty post"
+        navigationItem.title = post?.title ?? "emptyPostTitle".localized
         view.backgroundColor = .systemGreen
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(showInfoButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "infoButtonTitle".localized, style: .plain, target: self, action: #selector(showInfoButtonPressed))
     }
     
     @objc private func showInfoButtonPressed() {

@@ -12,11 +12,11 @@ enum RandomStringGeneratorError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .charactersArrayIsEmpty:
-            return "Массив символов пуст"
+            return "charactersArrayIsEmpty".localized
         case .minLengthIsMoreThenMaxLingth:
-            return "Минимальная длинна больше максимальной"
+            return "minLengthIsMoreThenMaxLingth".localized
         case .failedToGetRandomCharacter:
-            return "Не удалось получить случайный символ"
+            return "failedToGetRandomCharacter".localized
         }
     }
 }
