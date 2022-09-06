@@ -19,12 +19,12 @@ class InputTextView: UIView {
     // MARK: - Private Properties
     private lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Please, input word here..."
+        textField.placeholder = "inputTextPlaceholder".localized
         return textField
     }()
 
     private lazy var sendButton: UIButton = {
-        SystemButton(title: "Send") { [weak self] in
+        SystemButton(title: "sendButtonTitle".localized) { [weak self] in
             self?.sendButtonPressed()
         }
     }()

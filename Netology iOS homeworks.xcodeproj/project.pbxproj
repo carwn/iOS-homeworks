@@ -68,6 +68,8 @@
 		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		6DA51AE828C1F61100FBF364 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA51AEA28C1F61100FBF364 /* InfoPlist.strings */; };
+		6DA51AEF28C6FD6800FBF364 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA51AEE28C6FD6800FBF364 /* String+localized.swift */; };
+		6DA51AF228C6FDC700FBF364 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DA51AF428C6FDC700FBF364 /* Localizable.strings */; };
 		6DA62B0E281BCF2000DD73DD /* TestDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0D281BCF2000DD73DD /* TestDocument.swift */; };
 		6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */; };
 		6DA62B122820E61600DD73DD /* UILabel+labelWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */; };
@@ -214,6 +216,9 @@
 		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6DA51AE928C1F61100FBF364 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6DA51AEE28C6FD6800FBF364 /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
+		6DA51AF328C6FDC700FBF364 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DA51AF528C6FDCA00FBF364 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DA62B0D281BCF2000DD73DD /* TestDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDocument.swift; sourceTree = "<group>"; };
 		6DA62B0F281BCFBC00DD73DD /* TestURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLs.swift; sourceTree = "<group>"; };
 		6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+labelWithText.swift"; sourceTree = "<group>"; };
@@ -341,6 +346,7 @@
 				6DBA679A27BF7EAF00468CF5 /* UIColor+randomColor.swift */,
 				6DA62B112820E61600DD73DD /* UILabel+labelWithText.swift */,
 				6D2BDBF1286A0CAC00688911 /* UIViewController+showError.swift */,
+				6DA51AEE28C6FD6800FBF364 /* String+localized.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -407,6 +413,7 @@
 				1F9F325526D251DB00CB1285 /* LaunchScreen.storyboard */,
 				1F9F325826D251DB00CB1285 /* Info.plist */,
 				6DA51AEA28C1F61100FBF364 /* InfoPlist.strings */,
+				6DA51AF428C6FDC700FBF364 /* Localizable.strings */,
 				6DCD247F28260C15009E10A9 /* GoogleService-Info.plist */,
 			);
 			path = "Netology iOS homeworks";
@@ -739,6 +746,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DB3EA1227C611C400130B8E /* sample-15s.mp3 in Resources */,
+				6DA51AF228C6FDC700FBF364 /* Localizable.strings in Resources */,
 				6DB3EA1427C611C400130B8E /* sample-12s.mp3 in Resources */,
 				6DCD248028260C15009E10A9 /* GoogleService-Info.plist in Resources */,
 				6DB3EA0927C601DD00130B8E /* Queen.mp3 in Resources */,
@@ -824,6 +832,7 @@
 				6D01CB1427A1657D00CE9481 /* FeedCoordinator.swift in Sources */,
 				6DFD164C287A9E860001B884 /* SafeStore.swift in Sources */,
 				1F5B736F26EE007E0075597B /* UIScrollView+scrollToVerticalEnd.swift in Sources */,
+				6DA51AEF28C6FD6800FBF364 /* String+localized.swift in Sources */,
 				6DB5C337283A148600471775 /* LoginInspectorError.swift in Sources */,
 				6D54F91E27B0E7C2009544CC /* BruteForcier.swift in Sources */,
 				6DB3E9FF27C5EB5000130B8E /* AudioPlayer.swift in Sources */,
@@ -954,6 +963,15 @@
 				6DA51AE928C1F61100FBF364 /* ru */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6DA51AF428C6FDC700FBF364 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DA51AF328C6FDC700FBF364 /* en */,
+				6DA51AF528C6FDCA00FBF364 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

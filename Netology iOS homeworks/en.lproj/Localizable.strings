@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  Netology iOS homeworks
+
+  Created by Александр Шелихов on 06.09.2022.
+  
+*/
+
+"timerLabelText" = "Change color in";
+"pushPostViewController" = "Push PostViewController";
+"numberSing" = "#";
+"FeedViewController" = "FeedViewController";
+"Hello" = "Hello";
+"noInputText" = "No input text";
+"OK" = "OK";
+"error" = "Error";
+"inputTextPlaceholder" = "Please, input word here...";
+"sendButtonTitle" = "Send";
+"correct" = "Correct";
+"incorrect" = "Incorrect";
+"checkError" = "Check error";

@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  Netology iOS homeworks
+
+  Created by Александр Шелихов on 06.09.2022.
+  
+*/
+
+"timerLabelText" = "До изменения цвета";
+"pushPostViewController" = "Открыть вью контроллер с постами";
+"numberSing" = "№";
+"FeedViewController" = "Лента вью контроллер";
+"Hello" = "Привет";
+"noInputText" = "Не введен текст";
+"OK" = "Oкей";
+"error" = "Ошибка";
+"inputTextPlaceholder" = "Введите текс сюда...";
+"sendButtonTitle" = "Отправить";
+"correct" = "Верно";
+"incorrect" = "Не верно";
+"checkError" = "Ошибка проверки";
