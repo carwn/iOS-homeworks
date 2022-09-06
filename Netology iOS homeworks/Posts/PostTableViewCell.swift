@@ -136,7 +136,7 @@ class PostTableViewCell: UITableViewCell {
         self.imageName = imageName
         updateImage()
         descriptionLabel.text = description
-        likesLabel.text = "\("likes".localized): \(likes?.description ?? "-")"
+        likesLabel.text = likes?.likesDescription ?? "-"
         viewsLabel.text = "\("views".localized): \(views?.description ?? "-")"
     }
 
