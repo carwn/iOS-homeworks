@@ -18,17 +18,17 @@ enum AudioRecorderStatus: CustomStringConvertible {
     var description: String {
         switch self {
         case .microphoneAccessUnknow:
-            return "Требуется доступ к микрофону"
+            return "needPremissionMicrophone".localized
         case .microphoneAccessDenied:
-            return "В доступе к микрофону отказано"
+            return "noPremissionMicrophone".localized
         case .ready:
-            return "Готов к записи"
+            return "readyToRecord".localized
         case .recording:
-            return "Идет запись..."
+            return "recordInProgress".localized
         case .playing:
-            return "Воспроизведение..."
+            return "playing".localized
         case .recordFail:
-            return "Запись не удалась"
+            return "recordFail".localized
         }
     }
     

@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="Netology_iOS_homeworks" customModuleProvider="target">
             <connections>
+                <outlet property="getDirectionsButton" destination="jcW-IB-Vtw" id="CCd-JD-D5Z"/>
                 <outlet property="mapView" destination="jyB-ge-Ce8" id="8ah-2s-Zwk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,18 +24,18 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </mapView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ctd-JT-zEn">
-                    <rect key="frame" x="93" y="811" width="228.5" height="31"/>
+                    <rect key="frame" x="163" y="811" width="88" height="31"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcW-IB-Vtw">
-                            <rect key="frame" x="0.0" y="0.0" width="164.5" height="31"/>
+                            <rect key="frame" x="0.0" y="0.0" width="24" height="31"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="Проложить маршрут"/>
+                            <buttonConfiguration key="configuration" style="filled" title=""/>
                             <connections>
                                 <action selector="routeButtonPressed" destination="-1" eventType="touchUpInside" id="WgX-yu-dj6"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrX-bh-drB">
-                            <rect key="frame" x="184.5" y="0.0" width="44" height="31"/>
+                            <rect key="frame" x="44" y="0.0" width="44" height="31"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="trash" catalog="system"/>
                             <connections>

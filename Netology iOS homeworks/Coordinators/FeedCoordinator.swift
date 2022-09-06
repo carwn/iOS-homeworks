@@ -18,7 +18,7 @@ class FeedCoordinator: TabBarCoordinator {
     
     private lazy var navigationController: UINavigationController = {
         let navigationController = UINavigationController(rootViewController: feedViewController)
-        navigationController.tabBarItem = UITabBarItem(title: "Feed",
+        navigationController.tabBarItem = UITabBarItem(title: "feedTabTitle".localized,
                                                        image: UIImage(systemName: "f.square"),
                                                        selectedImage: UIImage(systemName: "f.square.fill"))
         return navigationController

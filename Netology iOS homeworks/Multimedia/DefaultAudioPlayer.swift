@@ -57,7 +57,7 @@ extension DefaultAudioPlayer: AudioPlayer {
             !audioListIsEmpty,
             let currentAudioIndex = currentAudioIndex
         else {
-            return "Нет аудио"
+            return "noAudio".localized
         }
         return audioURLs[currentAudioIndex].lastPathComponent
     }
