@@ -6,17 +6,24 @@
   
 */
 
+// Buttons
+"OK" = "Oкей";
+"cancel" = "Отмена";
+"sendButtonTitle" = "Отправить";
+"infoButtonTitle" = "Инфо";
+"showAlertButtonTitle" = "Показать алерт";
+"getDirections" = "Проложить маршрут";
+"contine" = "Продолжить";
+
+// Other
 "timerLabelText" = "До изменения цвета";
 "pushPostViewController" = "Открыть вью контроллер с постами";
 "numberSing" = "№";
 "FeedViewController" = "Лента вью контроллер";
 "Hello" = "Привет";
 "noInputText" = "Не введен текст";
-"OK" = "Oкей";
-"cancel" = "Отмена";
 "error" = "Ошибка";
 "inputTextPlaceholder" = "Введите текс сюда...";
-"sendButtonTitle" = "Отправить";
 "correct" = "Верно";
 "incorrect" = "Не верно";
 "checkError" = "Ошибка проверки";
@@ -29,8 +36,6 @@
 "testUserName" = "Мега тест юзер";
 "testUserStatus" = "Проверка...";
 "emptyPostTitle" = "Пустой пост";
-"infoButtonTitle" = "Инфо";
-"showAlertButtonTitle" = "Показать алерт";
 "loadingTitle" = "Загрузка...";
 "noNetworkServiceError" = "Не задан сетевой сервис";
 "testAlertTitle" = "Заголовок алерта";
@@ -63,6 +68,8 @@
 "authorFilterTitle" = "Фильтр по автору";
 "apply" = "Применить";
 "delete" = "Удалить";
+
+// Audio
 "needPremissionMicrophone" = "Требуется доступ к микрофону";
 "noPremissionMicrophone" = "В доступе к микрофону отказано";
 "readyToRecord" = "Готов к записи";
@@ -73,14 +80,16 @@
 "audioPlayer" = "Аудио плееер";
 "youTubeVideo" = "Ютюб видео";
 "recordAudio" = "Запись аудио";
+
+// Maps
 "noPremissionLocation" = "В доступе к геолокации отказано";
 "moscow" = "Москва";
 "london" = "Лондон";
 "newYork" = "Нью-Йорк";
 "selectDestination" = "Выберете назначенипе";
 "userPin" = "Пользовательская метка";
-"getDirections" = "Проложить маршрут";
-"contine" = "Продолжить";
+
+// Tabs
 "profileTabTitle" = "Профиль";
 "feedTabTitle" = "Лента";
 "multimediaTabTitle" = "Мультимедиа";

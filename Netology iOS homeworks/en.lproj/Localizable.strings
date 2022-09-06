@@ -6,17 +6,24 @@
   
 */
 
+// Buttons
+"OK" = "OK";
+"cancel" = "Cancel";
+"sendButtonTitle" = "Send";
+"infoButtonTitle" = "Info";
+"showAlertButtonTitle" = "Show alert";
+"getDirections" = "Get directions";
+"contine" = "Продолжить";
+
+// Other
 "timerLabelText" = "Change color in";
 "pushPostViewController" = "Push PostViewController";
 "numberSing" = "#";
 "FeedViewController" = "FeedViewController";
 "Hello" = "Hello";
 "noInputText" = "No input text";
-"OK" = "OK";
-"cancel" = "Cancel";
 "error" = "Error";
 "inputTextPlaceholder" = "Please, input word here...";
-"sendButtonTitle" = "Send";
 "correct" = "Correct";
 "incorrect" = "Incorrect";
 "checkError" = "Check error";
@@ -29,8 +36,6 @@
 "testUserName" = "Mega test user";
 "testUserStatus" = "Testing...";
 "emptyPostTitle" = "Empty post";
-"infoButtonTitle" = "Info";
-"showAlertButtonTitle" = "Shwo alert";
 "loadingTitle" = "Loading...";
 "noNetworkServiceError" = "No network service";
 "testAlertTitle" = "Alert title";
@@ -63,6 +68,8 @@
 "authorFilterTitle" = "Author filter";
 "apply" = "Apply";
 "delete" = "Delete";
+
+// Audio
 "needPremissionMicrophone" = "Need microphone premission";
 "noPremissionMicrophone" = "No microphone premission";
 "readyToRecord" = "Ready to record";
@@ -73,14 +80,16 @@
 "audioPlayer" = "Audio player";
 "youTubeVideo" = "YouTube video";
 "recordAudio" = "Record audio";
+
+// Maps
 "noPremissionLocation" = "No location premission";
 "moscow" = "Moscow";
 "london" = "London";
 "newYork" = "New York";
 "selectDestination" = "Select destination";
 "userPin" = "User pin";
-"getDirections" = "Get directions";
-"contine" = "Продолжить";
+
+// Tabs
 "profileTabTitle" = "Profile";
 "feedTabTitle" = "Feed";
 "multimediaTabTitle" = "Multimedia";
