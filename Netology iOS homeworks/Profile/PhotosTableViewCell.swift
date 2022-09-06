@@ -23,7 +23,7 @@ class PhotosTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .black
-        label.text = "Photos"
+        label.text = "photosTitle".localized
         return label
     }()
     

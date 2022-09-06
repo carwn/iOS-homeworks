@@ -51,7 +51,7 @@ class ProfileHeaderView: UIView {
     }()
     
     private lazy var setStatusButton: SystemButton = {
-        let button = SystemButton(title: "Set status", titleColor: .white) { [weak self] in
+        let button = SystemButton(title: "setStatusButtonTitle".localized, titleColor: .white) { [weak self] in
             self?.setStatusButtonPressed()
         }
         button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
@@ -159,7 +159,7 @@ class ProfileHeaderView: UIView {
             if let statusText = statusText, !statusText.isEmpty {
                 return statusText
             } else {
-                return "Waiting for something..."
+                return "statusPlaceholder".localized
             }
         }()
         statusLabel.text = statusTextForLabel

@@ -36,11 +36,11 @@ extension LoginViewPresenter: LoginViewOutput {
     
     func logInButtonPressed(login: String?, password: String?) {
         guard let userName = login, !userName.isEmpty else {
-            viewController?.showLogInError(title: "Не введено имя пользователя", message: nil)
+            viewController?.showLogInError(title: "noUserNameError".localized, message: nil)
             return
         }
         guard let password = password, !password.isEmpty else {
-            viewController?.showLogInError(title: "Не введен пароль", message: nil)
+            viewController?.showLogInError(title: "noPasswordError".localized, message: nil)
             return
         }
         delegate.check(login: userName, password: password) { [weak self] result in
@@ -48,26 +48,26 @@ extension LoginViewPresenter: LoginViewOutput {
             case .success(let userName):
                 self?.showProfile(login: userName)
             case .failure(let error):
-                self?.viewController?.showLogInError(title: "Ошибка", message: error.localizedDescription)
+                self?.viewController?.showLogInError(title: "error".localized, message: error.localizedDescription)
             }
         }
     }
     
     func createUserButtonPressed(withEmail email: String?, password: String?) {
         guard let email = email, !email.isEmpty else {
-            viewController?.showLogInError(title: "Не введен email", message: nil)
+            viewController?.showLogInError(title: "noeMailError".localized, message: nil)
             return
         }
         guard let password = password, !password.isEmpty else {
-            viewController?.showLogInError(title: "Не введен пароль", message: nil)
+            viewController?.showLogInError(title: "noPasswordError".localized, message: nil)
             return
         }
         delegate.createUser(withEmail: email, password: password) { [weak self] result in
             switch result {
             case .success(let user):
-                self?.viewController?.showLogInError(title: "Пользователь успешно создан", message: user.displayName)
+                self?.viewController?.showLogInError(title: "userSuccessCreationMessage".localized, message: user.displayName)
             case .failure(let error):
-                self?.viewController?.showLogInError(title: "Ошибка", message: error.localizedDescription)
+                self?.viewController?.showLogInError(title: "error".localized, message: error.localizedDescription)
             }
         }
     }

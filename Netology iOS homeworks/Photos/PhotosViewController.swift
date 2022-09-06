@@ -37,7 +37,7 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Photo Gallery"
+        navigationItem.title = "photoGallery".localized
         setupView()
         setupConstraints()
         startPhotosProcessing()
