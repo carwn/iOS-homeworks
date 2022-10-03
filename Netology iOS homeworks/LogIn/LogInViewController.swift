@@ -41,12 +41,10 @@ class LogInViewController: UIViewController {
     }()
     
     private let textFieldsViewBorderWidth: CGFloat = 0.5
-    private let textFieldsViewBorderColor: UIColor = .lightGray
     
     private lazy var textFieldsView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray6
-        view.layer.borderColor = textFieldsViewBorderColor.cgColor
         view.layer.borderWidth = textFieldsViewBorderWidth
         view.layer.masksToBounds = false
         view.clipsToBounds = true
@@ -54,11 +52,7 @@ class LogInViewController: UIViewController {
         return view
     }()
     
-    private lazy var textFieldsViewSeparator: UIView = {
-        let view = UIView()
-        view.backgroundColor = textFieldsViewBorderColor
-        return view
-    }()
+    private lazy var textFieldsViewSeparator = UIView()
     
     private lazy var loginTextField: UITextField = {
         let textField = UITextField()
@@ -84,7 +78,7 @@ class LogInViewController: UIViewController {
     }()
     
     private func setupTextField(_ textField: UITextField) {
-        textField.textColor = .black
+        textField.textColor = .myTextColor
         textField.font = .systemFont(ofSize: 16, weight: .regular)
         textField.tintColor = UIColor(named: "AccentColor")
         textField.autocapitalizationType = .none
@@ -146,6 +140,7 @@ class LogInViewController: UIViewController {
         setupViews()
         setupConstraints()
         presenter.viewDidLoad()
+        updateTextFieldsBorderColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,10 +158,14 @@ class LogInViewController: UIViewController {
         logInButton.hideLoading()
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        updateTextFieldsBorderColor()
+    }
+    
     // MARK: - Setup view and constraints
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .myBackgroundColor
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(scrollViewContentView)
         [logoImageView, textFieldsView, logInButton, guessPasswordStackView, createUserButton].forEach { view in
@@ -315,6 +314,12 @@ class LogInViewController: UIViewController {
             assertionFailure("Не удалось создать случайный пароль. \(error.localizedDescription)")
             return nil
         }
+    }
+    
+    private func updateTextFieldsBorderColor() {
+        let textFieldsViewBorderColor: UIColor = .myTextFieldsViewBorderColor
+        textFieldsView.layer.borderColor = textFieldsViewBorderColor.cgColor
+        textFieldsViewSeparator.backgroundColor = textFieldsViewBorderColor
     }
 }
 
