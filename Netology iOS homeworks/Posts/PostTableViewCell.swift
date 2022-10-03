@@ -37,7 +37,8 @@ class PostTableViewCell: UITableViewCell {
     
     private let postImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         imageView.backgroundColor = .myBackgroundColor
         return imageView
     }()
@@ -103,7 +104,7 @@ class PostTableViewCell: UITableViewCell {
                            postImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
                            postImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: Constants.authorLabelBottomOffset),
-                           postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
+                           postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor, multiplier: 10 / 16),
         
                            descriptionLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
                            descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: Constants.defaultOffset),
