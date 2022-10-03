@@ -22,7 +22,7 @@ class PhotosTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = .myTextColor
         label.text = "photosTitle".localized
         return label
     }()
@@ -30,7 +30,7 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var forwardArrowImageView: UIImageView = {
         let image = UIImage(systemName: "arrow.forward")
         let imageView = UIImageView(image: image)
-        imageView.tintColor = .black
+        imageView.tintColor = .myBlackColor
         return imageView
     }()
     
