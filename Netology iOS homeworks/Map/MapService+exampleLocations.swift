@@ -28,11 +28,11 @@ extension MapService {
         var title: String {
             switch self {
             case .moscow:
-                return "Москва"
+                return "moscow".localized
             case .london:
-                return "Лондон"
+                return "london".localized
             case .newYork:
-                return "Нью-Йорк"
+                return "newYork".localized
             }
         }
     }

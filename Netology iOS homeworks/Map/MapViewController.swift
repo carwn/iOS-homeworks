@@ -21,11 +21,14 @@ class MapViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var getDirectionsButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let randomLocation = MapService.ExampleLocations.allCases.randomElement() {
             addPin(location: randomLocation)
         }
+        getDirectionsButton.setTitle("getDirections".localized, for: .normal)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,13 +52,13 @@ class MapViewController: UIViewController {
         guard !destinations.isEmpty else {
             return
         }
-        let sheet = UIAlertController(title: "Выберете назначение", message: nil, preferredStyle: .actionSheet)
+        let sheet = UIAlertController(title: "selectDestination".localized, message: nil, preferredStyle: .actionSheet)
         for destination in destinations {
             sheet.addAction(UIAlertAction(title: destination.title, style: .default, handler: { [weak self] _ in
                 self?.getRoute(coordinate: destination.coordinate)
             }))
         }
-        sheet.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        sheet.addAction(UIAlertAction(title: "cancel".localized, style: .cancel))
         present(sheet, animated: true)
     }
     
@@ -101,15 +104,15 @@ class MapViewController: UIViewController {
     private func getCoordinatePressOnMap(sender: UITapGestureRecognizer) {
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
-        addPin(coordinate: locationCoordinate, title: "user pin")
+        addPin(coordinate: locationCoordinate, title: "userPin".localized)
     }
     
     private func showConformRouteAlert(coordinate: CLLocationCoordinate2D) {
-        let alert = UIAlertController(title: "Проложить маршрут", message: "\(coordinate.latitude)\n\(coordinate.longitude)", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Проложить", style: .default, handler: { [weak self] _ in
+        let alert = UIAlertController(title: "getDirections".localized, message: "\(coordinate.latitude)\n\(coordinate.longitude)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "contine".localized, style: .default, handler: { [weak self] _ in
             self?.getRoute(coordinate: coordinate)
         }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel))
         present(alert, animated: true)
     }
     

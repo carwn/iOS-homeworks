@@ -22,7 +22,7 @@ class FeedViewController: UIViewController {
 
     private lazy var buttonsStackView: UIStackView = {
         func pushPostViewControllerButton(number: Int) -> SystemButton {
-            let button = SystemButton(title: "PushPostViewController #\(number)")
+            let button = SystemButton(title: "\("pushPostViewController".localized) \("numberSing".localized)\(number)")
             button.onTapHandler = { [weak self] in
                 self?.pushPostViewControllerButtonPressed()
             }
@@ -96,7 +96,7 @@ class FeedViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "FeedViewController"
+        navigationItem.title = "FeedViewController".localized
         view.backgroundColor = UIColor(named: "BackgroundColor")
         updateTimerLabelText()
         setRandomColorForSquareView()
@@ -163,12 +163,12 @@ class FeedViewController: UIViewController {
 
     @objc
     private func pushPostViewControllerButtonPressed() {
-        let post = PostViewController.Post(title: "Hello")
+        let post = PostViewController.Post(title: "Hello".localized)
         onPushPostViewControllerButtonPressed?(post)
     }
     
     private func updateTimerLabelText() {
-        timerLabel.text = "До изменения цвета: \(secondsToChangeColor)"
+        timerLabel.text = "\("timerLabelText".localized): \(secondsToChangeColor)"
     }
     
     private func setRandomColorForSquareView() {
@@ -204,7 +204,7 @@ class FeedViewController: UIViewController {
 extension FeedViewController: InputTextViewDelegate {
     func userInputedText(text: String?) {
         guard let text = text, !text.isEmpty else {
-            present(UIAlertController.infoAlert(title: "Не введен текст"), animated: true)
+            present(UIAlertController.infoAlert(title: "noInputText".localized), animated: true)
             return
         }
         spinner.startAnimating()

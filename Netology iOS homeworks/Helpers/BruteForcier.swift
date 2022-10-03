@@ -16,7 +16,7 @@ class BruteForcier {
         var errorDescription: String? {
             switch self {
             case .timeout:
-                return "Таймаут"
+                return "timeout".localized
             }
         }
     }

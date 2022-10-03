@@ -10,11 +10,11 @@ import UIKit
 extension UIAlertController {
     static func infoAlert(title: String, message: String? = nil) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default))
         return alert
     }
     
     static func errorAlert(message: String) -> UIAlertController {
-        UIAlertController.infoAlert(title: "Ошибка", message: message)
+        UIAlertController.infoAlert(title: "error".localized, message: message)
     }
 }

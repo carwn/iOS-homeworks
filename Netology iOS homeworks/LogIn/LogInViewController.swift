@@ -63,7 +63,7 @@ class LogInViewController: UIViewController {
     private lazy var loginTextField: UITextField = {
         let textField = UITextField()
         setupTextField(textField)
-        textField.placeholder = "Email or phone"
+        textField.placeholder = "loginPlaceholder".localized
         textField.delegate = self
 #if DEBUG
         textField.text = "test@test.com"
@@ -74,7 +74,7 @@ class LogInViewController: UIViewController {
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         setupTextField(textField)
-        textField.placeholder = "Password"
+        textField.placeholder = "passwordPlaceholder".localized
         textField.isSecureTextEntry = true
         textField.delegate = self
 #if DEBUG
@@ -91,7 +91,7 @@ class LogInViewController: UIViewController {
     }
     
     private lazy var logInButton: LoadingButton = {
-        let button = LoadingButton(title: "Log In", titleColor: .white) { [weak self] in
+        let button = LoadingButton(title: "logInButtonTitle".localized, titleColor: .white) { [weak self] in
             self?.logInButtonPressed()
         }
         let bluePixelImage = UIImage(named: "blue_pixel")
@@ -108,14 +108,14 @@ class LogInViewController: UIViewController {
     
     private lazy var guessPasswordButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Подобрать пароль", for: .normal)
+        button.setTitle("pickUpPasswordButtonTitle".localized, for: .normal)
         button.addTarget(self, action: #selector(guessPasswordButtonPressed), for: .touchUpInside)
         return button
     }()
     
     private lazy var createUserButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Создать пользователя", for: .normal)
+        button.setTitle("createUserButtonTitle".localized, for: .normal)
         button.addTarget(self, action: #selector(createUserButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -262,7 +262,7 @@ class LogInViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let randomPassword = self?.randomPassword else {
                 DispatchQueue.main.async { [weak self] in
-                    self?.present(UIAlertController.infoAlert(title: "Не удалось сгенерировать случайный пароль"), animated: true)
+                    self?.present(UIAlertController.infoAlert(title: "cantGeneratePasswordError".localized), animated: true)
                 }
                 return
             }
@@ -281,7 +281,7 @@ class LogInViewController: UIViewController {
                 })
             } catch {
                 DispatchQueue.main.async { [weak self] in
-                    self?.present(UIAlertController.infoAlert(title: error.localizedDescription, message: "Пароль был: \(randomPassword)"), animated: true)
+                    self?.present(UIAlertController.infoAlert(title: error.localizedDescription, message: "\("passwordWas".localized): \(randomPassword)"), animated: true)
                 }
             }
             DispatchQueue.main.async { [weak self] in
@@ -291,18 +291,18 @@ class LogInViewController: UIViewController {
     }
     
     @objc func createUserButtonPressed() {
-        let alert = UIAlertController(title: "Создать пользователя", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "createUserTitle".localized, message: nil, preferredStyle: .alert)
         alert.addTextField { textField in
-            textField.placeholder = "email"
+            textField.placeholder = "emailPlaceholder".localized
         }
         alert.addTextField { textField in
-            textField.placeholder = "password"
+            textField.placeholder = "passwordPlaceholder".localized
         }
-        let createButton = UIAlertAction(title: "Создать", style: .default) { [weak self] action in
+        let createButton = UIAlertAction(title: "createButtonTitle".localized, style: .default) { [weak self] action in
             self?.presenter.createUserButtonPressed(withEmail: alert.textFields?[0].text, password: alert.textFields?[1].text)
         }
         alert.addAction(createButton)
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel))
         present(alert, animated: true)
     }
     

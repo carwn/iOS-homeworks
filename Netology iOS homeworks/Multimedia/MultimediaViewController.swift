@@ -139,9 +139,9 @@ extension MultimediaViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch Sections(rawValue: section) {
-        case .audioPlayer: return "Аудио плееер"
-        case .youtubeVideo: return "YouTube видео"
-        case .recordAudio: return "Запись аудио"
+        case .audioPlayer: return "audioPlayer".localized
+        case .youtubeVideo: return "youTubeVideo".localized
+        case .recordAudio: return "recordAudio".localized
         default: return nil
         }
     }

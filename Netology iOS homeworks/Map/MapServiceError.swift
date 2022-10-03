@@ -14,7 +14,7 @@ enum MapServiceError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .locationAccessDenied:
-            return "Нет доступа к геопозиции"
+            return "noPremissionLocation".localized
         case .other(let error):
             return error.localizedDescription
         }

@@ -1,0 +1,97 @@
+/* 
+  Localizable.strings
+  Netology iOS homeworks
+
+  Created by Александр Шелихов on 06.09.2022.
+  
+*/
+
+// Buttons
+"OK" = "Oкей";
+"cancel" = "Отмена";
+"sendButtonTitle" = "Отправить";
+"infoButtonTitle" = "Инфо";
+"showAlertButtonTitle" = "Показать алерт";
+"getDirections" = "Проложить маршрут";
+"contine" = "Продолжить";
+
+// Other
+"timerLabelText" = "До изменения цвета";
+"pushPostViewController" = "Открыть вью контроллер с постами";
+"numberSing" = "№";
+"FeedViewController" = "Лента вью контроллер";
+"Hello" = "Привет";
+"noInputText" = "Не введен текст";
+"error" = "Ошибка";
+"inputTextPlaceholder" = "Введите текс сюда...";
+"correct" = "Верно";
+"incorrect" = "Не верно";
+"checkError" = "Ошибка проверки";
+"timeout" = "Таймаут";
+"charactersArrayIsEmpty" = "Массив символов пуст";
+"minLengthIsMoreThenMaxLingth" = "Минимальная длинна больше максимальной";
+"failedToGetRandomCharacter" = "Не удалось получить случайный символ";
+"storedUserName" = "Кот хипстер";
+"storedUserStatus" = "Чилит";
+"testUserName" = "Мега тест юзер";
+"testUserStatus" = "Проверка...";
+"emptyPostTitle" = "Пустой пост";
+"loadingTitle" = "Загрузка...";
+"noNetworkServiceError" = "Не задан сетевой сервис";
+"testAlertTitle" = "Заголовок алерта";
+"testAlertMessage" = "Текст сообщения";
+"noUserNameError" = "Не введено имя пользователя";
+"noPasswordError" = "Не введен пароль";
+"noeMailError" = "Не введен адрес электронной почты";
+"userSuccessCreationMessage" = "Пользователь успешно создан";
+"loginPlaceholder" = "Почта или телефон";
+"emailPlaceholder" = "Почта";
+"passwordPlaceholder" = "Пароль";
+"logInButtonTitle" = "Войти";
+"pickUpPasswordButtonTitle" = "Подобрать пароль";
+"createUserButtonTitle" = "Создать пользователя";
+"cantGeneratePasswordError" = "Не удалось сгенерировать случайный пароль";
+"passwordWas" = "Пароль был";
+"createUserTitle" = "Создать пользователя";
+"createButtonTitle" = "Создать";
+"successMessage" = "Успешно";
+"postSavedMessage" = "Пост сохранен";
+"unknowUserName" = "Неизвестный пользователь";
+"setStatusButtonTitle" = "Установить статус";
+"statusPlaceholder" = "Ждем чего-то...";
+"photosTitle" = "Фото";
+"noAuthorTitle" = "Нет автора";
+"likes" = "Лайки";
+"views" = "Просмотры";
+"photoGallery" = "Фотогаллерея";
+"storedPosts" = "Сохраненные посты";
+"authorFilterTitle" = "Фильтр по автору";
+"apply" = "Применить";
+"delete" = "Удалить";
+
+// Audio
+"needPremissionMicrophone" = "Требуется доступ к микрофону";
+"noPremissionMicrophone" = "В доступе к микрофону отказано";
+"readyToRecord" = "Готов к записи";
+"recordInProgress" = "Идет запись...";
+"playing" = "Воспроизведение...";
+"recordFail" = "Запись не удалась";
+"noAudio" = "Нет аудио";
+"audioPlayer" = "Аудио плееер";
+"youTubeVideo" = "Ютюб видео";
+"recordAudio" = "Запись аудио";
+
+// Maps
+"noPremissionLocation" = "В доступе к геолокации отказано";
+"moscow" = "Москва";
+"london" = "Лондон";
+"newYork" = "Нью-Йорк";
+"selectDestination" = "Выберете назначенипе";
+"userPin" = "Пользовательская метка";
+
+// Tabs
+"profileTabTitle" = "Профиль";
+"feedTabTitle" = "Лента";
+"multimediaTabTitle" = "Мультимедиа";
+"storedPostsTabTitle" = "Сохраненные посты";
+"mapTabTitle" = "Карта";

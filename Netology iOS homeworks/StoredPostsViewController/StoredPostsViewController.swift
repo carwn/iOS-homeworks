@@ -23,7 +23,7 @@ class StoredPostsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: postTableViewCellIdentifier)
-        navigationItem.title = "Stored posts"
+        navigationItem.title = "storedPosts".localized
         navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "clear"),
                                                               style: .plain,
                                                               target: self,
@@ -37,15 +37,15 @@ class StoredPostsViewController: UITableViewController {
     
     @objc
     private func setFilterButtonPressed() {
-        let alert = UIAlertController(title: "Фильтр по автору", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "authorFilterTitle".localized, message: nil, preferredStyle: .alert)
         alert.addTextField { [weak self] textField in
             textField.text = self?.currentFilter
         }
-        alert.addAction(UIAlertAction(title: "Применить", style: .default, handler: { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "apply".localized, style: .default, handler: { [weak self] _ in
             let authorFilter = alert.textFields![0].text
             self?.setAuthorFilter(authorFilter)
         }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel))
         present(alert, animated: true)
     }
     
@@ -92,7 +92,7 @@ class StoredPostsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: "Удалить", handler: { [weak self] _, _, _ in
+        UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: "delete".localized, handler: { [weak self] _, _, _ in
             guard
                 let self = self,
                 let post = self.fetchedResultsController?.object(at: indexPath)

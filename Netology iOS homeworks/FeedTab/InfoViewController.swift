@@ -18,9 +18,9 @@ class InfoViewController: UIViewController {
         stack.alignment = .center
         return stack
     }()
-    private let showAlertButton = SystemButton(title: "Show alert")
-    private let titleLabel = UILabel(text: "Loading...")
-    private let orbitalPeriodLabel = UILabel(text: "Loading...")
+    private let showAlertButton = SystemButton(title: "showAlertButtonTitle".localized)
+    private let titleLabel = UILabel(text: "loadingTitle".localized)
+    private let orbitalPeriodLabel = UILabel(text: "loadingTitle".localized)
     private let tableView = UITableView()
     
     private var residents: [People] = [] {
@@ -66,7 +66,7 @@ class InfoViewController: UIViewController {
     
     private func startNetworkRequest() {
         guard let networkService = networkService else {
-            let errorTitle = "Не задан network service"
+            let errorTitle = "noNetworkServiceError".localized
             assertionFailure(errorTitle)
             present(UIAlertController.infoAlert(title: errorTitle), animated: true)
             return
@@ -81,8 +81,8 @@ class InfoViewController: UIViewController {
                 guard let self = self else { return }
                 DispatchQueue.main.async {
                     print(error)
-                    self.titleLabel.text = "error"
-                    self.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                    self.titleLabel.text = "error".localized
+                    self.showError(error)
                 }
             }
         }
@@ -98,8 +98,8 @@ class InfoViewController: UIViewController {
                 guard let self = self else { return }
                 DispatchQueue.main.async {
                     print(error)
-                    self.orbitalPeriodLabel.text = "error"
-                    self.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                    self.orbitalPeriodLabel.text = "error".localized
+                    self.showError(error)
                 }
             }
         }
@@ -117,7 +117,7 @@ class InfoViewController: UIViewController {
                     case .success(let people):
                         residents.append(people)
                     case .failure(let error):
-                        self?.present(UIAlertController.infoAlert(title: "Error", message: error.localizedDescription), animated: true)
+                        self?.showError(error)
                     }
                     group.leave()
                 })
@@ -130,11 +130,11 @@ class InfoViewController: UIViewController {
     }
     
     @objc private func showAlertButtonPressed() {
-        let alert = UIAlertController(title: "Alert title", message: "Message text", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        let alert = UIAlertController(title: "testAlertTitle".localized, message: "testAlertMessage".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { _ in
             print("OK button pressed")
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: { _ in
             print("Cancel button pressed")
         }))
         present(alert, animated: true, completion: nil)

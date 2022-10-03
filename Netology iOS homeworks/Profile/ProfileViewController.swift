@@ -185,7 +185,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
                             self?.present(UIAlertController.errorAlert(message: error.localizedDescription), animated: true)
                         }
                     }
-                    self?.present(UIAlertController.infoAlert(title: "Успешно", message: "Пост сохранен"), animated: true)
+                    self?.present(UIAlertController.infoAlert(title: "successMessage".localized, message: "postSavedMessage".localized), animated: true)
                 }
             }
             return cell
@@ -199,7 +199,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             return nil
         }
         let headerView = ProfileHeaderView()
-        let user = userService.user(name: userName) ?? User(fullName: "Unknow user", avatarName: nil, status: nil)
+        let user = userService.user(name: userName) ?? User(fullName: "unknowUserName".localized, avatarName: nil, status: nil)
         headerView.configure(image: user.avatar, title: user.fullName, currentStatus: user.status)
         headerView.avatarViewTappedClosure = { [weak self] views in
             self?.showAvatarView(avatarView: views.avatarView, backgroundView: views.backgroundView)

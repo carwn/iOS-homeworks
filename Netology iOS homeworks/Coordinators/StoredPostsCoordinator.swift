@@ -14,7 +14,7 @@ class StoredPostsCoordinator {
     
     init() {
         let storedPostsViewController = StoredPostsViewController(style: .plain)
-        storedPostsViewController.tabBarItem = UITabBarItem(title: "Stored posts",
+        storedPostsViewController.tabBarItem = UITabBarItem(title: "storedPostsTabTitle".localized,
                                                             image: UIImage(systemName: "star"),
                                                             selectedImage: UIImage(systemName: "star.fill"))
         storedPostsViewController.fetchedResultsController = StoredPostsManager.shared.postsFetchedResultsController()

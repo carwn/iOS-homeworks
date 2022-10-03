@@ -14,7 +14,7 @@ class MapCoordinator {
     init(mapService: MapService) {
         let mapViewController = MapViewController(nibName: String(describing: MapViewController.self), bundle: nil)
         mapViewController.mapService = mapService
-        mapViewController.tabBarItem = UITabBarItem(title: "Карта",
+        mapViewController.tabBarItem = UITabBarItem(title: "mapTabTitle".localized,
                                                     image: UIImage(systemName: "map"),
                                                     selectedImage: UIImage(systemName: "map.fill"))
         self.mapViewController = mapViewController

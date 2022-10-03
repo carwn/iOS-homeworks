@@ -132,12 +132,12 @@ class PostTableViewCell: UITableViewCell {
     }
     
     private func updateView(withAuthor author: String?, imageName: String?, description: String?, likes: Int?, views: Int?) {
-        authorLabel.text = author ?? "No author"
+        authorLabel.text = author ?? "noAuthorTitle".localized
         self.imageName = imageName
         updateImage()
         descriptionLabel.text = description
-        likesLabel.text = "Likes: \(likes?.description ?? "-")"
-        viewsLabel.text = "Views: \(views?.description ?? "-")"
+        likesLabel.text = likes?.likesDescription ?? "-"
+        viewsLabel.text = "\("views".localized): \(views?.description ?? "-")"
     }
 
     private func updateImage() {

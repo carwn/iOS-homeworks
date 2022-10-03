@@ -8,7 +8,7 @@
 import Foundation
 
 class CurrentUserService {
-    private let storedUser = User(fullName: "Hipster Cat", avatarName: "Cat", status: "Chill")
+    private let storedUser = User(fullName: "storedUserName".localized, avatarName: "Cat", status: "storedUserStatus".localized)
 }
 
 extension CurrentUserService: UserService {

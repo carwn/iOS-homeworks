@@ -9,7 +9,7 @@ import Foundation
 
 class TestUserService: UserService {
 
-    private let testUser = User(fullName: "Mega test user", avatarName: "Cat", status: "Testing...")
+    private let testUser = User(fullName: "testUserName".localized, avatarName: "Cat", status: "testUserStatus".localized)
     
     func user(name: String) -> User? {
         testUser

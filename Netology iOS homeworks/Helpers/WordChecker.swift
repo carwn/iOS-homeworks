@@ -17,11 +17,11 @@ class WordChecker {
         var description: String {
             switch self {
             case .correct:
-                return "Верно"
+                return "correct".localized
             case .notCorrect:
-                return "Не верно"
+                return "incorrect".localized
             case .checkError:
-                return "Ошибка проверки"
+                return "checkError".localized
             }
         }
     }

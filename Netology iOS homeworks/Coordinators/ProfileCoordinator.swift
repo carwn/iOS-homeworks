@@ -29,7 +29,7 @@ class ProfileCoordinator: TabBarCoordinator {
         let module = ModuleFactory.logInModule(delegate: delegate)
         logInViewController = module.view
         navigationController = UINavigationController(rootViewController: logInViewController)
-        navigationController.tabBarItem = UITabBarItem(title: "Profile",
+        navigationController.tabBarItem = UITabBarItem(title: "profileTabTitle".localized,
                                                       image: UIImage(systemName: "person"),
                                                       selectedImage: UIImage(systemName: "person.fill"))
         module.presenter.showProfileViewClosure = { [weak self] params in

@@ -1,0 +1,97 @@
+/* 
+  Localizable.strings
+  Netology iOS homeworks
+
+  Created by Александр Шелихов on 06.09.2022.
+  
+*/
+
+// Buttons
+"OK" = "OK";
+"cancel" = "Cancel";
+"sendButtonTitle" = "Send";
+"infoButtonTitle" = "Info";
+"showAlertButtonTitle" = "Show alert";
+"getDirections" = "Get directions";
+"contine" = "Продолжить";
+
+// Other
+"timerLabelText" = "Change color in";
+"pushPostViewController" = "Push PostViewController";
+"numberSing" = "#";
+"FeedViewController" = "FeedViewController";
+"Hello" = "Hello";
+"noInputText" = "No input text";
+"error" = "Error";
+"inputTextPlaceholder" = "Please, input word here...";
+"correct" = "Correct";
+"incorrect" = "Incorrect";
+"checkError" = "Check error";
+"timeout" = "Timeout";
+"charactersArrayIsEmpty" = "Characters array is empty";
+"minLengthIsMoreThenMaxLingth" = "Min length is more then max lingth";
+"failedToGetRandomCharacter" = "Failed to get random character";
+"storedUserName" = "Hipster Cat";
+"storedUserStatus" = "Chill";
+"testUserName" = "Mega test user";
+"testUserStatus" = "Testing...";
+"emptyPostTitle" = "Empty post";
+"loadingTitle" = "Loading...";
+"noNetworkServiceError" = "No network service";
+"testAlertTitle" = "Alert title";
+"testAlertMessage" = "Message text";
+"noUserNameError" = "No user name";
+"noPasswordError" = "No password";
+"noeMailError" = "No eMail";
+"userSuccessCreationMessage" = "User created";
+"loginPlaceholder" = "Email or phone";
+"emailPlaceholder" = "email";
+"passwordPlaceholder" = "Password";
+"logInButtonTitle" = "Log In";
+"pickUpPasswordButtonTitle" = "Pick up password";
+"createUserButtonTitle" = "Create user";
+"cantGeneratePasswordError" = "Cant generate random password";
+"passwordWas" = "Password";
+"createUserTitle" = "Create user";
+"createButtonTitle" = "Create";
+"successMessage" = "Success";
+"postSavedMessage" = "Post did saved";
+"unknowUserName" = "Unknow user";
+"setStatusButtonTitle" = "Set status";
+"statusPlaceholder" = "Waiting for something...";
+"photosTitle" = "Photos";
+"noAuthorTitle" = "No author";
+"likes" = "Likes";
+"views" = "Views";
+"photoGallery" = "Photo Gallery";
+"storedPosts" = "Stored posts";
+"authorFilterTitle" = "Author filter";
+"apply" = "Apply";
+"delete" = "Delete";
+
+// Audio
+"needPremissionMicrophone" = "Need microphone premission";
+"noPremissionMicrophone" = "No microphone premission";
+"readyToRecord" = "Ready to record";
+"recordInProgress" = "Record in progress...";
+"playing" = "Playing...";
+"recordFail" = "Record fail";
+"noAudio" = "No audio";
+"audioPlayer" = "Audio player";
+"youTubeVideo" = "YouTube video";
+"recordAudio" = "Record audio";
+
+// Maps
+"noPremissionLocation" = "No location premission";
+"moscow" = "Moscow";
+"london" = "London";
+"newYork" = "New York";
+"selectDestination" = "Select destination";
+"userPin" = "User pin";
+
+// Tabs
+"profileTabTitle" = "Profile";
+"feedTabTitle" = "Feed";
+"multimediaTabTitle" = "Multimedia";
+"storedPostsTabTitle" = "Stored posts";
+"mapTabTitle" = "Map";
