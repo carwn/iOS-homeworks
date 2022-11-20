@@ -65,6 +65,8 @@
 		6D5E11302859D2D00065E181 /* StoredPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */; };
 		6D5E11322859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */; };
 		6D5F88A9286D6BC800B4109A /* PostFetchedResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5F88A8286D6BC800B4109A /* PostFetchedResultsController.swift */; };
+		6D73BFA028EADEE800ECC5B2 /* UIColor+createColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73BF9F28EADEE800ECC5B2 /* UIColor+createColor.swift */; };
+		6D73BFA228EADFC600ECC5B2 /* UIColor+myColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73BFA128EADFC600ECC5B2 /* UIColor+myColors.swift */; };
 		6D73CA352813E204001563BD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA342813E204001563BD /* NetworkService.swift */; };
 		6D73CA372813E2FE001563BD /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73CA362813E2FE001563BD /* AppConfiguration.swift */; };
 		6D8DF4AB28C7937500F7A948 /* Int+likesDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DF4AA28C7937500F7A948 /* Int+likesDescription.swift */; };
@@ -215,6 +217,8 @@
 		6D5E112F2859D2D00065E181 /* StoredPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPostsViewController.swift; sourceTree = "<group>"; };
 		6D5E11312859DAC00065E181 /* StoredPostsViewController+NSFetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredPostsViewController+NSFetchedResultsControllerDelegate.swift"; sourceTree = "<group>"; };
 		6D5F88A8286D6BC800B4109A /* PostFetchedResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFetchedResultsController.swift; sourceTree = "<group>"; };
+		6D73BF9F28EADEE800ECC5B2 /* UIColor+createColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+createColor.swift"; sourceTree = "<group>"; };
+		6D73BFA128EADFC600ECC5B2 /* UIColor+myColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+myColors.swift"; sourceTree = "<group>"; };
 		6D73CA342813E204001563BD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		6D73CA362813E2FE001563BD /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6D8DF4AA28C7937500F7A948 /* Int+likesDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+likesDescription.swift"; sourceTree = "<group>"; };
@@ -353,6 +357,8 @@
 				6D2BDBF1286A0CAC00688911 /* UIViewController+showError.swift */,
 				6DA51AEE28C6FD6800FBF364 /* String+localized.swift */,
 				6D8DF4AA28C7937500F7A948 /* Int+likesDescription.swift */,
+				6D73BF9F28EADEE800ECC5B2 /* UIColor+createColor.swift */,
+				6D73BFA128EADFC600ECC5B2 /* UIColor+myColors.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -876,6 +882,7 @@
 				6DB3EA0327C5ECB400130B8E /* AudioPlayerDelegate.swift in Sources */,
 				6DA62B10281BCFBC00DD73DD /* TestURLs.swift in Sources */,
 				6DB3EA1B27C63A4C00130B8E /* YoutubeVideoCell.swift in Sources */,
+				6D73BFA228EADFC600ECC5B2 /* UIColor+myColors.swift in Sources */,
 				6DF2A9E128BBAEAF00808111 /* MapServiceError.swift in Sources */,
 				6DF2A9DA28BB721900808111 /* MapViewController.swift in Sources */,
 				1FE2311E2764C65A00235C80 /* UIAlertController+infoAlert.swift in Sources */,
@@ -917,6 +924,7 @@
 				6DB3EA1F27C657DD00130B8E /* AudioRecorderDelegate.swift in Sources */,
 				6D5E111C2851A0FA0065E181 /* Login.swift in Sources */,
 				6D5E111228518A670065E181 /* RealmAuthorizedUser.swift in Sources */,
+				6D73BFA028EADEE800ECC5B2 /* UIColor+createColor.swift in Sources */,
 				1FE2311A2764C22F00235C80 /* CurrentUserService.swift in Sources */,
 				6DB3EA0527C5FF8900130B8E /* MultimediaCoordinator.swift in Sources */,
 				6D426FC227808C4A003DC4CE /* LoginFactory.swift in Sources */,

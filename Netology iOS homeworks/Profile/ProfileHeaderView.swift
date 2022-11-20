@@ -24,7 +24,6 @@ class ProfileHeaderView: UIView {
         imageView.contentMode = .scaleAspectFit
         
         imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
         
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = avatarImageViewHeight / 2
@@ -39,14 +38,14 @@ class ProfileHeaderView: UIView {
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .black
+        label.textColor = .myTextColor
         return label
     }()
     
     private lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .gray
+        label.textColor = .myGrayColor
         return label
     }()
     
@@ -58,7 +57,6 @@ class ProfileHeaderView: UIView {
         button.layer.cornerRadius = 4
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.7
         return button
     }()
@@ -66,10 +64,9 @@ class ProfileHeaderView: UIView {
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()
         textField.font = .systemFont(ofSize: 15, weight: .regular)
-        textField.textColor = .black
+        textField.textColor = .myTextColor
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.backgroundColor = .white
+        textField.backgroundColor = .myBackgroundColor
         textField.layer.cornerRadius = 12
         textField.addTarget(self, action: #selector(statusTextChanged(_:)), for: .editingChanged)
         return textField
@@ -134,6 +131,7 @@ class ProfileHeaderView: UIView {
             make.top.equalTo(statusTextField.snp.bottom).offset(defaulOffset)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-defaulOffset)
         }
+        setupCGColors()
     }
     
     // MARK: - Public Methods
@@ -167,5 +165,15 @@ class ProfileHeaderView: UIView {
     
     @objc private func avatarImageTapAction() {
         avatarViewTappedClosure?((avatarView: avatarImageView, backgroundView: avatarBackgroundView))
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setupCGColors()
+    }
+    
+    private func setupCGColors() {
+        avatarImageView.layer.borderColor = UIColor.myWhiteColor.cgColor
+        setStatusButton.layer.shadowColor = UIColor.myBlackColor.cgColor
+        statusTextField.layer.borderColor = UIColor.myBlackColor.cgColor
     }
 }

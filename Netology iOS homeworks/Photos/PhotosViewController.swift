@@ -21,7 +21,7 @@ class PhotosViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .myBackgroundColor
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photosCollectionViewCellIdentifier)
@@ -38,6 +38,7 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "photoGallery".localized
+        navigationItem.titleView?.tintColor = .myTextColor
         setupView()
         setupConstraints()
         startPhotosProcessing()
