@@ -30,22 +30,23 @@ class PostTableViewCell: UITableViewCell {
     private let authorLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = .myTextColor
         label.numberOfLines = 2
         return label
     }()
     
     private let postImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .black
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.backgroundColor = .myBackgroundColor
         return imageView
     }()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemGray
+        label.textColor = .myGrayColor
         label.numberOfLines = 0
         return label
     }()
@@ -53,14 +54,14 @@ class PostTableViewCell: UITableViewCell {
     private let likesLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = .myTextColor
         return label
     }()
     
     private let viewsLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = .myTextColor
         return label
     }()
 
@@ -103,7 +104,7 @@ class PostTableViewCell: UITableViewCell {
                            postImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
                            postImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: Constants.authorLabelBottomOffset),
-                           postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
+                           postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor, multiplier: 10 / 16),
         
                            descriptionLabel.leadingAnchor.constraint(equalTo: authorLabel.leadingAnchor),
                            descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: Constants.defaultOffset),
@@ -121,6 +122,7 @@ class PostTableViewCell: UITableViewCell {
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognized))
         doubleTapGesture.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTapGesture)
+        contentView.backgroundColor = .myBackgroundColor
     }
     
     private func updateFromPost() {
